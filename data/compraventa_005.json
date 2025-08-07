@@ -1,0 +1,36 @@
+{
+  "tipo_documento": "compraventa",
+  "fecha_documento": "2025-06-26",
+  "numero_protocolo": "P6148/2024",
+  "notario": {
+    "nombre": "Dr. Ana López Sánchez",
+    "colegiacion": "COL350"
+  },
+  "partes": {
+    "vendedor": {
+      "nombre": "Carlos Rodríguez Martín",
+      "nif": "27965791R",
+      "domicilio": "Calle Constitución 47, Alfafar, 46910"
+    },
+    "comprador": {
+      "nombre": "Pedro Martínez Ruiz",
+      "nif": "90449942X",
+      "domicilio": "Calle Constitución 200, Alfafar, 46910"
+    }
+  },
+  "inmueble": {
+    "direccion": "Calle Constitución 177, Alfafar, 46910",
+    "superficie": 107.59,
+    "tipo": "vivienda",
+    "referencia_catastral": "7094215YJ4513S2319XX",
+    "valor_catastral": 85037,
+    "valor_real": 80039,
+    "uso": "local_comercial"
+  },
+  "calculo_iivtnu": {
+    "sujeto": true,
+    "base_imponible": 10828,
+    "cuota": 3157
+  },
+  "observaciones": "Documento sintético de compraventa generado para pruebas"
+}

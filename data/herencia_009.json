@@ -1,0 +1,41 @@
+{
+  "tipo_documento": "herencia",
+  "subtipo_documento": "aceptacion_herencia_simple",
+  "fecha_documento": "2024-11-12",
+  "numero_protocolo": "H9449/2024",
+  "notario": {
+    "nombre": "Dr. Carlos Rodríguez Martín",
+    "colegiacion": "COL112"
+  },
+  "causante": {
+    "nombre": "Juan Pérez García",
+    "nif": "69676009Y",
+    "fecha_fallecimiento": "2024-08-12",
+    "lugar_fallecimiento": "Alfafar"
+  },
+  "heredero": {
+    "nombre": "Carlos Rodríguez Martín",
+    "nif": "70928548Q",
+    "parentesco": "hija",
+    "domicilio": "Avenida Valencia 118, Alfafar, 46910",
+    "acepta_herencia": true
+  },
+  "inmueble_heredado": {
+    "descripcion": "Vivienda familiar",
+    "direccion": "Calle Constitución 1, Alfafar, 46910",
+    "valor_catastral": 171268,
+    "valor_real": 130673,
+    "tipo": "vivienda",
+    "referencia_catastral": "8130493YJ4513S4006XX",
+    "uso": "vivienda_habitual"
+  },
+  "calculo_isd": {
+    "comunidad_autonoma": "Valencia",
+    "grupo_parentesco": 1,
+    "base_imponible": 198006,
+    "reducciones": 26474,
+    "base_liquidable": 25248,
+    "cuota_final": 14925
+  },
+  "observaciones": "Documento sintético de herencia generado para pruebas"
+}

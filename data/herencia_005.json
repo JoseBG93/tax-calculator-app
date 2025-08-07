@@ -1,0 +1,41 @@
+{
+  "tipo_documento": "herencia",
+  "subtipo_documento": "aceptacion_herencia_simple",
+  "fecha_documento": "2024-11-16",
+  "numero_protocolo": "H2270/2024",
+  "notario": {
+    "nombre": "Dr. Ana López Sánchez",
+    "colegiacion": "COL102"
+  },
+  "causante": {
+    "nombre": "Ana López Sánchez",
+    "nif": "57721593B",
+    "fecha_fallecimiento": "2024-07-31",
+    "lugar_fallecimiento": "Alfafar"
+  },
+  "heredero": {
+    "nombre": "Juan Pérez García",
+    "nif": "53933698Z",
+    "parentesco": "madre",
+    "domicilio": "Avenida Valencia 200, Alfafar, 46910",
+    "acepta_herencia": true
+  },
+  "inmueble_heredado": {
+    "descripcion": "Vivienda familiar",
+    "direccion": "Avenida Valencia 137, Alfafar, 46910",
+    "valor_catastral": 131766,
+    "valor_real": 220297,
+    "tipo": "vivienda",
+    "referencia_catastral": "5908992YJ4513S5824XX",
+    "uso": "vivienda_habitual"
+  },
+  "calculo_isd": {
+    "comunidad_autonoma": "Valencia",
+    "grupo_parentesco": 2,
+    "base_imponible": 92818,
+    "reducciones": 24945,
+    "base_liquidable": 43737,
+    "cuota_final": 5939
+  },
+  "observaciones": "Documento sintético de herencia generado para pruebas"
+}

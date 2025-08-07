@@ -1,0 +1,36 @@
+{
+  "tipo_documento": "compraventa",
+  "fecha_documento": "2025-01-02",
+  "numero_protocolo": "P3682/2024",
+  "notario": {
+    "nombre": "Dr. Ana López Sánchez",
+    "colegiacion": "COL198"
+  },
+  "partes": {
+    "vendedor": {
+      "nombre": "Carlos Rodríguez Martín",
+      "nif": "37935393N",
+      "domicilio": "Calle Constitución 167, Alfafar, 46910"
+    },
+    "comprador": {
+      "nombre": "Juan Pérez García",
+      "nif": "55909436O",
+      "domicilio": "Avenida Valencia 82, Alfafar, 46910"
+    }
+  },
+  "inmueble": {
+    "direccion": "Calle Constitución 177, Alfafar, 46910",
+    "superficie": 92.66,
+    "tipo": "trastero",
+    "referencia_catastral": "9946507YJ4513S1052XX",
+    "valor_catastral": 198116,
+    "valor_real": 185304,
+    "uso": "segunda_vivienda"
+  },
+  "calculo_iivtnu": {
+    "sujeto": true,
+    "base_imponible": 12191,
+    "cuota": 4077
+  },
+  "observaciones": "Documento sintético de compraventa generado para pruebas"
+}

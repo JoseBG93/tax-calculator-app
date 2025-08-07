@@ -1,0 +1,36 @@
+{
+  "tipo_documento": "compraventa",
+  "fecha_documento": "2024-08-18",
+  "numero_protocolo": "P1454/2024",
+  "notario": {
+    "nombre": "Dr. María González López",
+    "colegiacion": "COL159"
+  },
+  "partes": {
+    "vendedor": {
+      "nombre": "Carlos Rodríguez Martín",
+      "nif": "28207654W",
+      "domicilio": "Calle Constitución 120, Alfafar, 46910"
+    },
+    "comprador": {
+      "nombre": "María González López",
+      "nif": "83781617V",
+      "domicilio": "Calle Constitución 150, Alfafar, 46910"
+    }
+  },
+  "inmueble": {
+    "direccion": "Avenida Valencia 124, Alfafar, 46910",
+    "superficie": 394.77,
+    "tipo": "local",
+    "referencia_catastral": "8065341YJ4513S5343XX",
+    "valor_catastral": 72091,
+    "valor_real": 276182,
+    "uso": "local_comercial"
+  },
+  "calculo_iivtnu": {
+    "sujeto": true,
+    "base_imponible": 21114,
+    "cuota": 2437
+  },
+  "observaciones": "Documento sintético de compraventa generado para pruebas"
+}

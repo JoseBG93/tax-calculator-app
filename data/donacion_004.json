@@ -1,0 +1,49 @@
+{
+  "tipo_documento": "donacion",
+  "subtipo_documento": "donacion_inmueble_familiar",
+  "fecha_documento": "2025-06-19",
+  "numero_protocolo": "D5882/2024",
+  "notario": {
+    "nombre": "Dr. Carlos Rodríguez Martín",
+    "colegiacion": "COL536"
+  },
+  "donante": {
+    "nombre": "María González López",
+    "nif": "49108236Q",
+    "domicilio": "Calle Mayor 127, Alfafar, 46910",
+    "estado_civil": "casado"
+  },
+  "donatario": {
+    "nombre": "Carlos Rodríguez Martín",
+    "nif": "64679064D",
+    "parentesco": "nieto",
+    "domicilio": "Calle Constitución 143, Alfafar, 46910"
+  },
+  "inmueble_donado": {
+    "descripcion": "Apartamento",
+    "direccion": "Plaza España 189, Alfafar, 46910",
+    "valor_catastral": 100446,
+    "valor_real": 199408,
+    "tipo": "vivienda",
+    "referencia_catastral": "2999124YJ4513S3234XX",
+    "superficie": 170.32,
+    "uso": "vivienda"
+  },
+  "calculo_isd": {
+    "comunidad_autonoma": "Valencia",
+    "grupo_parentesco": 2,
+    "base_imponible": 176269,
+    "reducciones_aplicables": [
+      {
+        "tipo": "reduccion_parentesco_directo",
+        "importe": 99278,
+        "descripcion": "Reducción por parentesco directo descendiente"
+      }
+    ],
+    "total_reducciones": 79260,
+    "base_liquidable": 25369,
+    "exencion_familiar": false,
+    "cuota_final": 252
+  },
+  "observaciones": "Documento sintético de donación generado para pruebas"
+}

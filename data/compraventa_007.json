@@ -1,0 +1,36 @@
+{
+  "tipo_documento": "compraventa",
+  "fecha_documento": "2024-10-18",
+  "numero_protocolo": "P7048/2024",
+  "notario": {
+    "nombre": "Dr. Juan Pérez García",
+    "colegiacion": "COL277"
+  },
+  "partes": {
+    "vendedor": {
+      "nombre": "Juan Pérez García",
+      "nif": "92559755M",
+      "domicilio": "Calle Real 23, Alfafar, 46910"
+    },
+    "comprador": {
+      "nombre": "Pedro Martínez Ruiz",
+      "nif": "62885652L",
+      "domicilio": "Calle Constitución 21, Alfafar, 46910"
+    }
+  },
+  "inmueble": {
+    "direccion": "Calle Constitución 111, Alfafar, 46910",
+    "superficie": 293.31,
+    "tipo": "oficina",
+    "referencia_catastral": "5766548YJ4513S6856XX",
+    "valor_catastral": 78794,
+    "valor_real": 83650,
+    "uso": "vivienda_habitual"
+  },
+  "calculo_iivtnu": {
+    "sujeto": true,
+    "base_imponible": 11234,
+    "cuota": 1647
+  },
+  "observaciones": "Documento sintético de compraventa generado para pruebas"
+}

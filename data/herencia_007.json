@@ -1,0 +1,41 @@
+{
+  "tipo_documento": "herencia",
+  "subtipo_documento": "aceptacion_herencia_simple",
+  "fecha_documento": "2025-03-14",
+  "numero_protocolo": "H9299/2024",
+  "notario": {
+    "nombre": "Dr. Juan Pérez García",
+    "colegiacion": "COL777"
+  },
+  "causante": {
+    "nombre": "Juan Pérez García",
+    "nif": "25052408T",
+    "fecha_fallecimiento": "2024-11-15",
+    "lugar_fallecimiento": "Alfafar"
+  },
+  "heredero": {
+    "nombre": "Pedro Martínez Ruiz",
+    "nif": "42287935B",
+    "parentesco": "cónyuge",
+    "domicilio": "Plaza España 84, Alfafar, 46910",
+    "acepta_herencia": true
+  },
+  "inmueble_heredado": {
+    "descripcion": "Vivienda familiar",
+    "direccion": "Calle Mayor 66, Alfafar, 46910",
+    "valor_catastral": 198252,
+    "valor_real": 185085,
+    "tipo": "vivienda",
+    "referencia_catastral": "8167543YJ4513S9512XX",
+    "uso": "vivienda_habitual"
+  },
+  "calculo_isd": {
+    "comunidad_autonoma": "Valencia",
+    "grupo_parentesco": 1,
+    "base_imponible": 218279,
+    "reducciones": 85066,
+    "base_liquidable": 21648,
+    "cuota_final": 11198
+  },
+  "observaciones": "Documento sintético de herencia generado para pruebas"
+}

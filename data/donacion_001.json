@@ -1,0 +1,49 @@
+{
+  "tipo_documento": "donacion",
+  "subtipo_documento": "donacion_inmueble_familiar",
+  "fecha_documento": "2025-07-04",
+  "numero_protocolo": "D9924/2024",
+  "notario": {
+    "nombre": "Dr. María González López",
+    "colegiacion": "COL232"
+  },
+  "donante": {
+    "nombre": "Ana López Sánchez",
+    "nif": "46649687F",
+    "domicilio": "Calle Constitución 98, Alfafar, 46910",
+    "estado_civil": "viudo"
+  },
+  "donatario": {
+    "nombre": "Pedro Martínez Ruiz",
+    "nif": "64398322Y",
+    "parentesco": "hijo",
+    "domicilio": "Plaza España 52, Alfafar, 46910"
+  },
+  "inmueble_donado": {
+    "descripcion": "Casa unifamiliar",
+    "direccion": "Calle Constitución 179, Alfafar, 46910",
+    "valor_catastral": 100890,
+    "valor_real": 244426,
+    "tipo": "vivienda",
+    "referencia_catastral": "8846981YJ4513S4902XX",
+    "superficie": 81.33,
+    "uso": "vivienda"
+  },
+  "calculo_isd": {
+    "comunidad_autonoma": "Valencia",
+    "grupo_parentesco": 2,
+    "base_imponible": 187955,
+    "reducciones_aplicables": [
+      {
+        "tipo": "reduccion_parentesco_directo",
+        "importe": 60276,
+        "descripcion": "Reducción por parentesco directo descendiente"
+      }
+    ],
+    "total_reducciones": 55833,
+    "base_liquidable": 18273,
+    "exencion_familiar": true,
+    "cuota_final": 1150
+  },
+  "observaciones": "Documento sintético de donación generado para pruebas"
+}

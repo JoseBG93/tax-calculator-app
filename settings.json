@@ -1,0 +1,9 @@
+{
+    "python.defaultInterpreterPath": "./taxapp/bin/python",
+    "python.terminal.activateEnvironment": true,
+    "editor.formatOnSave": true,
+    "python.testing.pytestEnabled": true,
+    "python.testing.pytestArgs": [
+        "tests"
+    ]
+}

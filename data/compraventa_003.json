@@ -1,0 +1,36 @@
+{
+  "tipo_documento": "compraventa",
+  "fecha_documento": "2025-06-09",
+  "numero_protocolo": "P2331/2024",
+  "notario": {
+    "nombre": "Dr. Pedro Martínez Ruiz",
+    "colegiacion": "COL522"
+  },
+  "partes": {
+    "vendedor": {
+      "nombre": "Ana López Sánchez",
+      "nif": "73162709Q",
+      "domicilio": "Avenida Valencia 57, Alfafar, 46910"
+    },
+    "comprador": {
+      "nombre": "María González López",
+      "nif": "11321914Y",
+      "domicilio": "Calle Real 145, Alfafar, 46910"
+    }
+  },
+  "inmueble": {
+    "direccion": "Plaza España 98, Alfafar, 46910",
+    "superficie": 253.35,
+    "tipo": "terreno",
+    "referencia_catastral": "3595343YJ4513S9707XX",
+    "valor_catastral": 176764,
+    "valor_real": 242620,
+    "uso": "segunda_vivienda"
+  },
+  "calculo_iivtnu": {
+    "sujeto": true,
+    "base_imponible": 38915,
+    "cuota": 1353
+  },
+  "observaciones": "Documento sintético de compraventa generado para pruebas"
+}

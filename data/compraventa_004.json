@@ -1,0 +1,36 @@
+{
+  "tipo_documento": "compraventa",
+  "fecha_documento": "2025-07-20",
+  "numero_protocolo": "P8951/2024",
+  "notario": {
+    "nombre": "Dr. Juan Pérez García",
+    "colegiacion": "COL413"
+  },
+  "partes": {
+    "vendedor": {
+      "nombre": "Ana López Sánchez",
+      "nif": "25697047B",
+      "domicilio": "Plaza España 11, Alfafar, 46910"
+    },
+    "comprador": {
+      "nombre": "Carlos Rodríguez Martín",
+      "nif": "58053424F",
+      "domicilio": "Calle Mayor 152, Alfafar, 46910"
+    }
+  },
+  "inmueble": {
+    "direccion": "Calle Constitución 1, Alfafar, 46910",
+    "superficie": 382.73,
+    "tipo": "local",
+    "referencia_catastral": "2363341YJ4513S8475XX",
+    "valor_catastral": 46986,
+    "valor_real": 150274,
+    "uso": "vivienda_habitual"
+  },
+  "calculo_iivtnu": {
+    "sujeto": true,
+    "base_imponible": 31240,
+    "cuota": 649
+  },
+  "observaciones": "Documento sintético de compraventa generado para pruebas"
+}

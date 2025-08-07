@@ -1,0 +1,1271 @@
+{
+  "generated_at": "2025-07-23T07:51:24.152243",
+  "total_count": 30,
+  "por_tipo": {
+    "compraventa": 10,
+    "donacion": 10,
+    "herencia": 10
+  },
+  "docs_municipales": [
+    {
+      "tipo_documento": "compraventa",
+      "fecha_documento": "2025-01-02",
+      "numero_protocolo": "P3682/2024",
+      "notario": {
+        "nombre": "Dr. Ana López Sánchez",
+        "colegiacion": "COL198"
+      },
+      "partes": {
+        "vendedor": {
+          "nombre": "Carlos Rodríguez Martín",
+          "nif": "37935393N",
+          "domicilio": "Calle Constitución 167, Alfafar, 46910"
+        },
+        "comprador": {
+          "nombre": "Juan Pérez García",
+          "nif": "55909436O",
+          "domicilio": "Avenida Valencia 82, Alfafar, 46910"
+        }
+      },
+      "inmueble": {
+        "direccion": "Calle Constitución 177, Alfafar, 46910",
+        "superficie": 92.66,
+        "tipo": "trastero",
+        "referencia_catastral": "9946507YJ4513S1052XX",
+        "valor_catastral": 198116,
+        "valor_real": 185304,
+        "uso": "segunda_vivienda"
+      },
+      "calculo_iivtnu": {
+        "sujeto": true,
+        "base_imponible": 12191,
+        "cuota": 4077
+      },
+      "observaciones": "Documento sintético de compraventa generado para pruebas"
+    },
+    {
+      "tipo_documento": "compraventa",
+      "fecha_documento": "2025-05-22",
+      "numero_protocolo": "P7691/2024",
+      "notario": {
+        "nombre": "Dr. Ana López Sánchez",
+        "colegiacion": "COL764"
+      },
+      "partes": {
+        "vendedor": {
+          "nombre": "Juan Pérez García",
+          "nif": "88919425X",
+          "domicilio": "Avenida Valencia 126, Alfafar, 46910"
+        },
+        "comprador": {
+          "nombre": "Pedro Martínez Ruiz",
+          "nif": "45859269P",
+          "domicilio": "Calle Constitución 89, Alfafar, 46910"
+        }
+      },
+      "inmueble": {
+        "direccion": "Plaza España 195, Alfafar, 46910",
+        "superficie": 261.33,
+        "tipo": "local",
+        "referencia_catastral": "7765269YJ4513S2338XX",
+        "valor_catastral": 40957,
+        "valor_real": 291257,
+        "uso": "local_comercial"
+      },
+      "calculo_iivtnu": {
+        "sujeto": true,
+        "base_imponible": 30767,
+        "cuota": 852
+      },
+      "observaciones": "Documento sintético de compraventa generado para pruebas"
+    },
+    {
+      "tipo_documento": "compraventa",
+      "fecha_documento": "2025-06-09",
+      "numero_protocolo": "P2331/2024",
+      "notario": {
+        "nombre": "Dr. Pedro Martínez Ruiz",
+        "colegiacion": "COL522"
+      },
+      "partes": {
+        "vendedor": {
+          "nombre": "Ana López Sánchez",
+          "nif": "73162709Q",
+          "domicilio": "Avenida Valencia 57, Alfafar, 46910"
+        },
+        "comprador": {
+          "nombre": "María González López",
+          "nif": "11321914Y",
+          "domicilio": "Calle Real 145, Alfafar, 46910"
+        }
+      },
+      "inmueble": {
+        "direccion": "Plaza España 98, Alfafar, 46910",
+        "superficie": 253.35,
+        "tipo": "terreno",
+        "referencia_catastral": "3595343YJ4513S9707XX",
+        "valor_catastral": 176764,
+        "valor_real": 242620,
+        "uso": "segunda_vivienda"
+      },
+      "calculo_iivtnu": {
+        "sujeto": true,
+        "base_imponible": 38915,
+        "cuota": 1353
+      },
+      "observaciones": "Documento sintético de compraventa generado para pruebas"
+    },
+    {
+      "tipo_documento": "compraventa",
+      "fecha_documento": "2025-07-20",
+      "numero_protocolo": "P8951/2024",
+      "notario": {
+        "nombre": "Dr. Juan Pérez García",
+        "colegiacion": "COL413"
+      },
+      "partes": {
+        "vendedor": {
+          "nombre": "Ana López Sánchez",
+          "nif": "25697047B",
+          "domicilio": "Plaza España 11, Alfafar, 46910"
+        },
+        "comprador": {
+          "nombre": "Carlos Rodríguez Martín",
+          "nif": "58053424F",
+          "domicilio": "Calle Mayor 152, Alfafar, 46910"
+        }
+      },
+      "inmueble": {
+        "direccion": "Calle Constitución 1, Alfafar, 46910",
+        "superficie": 382.73,
+        "tipo": "local",
+        "referencia_catastral": "2363341YJ4513S8475XX",
+        "valor_catastral": 46986,
+        "valor_real": 150274,
+        "uso": "vivienda_habitual"
+      },
+      "calculo_iivtnu": {
+        "sujeto": true,
+        "base_imponible": 31240,
+        "cuota": 649
+      },
+      "observaciones": "Documento sintético de compraventa generado para pruebas"
+    },
+    {
+      "tipo_documento": "compraventa",
+      "fecha_documento": "2025-06-26",
+      "numero_protocolo": "P6148/2024",
+      "notario": {
+        "nombre": "Dr. Ana López Sánchez",
+        "colegiacion": "COL350"
+      },
+      "partes": {
+        "vendedor": {
+          "nombre": "Carlos Rodríguez Martín",
+          "nif": "27965791R",
+          "domicilio": "Calle Constitución 47, Alfafar, 46910"
+        },
+        "comprador": {
+          "nombre": "Pedro Martínez Ruiz",
+          "nif": "90449942X",
+          "domicilio": "Calle Constitución 200, Alfafar, 46910"
+        }
+      },
+      "inmueble": {
+        "direccion": "Calle Constitución 177, Alfafar, 46910",
+        "superficie": 107.59,
+        "tipo": "vivienda",
+        "referencia_catastral": "7094215YJ4513S2319XX",
+        "valor_catastral": 85037,
+        "valor_real": 80039,
+        "uso": "local_comercial"
+      },
+      "calculo_iivtnu": {
+        "sujeto": true,
+        "base_imponible": 10828,
+        "cuota": 3157
+      },
+      "observaciones": "Documento sintético de compraventa generado para pruebas"
+    },
+    {
+      "tipo_documento": "compraventa",
+      "fecha_documento": "2025-05-14",
+      "numero_protocolo": "P1414/2024",
+      "notario": {
+        "nombre": "Dr. María González López",
+        "colegiacion": "COL906"
+      },
+      "partes": {
+        "vendedor": {
+          "nombre": "Pedro Martínez Ruiz",
+          "nif": "66852808F",
+          "domicilio": "Calle Real 102, Alfafar, 46910"
+        },
+        "comprador": {
+          "nombre": "María González López",
+          "nif": "63685905C",
+          "domicilio": "Plaza España 78, Alfafar, 46910"
+        }
+      },
+      "inmueble": {
+        "direccion": "Calle Mayor 89, Alfafar, 46910",
+        "superficie": 199.8,
+        "tipo": "trastero",
+        "referencia_catastral": "6518186YJ4513S9421XX",
+        "valor_catastral": 44335,
+        "valor_real": 195227,
+        "uso": "local_comercial"
+      },
+      "calculo_iivtnu": {
+        "sujeto": true,
+        "base_imponible": 10699,
+        "cuota": 3605
+      },
+      "observaciones": "Documento sintético de compraventa generado para pruebas"
+    },
+    {
+      "tipo_documento": "compraventa",
+      "fecha_documento": "2024-10-18",
+      "numero_protocolo": "P7048/2024",
+      "notario": {
+        "nombre": "Dr. Juan Pérez García",
+        "colegiacion": "COL277"
+      },
+      "partes": {
+        "vendedor": {
+          "nombre": "Juan Pérez García",
+          "nif": "92559755M",
+          "domicilio": "Calle Real 23, Alfafar, 46910"
+        },
+        "comprador": {
+          "nombre": "Pedro Martínez Ruiz",
+          "nif": "62885652L",
+          "domicilio": "Calle Constitución 21, Alfafar, 46910"
+        }
+      },
+      "inmueble": {
+        "direccion": "Calle Constitución 111, Alfafar, 46910",
+        "superficie": 293.31,
+        "tipo": "oficina",
+        "referencia_catastral": "5766548YJ4513S6856XX",
+        "valor_catastral": 78794,
+        "valor_real": 83650,
+        "uso": "vivienda_habitual"
+      },
+      "calculo_iivtnu": {
+        "sujeto": true,
+        "base_imponible": 11234,
+        "cuota": 1647
+      },
+      "observaciones": "Documento sintético de compraventa generado para pruebas"
+    },
+    {
+      "tipo_documento": "compraventa",
+      "fecha_documento": "2025-06-06",
+      "numero_protocolo": "P6173/2024",
+      "notario": {
+        "nombre": "Dr. María González López",
+        "colegiacion": "COL869"
+      },
+      "partes": {
+        "vendedor": {
+          "nombre": "Carlos Rodríguez Martín",
+          "nif": "42121042X",
+          "domicilio": "Calle Real 5, Alfafar, 46910"
+        },
+        "comprador": {
+          "nombre": "María González López",
+          "nif": "42178453Z",
+          "domicilio": "Calle Mayor 166, Alfafar, 46910"
+        }
+      },
+      "inmueble": {
+        "direccion": "Calle Constitución 116, Alfafar, 46910",
+        "superficie": 199.31,
+        "tipo": "terreno",
+        "referencia_catastral": "1651519YJ4513S6336XX",
+        "valor_catastral": 127013,
+        "valor_real": 156605,
+        "uso": "oficina"
+      },
+      "calculo_iivtnu": {
+        "sujeto": true,
+        "base_imponible": 18827,
+        "cuota": 1157
+      },
+      "observaciones": "Documento sintético de compraventa generado para pruebas"
+    },
+    {
+      "tipo_documento": "compraventa",
+      "fecha_documento": "2024-08-18",
+      "numero_protocolo": "P1454/2024",
+      "notario": {
+        "nombre": "Dr. María González López",
+        "colegiacion": "COL159"
+      },
+      "partes": {
+        "vendedor": {
+          "nombre": "Carlos Rodríguez Martín",
+          "nif": "28207654W",
+          "domicilio": "Calle Constitución 120, Alfafar, 46910"
+        },
+        "comprador": {
+          "nombre": "María González López",
+          "nif": "83781617V",
+          "domicilio": "Calle Constitución 150, Alfafar, 46910"
+        }
+      },
+      "inmueble": {
+        "direccion": "Avenida Valencia 124, Alfafar, 46910",
+        "superficie": 394.77,
+        "tipo": "local",
+        "referencia_catastral": "8065341YJ4513S5343XX",
+        "valor_catastral": 72091,
+        "valor_real": 276182,
+        "uso": "local_comercial"
+      },
+      "calculo_iivtnu": {
+        "sujeto": true,
+        "base_imponible": 21114,
+        "cuota": 2437
+      },
+      "observaciones": "Documento sintético de compraventa generado para pruebas"
+    },
+    {
+      "tipo_documento": "compraventa",
+      "fecha_documento": "2024-11-13",
+      "numero_protocolo": "P9492/2024",
+      "notario": {
+        "nombre": "Dr. Pedro Martínez Ruiz",
+        "colegiacion": "COL789"
+      },
+      "partes": {
+        "vendedor": {
+          "nombre": "Pedro Martínez Ruiz",
+          "nif": "19488452D",
+          "domicilio": "Calle Real 161, Alfafar, 46910"
+        },
+        "comprador": {
+          "nombre": "María González López",
+          "nif": "20036965C",
+          "domicilio": "Calle Real 73, Alfafar, 46910"
+        }
+      },
+      "inmueble": {
+        "direccion": "Calle Real 85, Alfafar, 46910",
+        "superficie": 146.98,
+        "tipo": "vivienda",
+        "referencia_catastral": "6226278YJ4513S4071XX",
+        "valor_catastral": 53347,
+        "valor_real": 139633,
+        "uso": "local_comercial"
+      },
+      "calculo_iivtnu": {
+        "sujeto": true,
+        "base_imponible": 39601,
+        "cuota": 3750
+      },
+      "observaciones": "Documento sintético de compraventa generado para pruebas"
+    },
+    {
+      "tipo_documento": "donacion",
+      "subtipo_documento": "donacion_inmueble_familiar",
+      "fecha_documento": "2025-07-04",
+      "numero_protocolo": "D9924/2024",
+      "notario": {
+        "nombre": "Dr. María González López",
+        "colegiacion": "COL232"
+      },
+      "donante": {
+        "nombre": "Ana López Sánchez",
+        "nif": "46649687F",
+        "domicilio": "Calle Constitución 98, Alfafar, 46910",
+        "estado_civil": "viudo"
+      },
+      "donatario": {
+        "nombre": "Pedro Martínez Ruiz",
+        "nif": "64398322Y",
+        "parentesco": "hijo",
+        "domicilio": "Plaza España 52, Alfafar, 46910"
+      },
+      "inmueble_donado": {
+        "descripcion": "Casa unifamiliar",
+        "direccion": "Calle Constitución 179, Alfafar, 46910",
+        "valor_catastral": 100890,
+        "valor_real": 244426,
+        "tipo": "vivienda",
+        "referencia_catastral": "8846981YJ4513S4902XX",
+        "superficie": 81.33,
+        "uso": "vivienda"
+      },
+      "calculo_isd": {
+        "comunidad_autonoma": "Valencia",
+        "grupo_parentesco": 2,
+        "base_imponible": 187955,
+        "reducciones_aplicables": [
+          {
+            "tipo": "reduccion_parentesco_directo",
+            "importe": 60276,
+            "descripcion": "Reducción por parentesco directo descendiente"
+          }
+        ],
+        "total_reducciones": 55833,
+        "base_liquidable": 18273,
+        "exencion_familiar": true,
+        "cuota_final": 1150
+      },
+      "observaciones": "Documento sintético de donación generado para pruebas"
+    },
+    {
+      "tipo_documento": "donacion",
+      "subtipo_documento": "donacion_inmueble_familiar",
+      "fecha_documento": "2025-06-15",
+      "numero_protocolo": "D6484/2024",
+      "notario": {
+        "nombre": "Dr. María González López",
+        "colegiacion": "COL886"
+      },
+      "donante": {
+        "nombre": "Carlos Rodríguez Martín",
+        "nif": "68307359N",
+        "domicilio": "Calle Mayor 97, Alfafar, 46910",
+        "estado_civil": "viudo"
+      },
+      "donatario": {
+        "nombre": "Ana López Sánchez",
+        "nif": "63580188J",
+        "parentesco": "hija",
+        "domicilio": "Calle Real 110, Alfafar, 46910"
+      },
+      "inmueble_donado": {
+        "descripcion": "Local comercial",
+        "direccion": "Calle Real 37, Alfafar, 46910",
+        "valor_catastral": 67551,
+        "valor_real": 143042,
+        "tipo": "vivienda",
+        "referencia_catastral": "5014879YJ4513S2997XX",
+        "superficie": 61.49,
+        "uso": "vivienda"
+      },
+      "calculo_isd": {
+        "comunidad_autonoma": "Valencia",
+        "grupo_parentesco": 2,
+        "base_imponible": 149431,
+        "reducciones_aplicables": [
+          {
+            "tipo": "reduccion_parentesco_directo",
+            "importe": 79235,
+            "descripcion": "Reducción por parentesco directo descendiente"
+          }
+        ],
+        "total_reducciones": 77785,
+        "base_liquidable": 41358,
+        "exencion_familiar": false,
+        "cuota_final": 841
+      },
+      "observaciones": "Documento sintético de donación generado para pruebas"
+    },
+    {
+      "tipo_documento": "donacion",
+      "subtipo_documento": "donacion_inmueble_familiar",
+      "fecha_documento": "2025-05-06",
+      "numero_protocolo": "D1304/2024",
+      "notario": {
+        "nombre": "Dr. Ana López Sánchez",
+        "colegiacion": "COL722"
+      },
+      "donante": {
+        "nombre": "Pedro Martínez Ruiz",
+        "nif": "19746534G",
+        "domicilio": "Calle Constitución 169, Alfafar, 46910",
+        "estado_civil": "casado"
+      },
+      "donatario": {
+        "nombre": "Carlos Rodríguez Martín",
+        "nif": "87402982I",
+        "parentesco": "nieta",
+        "domicilio": "Plaza España 10, Alfafar, 46910"
+      },
+      "inmueble_donado": {
+        "descripcion": "Apartamento",
+        "direccion": "Calle Constitución 22, Alfafar, 46910",
+        "valor_catastral": 50489,
+        "valor_real": 172295,
+        "tipo": "vivienda",
+        "referencia_catastral": "3999820YJ4513S1677XX",
+        "superficie": 199.75,
+        "uso": "vivienda"
+      },
+      "calculo_isd": {
+        "comunidad_autonoma": "Valencia",
+        "grupo_parentesco": 2,
+        "base_imponible": 182815,
+        "reducciones_aplicables": [
+          {
+            "tipo": "reduccion_parentesco_directo",
+            "importe": 51267,
+            "descripcion": "Reducción por parentesco directo descendiente"
+          }
+        ],
+        "total_reducciones": 85037,
+        "base_liquidable": 33090,
+        "exencion_familiar": true,
+        "cuota_final": 2254
+      },
+      "observaciones": "Documento sintético de donación generado para pruebas"
+    },
+    {
+      "tipo_documento": "donacion",
+      "subtipo_documento": "donacion_inmueble_familiar",
+      "fecha_documento": "2025-06-19",
+      "numero_protocolo": "D5882/2024",
+      "notario": {
+        "nombre": "Dr. Carlos Rodríguez Martín",
+        "colegiacion": "COL536"
+      },
+      "donante": {
+        "nombre": "María González López",
+        "nif": "49108236Q",
+        "domicilio": "Calle Mayor 127, Alfafar, 46910",
+        "estado_civil": "casado"
+      },
+      "donatario": {
+        "nombre": "Carlos Rodríguez Martín",
+        "nif": "64679064D",
+        "parentesco": "nieto",
+        "domicilio": "Calle Constitución 143, Alfafar, 46910"
+      },
+      "inmueble_donado": {
+        "descripcion": "Apartamento",
+        "direccion": "Plaza España 189, Alfafar, 46910",
+        "valor_catastral": 100446,
+        "valor_real": 199408,
+        "tipo": "vivienda",
+        "referencia_catastral": "2999124YJ4513S3234XX",
+        "superficie": 170.32,
+        "uso": "vivienda"
+      },
+      "calculo_isd": {
+        "comunidad_autonoma": "Valencia",
+        "grupo_parentesco": 2,
+        "base_imponible": 176269,
+        "reducciones_aplicables": [
+          {
+            "tipo": "reduccion_parentesco_directo",
+            "importe": 99278,
+            "descripcion": "Reducción por parentesco directo descendiente"
+          }
+        ],
+        "total_reducciones": 79260,
+        "base_liquidable": 25369,
+        "exencion_familiar": false,
+        "cuota_final": 252
+      },
+      "observaciones": "Documento sintético de donación generado para pruebas"
+    },
+    {
+      "tipo_documento": "donacion",
+      "subtipo_documento": "donacion_inmueble_familiar",
+      "fecha_documento": "2025-06-01",
+      "numero_protocolo": "D1153/2024",
+      "notario": {
+        "nombre": "Dr. Juan Pérez García",
+        "colegiacion": "COL400"
+      },
+      "donante": {
+        "nombre": "Ana López Sánchez",
+        "nif": "56157622X",
+        "domicilio": "Calle Mayor 68, Alfafar, 46910",
+        "estado_civil": "soltero"
+      },
+      "donatario": {
+        "nombre": "Carlos Rodríguez Martín",
+        "nif": "65627150H",
+        "parentesco": "hijo",
+        "domicilio": "Avenida Valencia 34, Alfafar, 46910"
+      },
+      "inmueble_donado": {
+        "descripcion": "Local comercial",
+        "direccion": "Avenida Valencia 44, Alfafar, 46910",
+        "valor_catastral": 53374,
+        "valor_real": 223458,
+        "tipo": "vivienda",
+        "referencia_catastral": "6840200YJ4513S5711XX",
+        "superficie": 157.76,
+        "uso": "vivienda"
+      },
+      "calculo_isd": {
+        "comunidad_autonoma": "Valencia",
+        "grupo_parentesco": 2,
+        "base_imponible": 84689,
+        "reducciones_aplicables": [
+          {
+            "tipo": "reduccion_parentesco_directo",
+            "importe": 80962,
+            "descripcion": "Reducción por parentesco directo descendiente"
+          }
+        ],
+        "total_reducciones": 58293,
+        "base_liquidable": 19655,
+        "exencion_familiar": true,
+        "cuota_final": 825
+      },
+      "observaciones": "Documento sintético de donación generado para pruebas"
+    },
+    {
+      "tipo_documento": "donacion",
+      "subtipo_documento": "donacion_inmueble_familiar",
+      "fecha_documento": "2025-04-01",
+      "numero_protocolo": "D7525/2024",
+      "notario": {
+        "nombre": "Dr. Carlos Rodríguez Martín",
+        "colegiacion": "COL299"
+      },
+      "donante": {
+        "nombre": "Juan Pérez García",
+        "nif": "33710273H",
+        "domicilio": "Calle Real 32, Alfafar, 46910",
+        "estado_civil": "soltero"
+      },
+      "donatario": {
+        "nombre": "Carlos Rodríguez Martín",
+        "nif": "81995896Y",
+        "parentesco": "nieto",
+        "domicilio": "Calle Mayor 127, Alfafar, 46910"
+      },
+      "inmueble_donado": {
+        "descripcion": "Local comercial",
+        "direccion": "Calle Constitución 131, Alfafar, 46910",
+        "valor_catastral": 91343,
+        "valor_real": 118197,
+        "tipo": "vivienda",
+        "referencia_catastral": "6955450YJ4513S7792XX",
+        "superficie": 139.18,
+        "uso": "vivienda"
+      },
+      "calculo_isd": {
+        "comunidad_autonoma": "Valencia",
+        "grupo_parentesco": 2,
+        "base_imponible": 231798,
+        "reducciones_aplicables": [
+          {
+            "tipo": "reduccion_parentesco_directo",
+            "importe": 58729,
+            "descripcion": "Reducción por parentesco directo descendiente"
+          }
+        ],
+        "total_reducciones": 57602,
+        "base_liquidable": 29762,
+        "exencion_familiar": true,
+        "cuota_final": 1519
+      },
+      "observaciones": "Documento sintético de donación generado para pruebas"
+    },
+    {
+      "tipo_documento": "donacion",
+      "subtipo_documento": "donacion_inmueble_familiar",
+      "fecha_documento": "2025-02-05",
+      "numero_protocolo": "D2757/2024",
+      "notario": {
+        "nombre": "Dr. María González López",
+        "colegiacion": "COL253"
+      },
+      "donante": {
+        "nombre": "María González López",
+        "nif": "51911120G",
+        "domicilio": "Calle Constitución 76, Alfafar, 46910",
+        "estado_civil": "viudo"
+      },
+      "donatario": {
+        "nombre": "Ana López Sánchez",
+        "nif": "35371876V",
+        "parentesco": "nieto",
+        "domicilio": "Calle Real 163, Alfafar, 46910"
+      },
+      "inmueble_donado": {
+        "descripcion": "Local comercial",
+        "direccion": "Avenida Valencia 82, Alfafar, 46910",
+        "valor_catastral": 90434,
+        "valor_real": 189263,
+        "tipo": "vivienda",
+        "referencia_catastral": "3188190YJ4513S5132XX",
+        "superficie": 172.08,
+        "uso": "vivienda"
+      },
+      "calculo_isd": {
+        "comunidad_autonoma": "Valencia",
+        "grupo_parentesco": 2,
+        "base_imponible": 153530,
+        "reducciones_aplicables": [
+          {
+            "tipo": "reduccion_parentesco_directo",
+            "importe": 71801,
+            "descripcion": "Reducción por parentesco directo descendiente"
+          }
+        ],
+        "total_reducciones": 53623,
+        "base_liquidable": 20674,
+        "exencion_familiar": true,
+        "cuota_final": 4394
+      },
+      "observaciones": "Documento sintético de donación generado para pruebas"
+    },
+    {
+      "tipo_documento": "donacion",
+      "subtipo_documento": "donacion_inmueble_familiar",
+      "fecha_documento": "2025-06-28",
+      "numero_protocolo": "D6434/2024",
+      "notario": {
+        "nombre": "Dr. Ana López Sánchez",
+        "colegiacion": "COL664"
+      },
+      "donante": {
+        "nombre": "Ana López Sánchez",
+        "nif": "76935927X",
+        "domicilio": "Calle Mayor 109, Alfafar, 46910",
+        "estado_civil": "viudo"
+      },
+      "donatario": {
+        "nombre": "María González López",
+        "nif": "75123830O",
+        "parentesco": "nieta",
+        "domicilio": "Calle Mayor 151, Alfafar, 46910"
+      },
+      "inmueble_donado": {
+        "descripcion": "Casa unifamiliar",
+        "direccion": "Calle Real 172, Alfafar, 46910",
+        "valor_catastral": 127972,
+        "valor_real": 198458,
+        "tipo": "vivienda",
+        "referencia_catastral": "8658104YJ4513S3177XX",
+        "superficie": 124.99,
+        "uso": "vivienda"
+      },
+      "calculo_isd": {
+        "comunidad_autonoma": "Valencia",
+        "grupo_parentesco": 2,
+        "base_imponible": 245160,
+        "reducciones_aplicables": [
+          {
+            "tipo": "reduccion_parentesco_directo",
+            "importe": 51962,
+            "descripcion": "Reducción por parentesco directo descendiente"
+          }
+        ],
+        "total_reducciones": 86148,
+        "base_liquidable": 38619,
+        "exencion_familiar": false,
+        "cuota_final": 4565
+      },
+      "observaciones": "Documento sintético de donación generado para pruebas"
+    },
+    {
+      "tipo_documento": "donacion",
+      "subtipo_documento": "donacion_inmueble_familiar",
+      "fecha_documento": "2025-04-16",
+      "numero_protocolo": "D3378/2024",
+      "notario": {
+        "nombre": "Dr. María González López",
+        "colegiacion": "COL441"
+      },
+      "donante": {
+        "nombre": "Carlos Rodríguez Martín",
+        "nif": "91096559K",
+        "domicilio": "Avenida Valencia 10, Alfafar, 46910",
+        "estado_civil": "viudo"
+      },
+      "donatario": {
+        "nombre": "Ana López Sánchez",
+        "nif": "61605148U",
+        "parentesco": "nieta",
+        "domicilio": "Calle Constitución 99, Alfafar, 46910"
+      },
+      "inmueble_donado": {
+        "descripcion": "Apartamento",
+        "direccion": "Plaza España 159, Alfafar, 46910",
+        "valor_catastral": 56939,
+        "valor_real": 150976,
+        "tipo": "vivienda",
+        "referencia_catastral": "6205457YJ4513S4259XX",
+        "superficie": 145.64,
+        "uso": "vivienda"
+      },
+      "calculo_isd": {
+        "comunidad_autonoma": "Valencia",
+        "grupo_parentesco": 2,
+        "base_imponible": 135383,
+        "reducciones_aplicables": [
+          {
+            "tipo": "reduccion_parentesco_directo",
+            "importe": 63100,
+            "descripcion": "Reducción por parentesco directo descendiente"
+          }
+        ],
+        "total_reducciones": 105961,
+        "base_liquidable": 14576,
+        "exencion_familiar": false,
+        "cuota_final": 2490
+      },
+      "observaciones": "Documento sintético de donación generado para pruebas"
+    },
+    {
+      "tipo_documento": "donacion",
+      "subtipo_documento": "donacion_inmueble_familiar",
+      "fecha_documento": "2025-04-18",
+      "numero_protocolo": "D2858/2024",
+      "notario": {
+        "nombre": "Dr. María González López",
+        "colegiacion": "COL833"
+      },
+      "donante": {
+        "nombre": "Carlos Rodríguez Martín",
+        "nif": "41397728P",
+        "domicilio": "Calle Constitución 97, Alfafar, 46910",
+        "estado_civil": "casado"
+      },
+      "donatario": {
+        "nombre": "Juan Pérez García",
+        "nif": "62883865N",
+        "parentesco": "nieta",
+        "domicilio": "Calle Real 33, Alfafar, 46910"
+      },
+      "inmueble_donado": {
+        "descripcion": "Apartamento",
+        "direccion": "Avenida Valencia 52, Alfafar, 46910",
+        "valor_catastral": 95556,
+        "valor_real": 214563,
+        "tipo": "vivienda",
+        "referencia_catastral": "9463465YJ4513S7552XX",
+        "superficie": 133.13,
+        "uso": "vivienda"
+      },
+      "calculo_isd": {
+        "comunidad_autonoma": "Valencia",
+        "grupo_parentesco": 2,
+        "base_imponible": 172206,
+        "reducciones_aplicables": [
+          {
+            "tipo": "reduccion_parentesco_directo",
+            "importe": 67345,
+            "descripcion": "Reducción por parentesco directo descendiente"
+          }
+        ],
+        "total_reducciones": 107326,
+        "base_liquidable": 12115,
+        "exencion_familiar": false,
+        "cuota_final": 2756
+      },
+      "observaciones": "Documento sintético de donación generado para pruebas"
+    },
+    {
+      "tipo_documento": "herencia",
+      "subtipo_documento": "aceptacion_herencia_simple",
+      "fecha_documento": "2025-06-18",
+      "numero_protocolo": "H3361/2024",
+      "notario": {
+        "nombre": "Dr. Pedro Martínez Ruiz",
+        "colegiacion": "COL474"
+      },
+      "causante": {
+        "nombre": "Juan Pérez García",
+        "nif": "33041087U",
+        "fecha_fallecimiento": "2025-01-05",
+        "lugar_fallecimiento": "Alfafar"
+      },
+      "heredero": {
+        "nombre": "Carlos Rodríguez Martín",
+        "nif": "94416761U",
+        "parentesco": "hijo",
+        "domicilio": "Avenida Valencia 183, Alfafar, 46910",
+        "acepta_herencia": true
+      },
+      "inmueble_heredado": {
+        "descripcion": "Vivienda familiar",
+        "direccion": "Calle Real 151, Alfafar, 46910",
+        "valor_catastral": 142924,
+        "valor_real": 99583,
+        "tipo": "vivienda",
+        "referencia_catastral": "5847478YJ4513S8770XX",
+        "uso": "vivienda_habitual"
+      },
+      "calculo_isd": {
+        "comunidad_autonoma": "Valencia",
+        "grupo_parentesco": 2,
+        "base_imponible": 217797,
+        "reducciones": 70116,
+        "base_liquidable": 37625,
+        "cuota_final": 10384
+      },
+      "observaciones": "Documento sintético de herencia generado para pruebas"
+    },
+    {
+      "tipo_documento": "herencia",
+      "subtipo_documento": "aceptacion_herencia_simple",
+      "fecha_documento": "2025-01-29",
+      "numero_protocolo": "H5701/2024",
+      "notario": {
+        "nombre": "Dr. Juan Pérez García",
+        "colegiacion": "COL607"
+      },
+      "causante": {
+        "nombre": "Carlos Rodríguez Martín",
+        "nif": "29599652Y",
+        "fecha_fallecimiento": "2024-10-23",
+        "lugar_fallecimiento": "Alfafar"
+      },
+      "heredero": {
+        "nombre": "María González López",
+        "nif": "59248181S",
+        "parentesco": "padre",
+        "domicilio": "Calle Real 167, Alfafar, 46910",
+        "acepta_herencia": true
+      },
+      "inmueble_heredado": {
+        "descripcion": "Vivienda familiar",
+        "direccion": "Plaza España 78, Alfafar, 46910",
+        "valor_catastral": 102222,
+        "valor_real": 255224,
+        "tipo": "vivienda",
+        "referencia_catastral": "1243893YJ4513S1066XX",
+        "uso": "vivienda_habitual"
+      },
+      "calculo_isd": {
+        "comunidad_autonoma": "Valencia",
+        "grupo_parentesco": 2,
+        "base_imponible": 209956,
+        "reducciones": 72284,
+        "base_liquidable": 45399,
+        "cuota_final": 11573
+      },
+      "observaciones": "Documento sintético de herencia generado para pruebas"
+    },
+    {
+      "tipo_documento": "herencia",
+      "subtipo_documento": "aceptacion_herencia_simple",
+      "fecha_documento": "2025-06-08",
+      "numero_protocolo": "H6544/2024",
+      "notario": {
+        "nombre": "Dr. Ana López Sánchez",
+        "colegiacion": "COL945"
+      },
+      "causante": {
+        "nombre": "Ana López Sánchez",
+        "nif": "81273361R",
+        "fecha_fallecimiento": "2024-12-30",
+        "lugar_fallecimiento": "Alfafar"
+      },
+      "heredero": {
+        "nombre": "Carlos Rodríguez Martín",
+        "nif": "52253659S",
+        "parentesco": "madre",
+        "domicilio": "Calle Mayor 105, Alfafar, 46910",
+        "acepta_herencia": true
+      },
+      "inmueble_heredado": {
+        "descripcion": "Vivienda familiar",
+        "direccion": "Avenida Valencia 115, Alfafar, 46910",
+        "valor_catastral": 110017,
+        "valor_real": 82541,
+        "tipo": "vivienda",
+        "referencia_catastral": "5140640YJ4513S5041XX",
+        "uso": "vivienda_habitual"
+      },
+      "calculo_isd": {
+        "comunidad_autonoma": "Valencia",
+        "grupo_parentesco": 1,
+        "base_imponible": 167930,
+        "reducciones": 98183,
+        "base_liquidable": 9559,
+        "cuota_final": 4079
+      },
+      "observaciones": "Documento sintético de herencia generado para pruebas"
+    },
+    {
+      "tipo_documento": "herencia",
+      "subtipo_documento": "aceptacion_herencia_simple",
+      "fecha_documento": "2024-12-28",
+      "numero_protocolo": "H8999/2024",
+      "notario": {
+        "nombre": "Dr. Juan Pérez García",
+        "colegiacion": "COL378"
+      },
+      "causante": {
+        "nombre": "Pedro Martínez Ruiz",
+        "nif": "56228849V",
+        "fecha_fallecimiento": "2024-09-19",
+        "lugar_fallecimiento": "Alfafar"
+      },
+      "heredero": {
+        "nombre": "María González López",
+        "nif": "61910578M",
+        "parentesco": "hija",
+        "domicilio": "Plaza España 21, Alfafar, 46910",
+        "acepta_herencia": true
+      },
+      "inmueble_heredado": {
+        "descripcion": "Vivienda familiar",
+        "direccion": "Calle Constitución 99, Alfafar, 46910",
+        "valor_catastral": 70833,
+        "valor_real": 282209,
+        "tipo": "vivienda",
+        "referencia_catastral": "6611339YJ4513S5464XX",
+        "uso": "vivienda_habitual"
+      },
+      "calculo_isd": {
+        "comunidad_autonoma": "Valencia",
+        "grupo_parentesco": 1,
+        "base_imponible": 105192,
+        "reducciones": 38010,
+        "base_liquidable": 23972,
+        "cuota_final": 12757
+      },
+      "observaciones": "Documento sintético de herencia generado para pruebas"
+    },
+    {
+      "tipo_documento": "herencia",
+      "subtipo_documento": "aceptacion_herencia_simple",
+      "fecha_documento": "2024-11-16",
+      "numero_protocolo": "H2270/2024",
+      "notario": {
+        "nombre": "Dr. Ana López Sánchez",
+        "colegiacion": "COL102"
+      },
+      "causante": {
+        "nombre": "Ana López Sánchez",
+        "nif": "57721593B",
+        "fecha_fallecimiento": "2024-07-31",
+        "lugar_fallecimiento": "Alfafar"
+      },
+      "heredero": {
+        "nombre": "Juan Pérez García",
+        "nif": "53933698Z",
+        "parentesco": "madre",
+        "domicilio": "Avenida Valencia 200, Alfafar, 46910",
+        "acepta_herencia": true
+      },
+      "inmueble_heredado": {
+        "descripcion": "Vivienda familiar",
+        "direccion": "Avenida Valencia 137, Alfafar, 46910",
+        "valor_catastral": 131766,
+        "valor_real": 220297,
+        "tipo": "vivienda",
+        "referencia_catastral": "5908992YJ4513S5824XX",
+        "uso": "vivienda_habitual"
+      },
+      "calculo_isd": {
+        "comunidad_autonoma": "Valencia",
+        "grupo_parentesco": 2,
+        "base_imponible": 92818,
+        "reducciones": 24945,
+        "base_liquidable": 43737,
+        "cuota_final": 5939
+      },
+      "observaciones": "Documento sintético de herencia generado para pruebas"
+    },
+    {
+      "tipo_documento": "herencia",
+      "subtipo_documento": "aceptacion_herencia_simple",
+      "fecha_documento": "2025-05-19",
+      "numero_protocolo": "H4391/2024",
+      "notario": {
+        "nombre": "Dr. María González López",
+        "colegiacion": "COL424"
+      },
+      "causante": {
+        "nombre": "Pedro Martínez Ruiz",
+        "nif": "97650350T",
+        "fecha_fallecimiento": "2025-02-05",
+        "lugar_fallecimiento": "Alfafar"
+      },
+      "heredero": {
+        "nombre": "Juan Pérez García",
+        "nif": "50686791G",
+        "parentesco": "cónyuge",
+        "domicilio": "Calle Real 163, Alfafar, 46910",
+        "acepta_herencia": true
+      },
+      "inmueble_heredado": {
+        "descripcion": "Vivienda familiar",
+        "direccion": "Avenida Valencia 84, Alfafar, 46910",
+        "valor_catastral": 124866,
+        "valor_real": 258570,
+        "tipo": "vivienda",
+        "referencia_catastral": "9473427YJ4513S4940XX",
+        "uso": "vivienda_habitual"
+      },
+      "calculo_isd": {
+        "comunidad_autonoma": "Valencia",
+        "grupo_parentesco": 2,
+        "base_imponible": 295464,
+        "reducciones": 26124,
+        "base_liquidable": 19793,
+        "cuota_final": 4110
+      },
+      "observaciones": "Documento sintético de herencia generado para pruebas"
+    },
+    {
+      "tipo_documento": "herencia",
+      "subtipo_documento": "aceptacion_herencia_simple",
+      "fecha_documento": "2025-03-14",
+      "numero_protocolo": "H9299/2024",
+      "notario": {
+        "nombre": "Dr. Juan Pérez García",
+        "colegiacion": "COL777"
+      },
+      "causante": {
+        "nombre": "Juan Pérez García",
+        "nif": "25052408T",
+        "fecha_fallecimiento": "2024-11-15",
+        "lugar_fallecimiento": "Alfafar"
+      },
+      "heredero": {
+        "nombre": "Pedro Martínez Ruiz",
+        "nif": "42287935B",
+        "parentesco": "cónyuge",
+        "domicilio": "Plaza España 84, Alfafar, 46910",
+        "acepta_herencia": true
+      },
+      "inmueble_heredado": {
+        "descripcion": "Vivienda familiar",
+        "direccion": "Calle Mayor 66, Alfafar, 46910",
+        "valor_catastral": 198252,
+        "valor_real": 185085,
+        "tipo": "vivienda",
+        "referencia_catastral": "8167543YJ4513S9512XX",
+        "uso": "vivienda_habitual"
+      },
+      "calculo_isd": {
+        "comunidad_autonoma": "Valencia",
+        "grupo_parentesco": 1,
+        "base_imponible": 218279,
+        "reducciones": 85066,
+        "base_liquidable": 21648,
+        "cuota_final": 11198
+      },
+      "observaciones": "Documento sintético de herencia generado para pruebas"
+    },
+    {
+      "tipo_documento": "herencia",
+      "subtipo_documento": "aceptacion_herencia_simple",
+      "fecha_documento": "2025-03-12",
+      "numero_protocolo": "H5626/2024",
+      "notario": {
+        "nombre": "Dr. Pedro Martínez Ruiz",
+        "colegiacion": "COL958"
+      },
+      "causante": {
+        "nombre": "Ana López Sánchez",
+        "nif": "18495310C",
+        "fecha_fallecimiento": "2024-11-04",
+        "lugar_fallecimiento": "Alfafar"
+      },
+      "heredero": {
+        "nombre": "Carlos Rodríguez Martín",
+        "nif": "86388282B",
+        "parentesco": "madre",
+        "domicilio": "Plaza España 21, Alfafar, 46910",
+        "acepta_herencia": true
+      },
+      "inmueble_heredado": {
+        "descripcion": "Vivienda familiar",
+        "direccion": "Calle Real 2, Alfafar, 46910",
+        "valor_catastral": 128019,
+        "valor_real": 213823,
+        "tipo": "vivienda",
+        "referencia_catastral": "8750482YJ4513S6032XX",
+        "uso": "vivienda_habitual"
+      },
+      "calculo_isd": {
+        "comunidad_autonoma": "Valencia",
+        "grupo_parentesco": 1,
+        "base_imponible": 233751,
+        "reducciones": 52223,
+        "base_liquidable": 13749,
+        "cuota_final": 11970
+      },
+      "observaciones": "Documento sintético de herencia generado para pruebas"
+    },
+    {
+      "tipo_documento": "herencia",
+      "subtipo_documento": "aceptacion_herencia_simple",
+      "fecha_documento": "2024-11-12",
+      "numero_protocolo": "H9449/2024",
+      "notario": {
+        "nombre": "Dr. Carlos Rodríguez Martín",
+        "colegiacion": "COL112"
+      },
+      "causante": {
+        "nombre": "Juan Pérez García",
+        "nif": "69676009Y",
+        "fecha_fallecimiento": "2024-08-12",
+        "lugar_fallecimiento": "Alfafar"
+      },
+      "heredero": {
+        "nombre": "Carlos Rodríguez Martín",
+        "nif": "70928548Q",
+        "parentesco": "hija",
+        "domicilio": "Avenida Valencia 118, Alfafar, 46910",
+        "acepta_herencia": true
+      },
+      "inmueble_heredado": {
+        "descripcion": "Vivienda familiar",
+        "direccion": "Calle Constitución 1, Alfafar, 46910",
+        "valor_catastral": 171268,
+        "valor_real": 130673,
+        "tipo": "vivienda",
+        "referencia_catastral": "8130493YJ4513S4006XX",
+        "uso": "vivienda_habitual"
+      },
+      "calculo_isd": {
+        "comunidad_autonoma": "Valencia",
+        "grupo_parentesco": 1,
+        "base_imponible": 198006,
+        "reducciones": 26474,
+        "base_liquidable": 25248,
+        "cuota_final": 14925
+      },
+      "observaciones": "Documento sintético de herencia generado para pruebas"
+    },
+    {
+      "tipo_documento": "herencia",
+      "subtipo_documento": "aceptacion_herencia_simple",
+      "fecha_documento": "2024-12-18",
+      "numero_protocolo": "H4375/2024",
+      "notario": {
+        "nombre": "Dr. Ana López Sánchez",
+        "colegiacion": "COL765"
+      },
+      "causante": {
+        "nombre": "Pedro Martínez Ruiz",
+        "nif": "11596540J",
+        "fecha_fallecimiento": "2024-08-03",
+        "lugar_fallecimiento": "Alfafar"
+      },
+      "heredero": {
+        "nombre": "Juan Pérez García",
+        "nif": "24638745F",
+        "parentesco": "hijo",
+        "domicilio": "Avenida Valencia 114, Alfafar, 46910",
+        "acepta_herencia": true
+      },
+      "inmueble_heredado": {
+        "descripcion": "Vivienda familiar",
+        "direccion": "Plaza España 81, Alfafar, 46910",
+        "valor_catastral": 118393,
+        "valor_real": 172113,
+        "tipo": "vivienda",
+        "referencia_catastral": "4977654YJ4513S9760XX",
+        "uso": "vivienda_habitual"
+      },
+      "calculo_isd": {
+        "comunidad_autonoma": "Valencia",
+        "grupo_parentesco": 1,
+        "base_imponible": 203715,
+        "reducciones": 62979,
+        "base_liquidable": 32968,
+        "cuota_final": 11903
+      },
+      "observaciones": "Documento sintético de herencia generado para pruebas"
+    }
+  ]
+}
