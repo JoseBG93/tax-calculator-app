@@ -1,0 +1,136 @@
+# =====================================================
+# ARCHIVO .gitignore - Control de versiones con Git
+# =====================================================
+# Este archivo le dice a Git qué archivos/carpetas NO debe trackear
+# Sintaxis: Cada línea es un patrón. # para comentarios
+# Lenguaje: Patrones de Git (similar a expresiones regulares)
+# Documentación: https://git-scm.com/docs/gitignore
+
+# =====================================================
+# 🔐 SEGURIDAD - Variables de entorno y secretos
+# =====================================================
+# NUNCA subas estos archivos a GitHub - contienen contraseñas y API keys
+.env                    # Archivo principal de variables de entorno
+.env.local             # Variante local del desarrollador
+.env.*.local           # Cualquier archivo .env.[algo].local
+
+# =====================================================
+# 🐍 PYTHON - Entorno virtual
+# =====================================================
+# El entorno virtual contiene todas las librerías instaladas (Flask, pandas, etc.)
+# Se puede recrear con: pip install -r requirements.txt
+# Por eso no se sube - ocuparía mucho espacio innecesariamente
+taxapp_venv/           # Tu entorno virtual específico de este proyecto
+venv/                  # Nombre genérico común
+env/                   # Otra convención común
+ENV/                   # Variante en mayúsculas
+.venv/                 # Convención con punto (oculto en Linux)
+
+# =====================================================
+# 🗑️ PYTHON - Cache y archivos compilados
+# =====================================================
+# Python crea estos archivos automáticamente para ejecutar más rápido
+# Se regeneran solos, no tienen valor para compartir
+__pycache__/           # Carpeta de cache principal de Python 3
+*.py[cod]              # .pyc, .pyo, .pyd - archivos Python compilados
+*$py.class             # Archivos de Jython (Python en Java)
+*.pyc                  # Bytecode compilado de Python
+.pytest_cache/         # Cache de pytest (framework de testing)
+*.pyo                  # Python optimizado (obsoleto en Python 3)
+
+# =====================================================
+# 💾 BASE DE DATOS - Archivos locales
+# =====================================================
+# Las bases de datos locales contienen datos de prueba/desarrollo
+# Cada desarrollador tiene la suya propia
+database/*.db          # SQLite en carpeta database
+database/*.sqlite      # Otra extensión de SQLite
+*.db                   # Cualquier archivo .db en el proyecto
+*.sqlite               # Cualquier archivo .sqlite
+*.sqlite3              # Extensión alternativa de SQLite
+
+# =====================================================
+# 💻 IDEs - Configuración de editores
+# =====================================================
+# Cada desarrollador usa su editor preferido con su configuración personal
+.vscode/               # Visual Studio Code / Cursor
+.idea/                 # PyCharm, IntelliJ IDEA
+*.swp                  # Vim swap files (archivos temporales)
+*.swo                  # Vim swap overflow
+*~                     # Archivos de respaldo de varios editores
+
+# =====================================================
+# 📝 LOGS - Archivos de registro
+# =====================================================
+# Los logs contienen información de ejecución, errores, debugging
+*.log                  # Cualquier archivo de log
+logs/                  # Carpeta dedicada a logs
+
+# =====================================================
+# 📦 PYTHON - Distribución y empaquetado
+# =====================================================
+# Archivos creados al empaquetar tu proyecto para distribución
+dist/                  # Carpeta de distribución final
+build/                 # Carpeta de construcción temporal
+*.egg-info/            # Metadatos del paquete Python
+*.egg                  # Formato antiguo de paquetes Python
+
+# =====================================================
+# 🖥️ SISTEMA OPERATIVO - Archivos del OS
+# =====================================================
+# Archivos que los sistemas operativos crean automáticamente
+.DS_Store              # macOS - información de carpetas
+Thumbs.db              # Windows - cache de miniaturas
+desktop.ini            # Windows - configuración de carpetas
+
+# =====================================================
+# 🌐 FLASK - Archivos específicos del framework
+# =====================================================
+instance/              # Carpeta para configuración específica de la instancia
+.webassets-cache       # Cache de assets web (CSS, JS compilados)
+
+# =====================================================
+# 🧪 TESTING - Reportes de cobertura
+# =====================================================
+# Archivos generados al medir qué % de tu código está testeado
+htmlcov/               # Reporte HTML de cobertura
+.coverage              # Archivo de datos de cobertura
+.coverage.*            # Archivos de cobertura paralelos
+coverage.xml           # Reporte XML de cobertura
+*.cover                # Archivos de cobertura anotados
+
+# =====================================================
+# 📓 JUPYTER - Notebooks
+# =====================================================
+.ipynb_checkpoints     # Checkpoints de Jupyter Notebooks
+
+# =====================================================
+# 🔧 PYTHON - Gestión de versiones
+# =====================================================
+.python-version        # Archivo de pyenv para especificar versión de Python
+
+# =====================================================
+# 🔄 MIGRACIONES DE BASE DE DATOS (Opcional)
+# =====================================================
+# Algunos equipos SÍ suben las migraciones para mantener sincronizada
+# la estructura de la BD. Descomenta si NO quieres subirlas:
+# migrations/
+
+# =====================================================
+# 💡 TIPS PARA JOSÉ:
+# =====================================================
+# 1. Si dudas si algo debe ir en Git, pregúntate:
+#    - ¿Contiene secretos? → NO subir
+#    - ¿Se puede regenerar? → NO subir
+#    - ¿Es específico de mi máquina? → NO subir
+#    - ¿Es código o documentación? → SÍ subir
+#
+# 2. Para ver qué está ignorando Git: git status --ignored
+#
+# 3. Si ya subiste algo por error:
+#    git rm --cached archivo_a_ignorar
+#    Luego añádelo al .gitignore
+#
+# 4. El .gitignore debe ser uno de los PRIMEROS archivos
+#    en crear en cualquier proyecto
+# =====================================================
