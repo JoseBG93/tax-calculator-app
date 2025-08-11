@@ -1,0 +1,36 @@
+{
+  "tipo_documento": "compraventa",
+  "fecha_documento": "2025-06-06",
+  "numero_protocolo": "P6173/2024",
+  "notario": {
+    "nombre": "Dr. María González López",
+    "colegiacion": "COL869"
+  },
+  "partes": {
+    "vendedor": {
+      "nombre": "Carlos Rodríguez Martín",
+      "nif": "42121042X",
+      "domicilio": "Calle Real 5, Alfafar, 46910"
+    },
+    "comprador": {
+      "nombre": "María González López",
+      "nif": "42178453Z",
+      "domicilio": "Calle Mayor 166, Alfafar, 46910"
+    }
+  },
+  "inmueble": {
+    "direccion": "Calle Constitución 116, Alfafar, 46910",
+    "superficie": 199.31,
+    "tipo": "terreno",
+    "referencia_catastral": "1651519YJ4513S6336XX",
+    "valor_catastral": 127013,
+    "valor_real": 156605,
+    "uso": "oficina"
+  },
+  "calculo_iivtnu": {
+    "sujeto": true,
+    "base_imponible": 18827,
+    "cuota": 1157
+  },
+  "observaciones": "Documento sintético de compraventa generado para pruebas"
+}

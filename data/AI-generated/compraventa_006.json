@@ -1,0 +1,36 @@
+{
+  "tipo_documento": "compraventa",
+  "fecha_documento": "2025-05-14",
+  "numero_protocolo": "P1414/2024",
+  "notario": {
+    "nombre": "Dr. María González López",
+    "colegiacion": "COL906"
+  },
+  "partes": {
+    "vendedor": {
+      "nombre": "Pedro Martínez Ruiz",
+      "nif": "66852808F",
+      "domicilio": "Calle Real 102, Alfafar, 46910"
+    },
+    "comprador": {
+      "nombre": "María González López",
+      "nif": "63685905C",
+      "domicilio": "Plaza España 78, Alfafar, 46910"
+    }
+  },
+  "inmueble": {
+    "direccion": "Calle Mayor 89, Alfafar, 46910",
+    "superficie": 199.8,
+    "tipo": "trastero",
+    "referencia_catastral": "6518186YJ4513S9421XX",
+    "valor_catastral": 44335,
+    "valor_real": 195227,
+    "uso": "local_comercial"
+  },
+  "calculo_iivtnu": {
+    "sujeto": true,
+    "base_imponible": 10699,
+    "cuota": 3605
+  },
+  "observaciones": "Documento sintético de compraventa generado para pruebas"
+}

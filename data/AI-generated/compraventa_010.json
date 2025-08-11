@@ -1,0 +1,36 @@
+{
+  "tipo_documento": "compraventa",
+  "fecha_documento": "2024-11-13",
+  "numero_protocolo": "P9492/2024",
+  "notario": {
+    "nombre": "Dr. Pedro Martínez Ruiz",
+    "colegiacion": "COL789"
+  },
+  "partes": {
+    "vendedor": {
+      "nombre": "Pedro Martínez Ruiz",
+      "nif": "19488452D",
+      "domicilio": "Calle Real 161, Alfafar, 46910"
+    },
+    "comprador": {
+      "nombre": "María González López",
+      "nif": "20036965C",
+      "domicilio": "Calle Real 73, Alfafar, 46910"
+    }
+  },
+  "inmueble": {
+    "direccion": "Calle Real 85, Alfafar, 46910",
+    "superficie": 146.98,
+    "tipo": "vivienda",
+    "referencia_catastral": "6226278YJ4513S4071XX",
+    "valor_catastral": 53347,
+    "valor_real": 139633,
+    "uso": "local_comercial"
+  },
+  "calculo_iivtnu": {
+    "sujeto": true,
+    "base_imponible": 39601,
+    "cuota": 3750
+  },
+  "observaciones": "Documento sintético de compraventa generado para pruebas"
+}

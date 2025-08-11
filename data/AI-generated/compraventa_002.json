@@ -1,0 +1,36 @@
+{
+  "tipo_documento": "compraventa",
+  "fecha_documento": "2025-05-22",
+  "numero_protocolo": "P7691/2024",
+  "notario": {
+    "nombre": "Dr. Ana López Sánchez",
+    "colegiacion": "COL764"
+  },
+  "partes": {
+    "vendedor": {
+      "nombre": "Juan Pérez García",
+      "nif": "88919425X",
+      "domicilio": "Avenida Valencia 126, Alfafar, 46910"
+    },
+    "comprador": {
+      "nombre": "Pedro Martínez Ruiz",
+      "nif": "45859269P",
+      "domicilio": "Calle Constitución 89, Alfafar, 46910"
+    }
+  },
+  "inmueble": {
+    "direccion": "Plaza España 195, Alfafar, 46910",
+    "superficie": 261.33,
+    "tipo": "local",
+    "referencia_catastral": "7765269YJ4513S2338XX",
+    "valor_catastral": 40957,
+    "valor_real": 291257,
+    "uso": "local_comercial"
+  },
+  "calculo_iivtnu": {
+    "sujeto": true,
+    "base_imponible": 30767,
+    "cuota": 852
+  },
+  "observaciones": "Documento sintético de compraventa generado para pruebas"
+}

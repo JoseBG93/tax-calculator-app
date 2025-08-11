@@ -1,0 +1,49 @@
+{
+  "tipo_documento": "donacion",
+  "subtipo_documento": "donacion_inmueble_familiar",
+  "fecha_documento": "2025-06-28",
+  "numero_protocolo": "D6434/2024",
+  "notario": {
+    "nombre": "Dr. Ana López Sánchez",
+    "colegiacion": "COL664"
+  },
+  "donante": {
+    "nombre": "Ana López Sánchez",
+    "nif": "76935927X",
+    "domicilio": "Calle Mayor 109, Alfafar, 46910",
+    "estado_civil": "viudo"
+  },
+  "donatario": {
+    "nombre": "María González López",
+    "nif": "75123830O",
+    "parentesco": "nieta",
+    "domicilio": "Calle Mayor 151, Alfafar, 46910"
+  },
+  "inmueble_donado": {
+    "descripcion": "Casa unifamiliar",
+    "direccion": "Calle Real 172, Alfafar, 46910",
+    "valor_catastral": 127972,
+    "valor_real": 198458,
+    "tipo": "vivienda",
+    "referencia_catastral": "8658104YJ4513S3177XX",
+    "superficie": 124.99,
+    "uso": "vivienda"
+  },
+  "calculo_isd": {
+    "comunidad_autonoma": "Valencia",
+    "grupo_parentesco": 2,
+    "base_imponible": 245160,
+    "reducciones_aplicables": [
+      {
+        "tipo": "reduccion_parentesco_directo",
+        "importe": 51962,
+        "descripcion": "Reducción por parentesco directo descendiente"
+      }
+    ],
+    "total_reducciones": 86148,
+    "base_liquidable": 38619,
+    "exencion_familiar": false,
+    "cuota_final": 4565
+  },
+  "observaciones": "Documento sintético de donación generado para pruebas"
+}

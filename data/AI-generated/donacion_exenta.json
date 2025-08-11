@@ -1,0 +1,166 @@
+{
+  "tipo_documento": "donacion",
+  "subtipo_documento": "donacion_inmueble_familiar",
+  "identificador_documento": "DOC-2024-DON-001",
+  "fecha_documento": "2024-08-10",
+  "registro_entrada": {
+    "fecha": "2024-08-15",
+    "numero": "2024/04567",
+    "orden_prioridad": 4567
+  },
+  "notario": {
+    "nombre": "Carmen Rodríguez Vázquez",
+    "protocolo": "3278/2024"
+  },
+  "donante": {
+    "nombre": "Francisco López Martínez",
+    "nif": "11111111A",
+    "domicilio": "Calle Mayor 15, Alfafar, 46910",
+    "estado_civil": "casado",
+    "regimen_economico": "gananciales"
+  },
+  "donatario": {
+    "nombre": "Elena López Sánchez",
+    "nif": "22222222B", 
+    "domicilio": "Avenida Valencia 88, Alfafar, 46910",
+    "parentesco": "hija",
+    "estado_civil": "soltera"
+  },
+  "conyuge_donante": {
+    "nombre": "Rosa Martínez García",
+    "nif": "33333333C",
+    "consiente_donacion": true,
+    "fecha_consentimiento": "2024-08-10"
+  },
+  "inmueble_donado": {
+    "descripcion": "Apartamento dos dormitorios",
+    "direccion": "Calle Constitución 22, 3º B, Alfafar, 46910",
+    "referencia_catastral": "3456789YJ4513S0003XX",
+    "superficie": 75.5,
+    "valor_catastral": 68000.00,
+    "valor_real": 120000.00,
+    "uso": "vivienda",
+    "cargas": [],
+    "fecha_adquisicion_donante": "2005-03-20",
+    "titulo_adquisicion": "compraventa"
+  },
+  "condiciones_donacion": {
+    "tipo": "donacion_pura",
+    "reserva_usufructo": false,
+    "condiciones_suspensivas": [],
+    "modo_entrega": "inmediata",
+    "aceptacion_donatario": true,
+    "fecha_aceptacion": "2024-08-10"
+  },
+  "analisis_fiscal": {
+    "impuesto_aplicable": "ISD",
+    "comunidad_autonoma": "Valencia",
+    "grupo_parentesco": 2,
+    "tipo_bien": "inmueble_urbano",
+    "valor_fiscal": 120000.00
+  },
+  "calculo_isd": {
+    "base_imponible": 120000.00,
+    "reducciones_aplicables": [
+      {
+        "tipo": "reduccion_parentesco_directo",
+        "importe": 100000.00,
+        "descripcion": "Reducción por parentesco directo descendiente"
+      },
+      {
+        "tipo": "reduccion_vivienda_familiar",
+        "importe": 20000.00,
+        "descripcion": "Reducción adicional por vivienda habitual"
+      }
+    ],
+    "total_reducciones": 120000.00,
+    "base_liquidable": 0.00,
+    "cuota_tributaria": 0.00,
+    "bonificaciones": [],
+    "cuota_final": 0.00,
+    "exencion_total": true,
+    "motivo_exencion": "Base liquidable inferior al mínimo exento"
+  },
+  "iivtnu_analisis": {
+    "sujeto_a_iivtnu": false,
+    "motivo_no_sujecion": "Donación entre familiares directos sin incremento patrimonial municipal",
+    "periodo_generacion": null,
+    "base_imponible": 0.00,
+    "cuota": 0.00
+  },
+  "documentacion_complementaria": [
+    "certificado_nacimiento_donatario",
+    "certificado_matrimonio_donante",
+    "nota_simple_registral",
+    "cedula_habitabilidad"
+  ],
+  "obligaciones_formales": {
+    "autoliquidacion_isd": {
+      "obligatoria": true,
+      "plazo_presentacion": "2024-11-10",
+      "presentada": false,
+      "importe_liquidacion": 0.00
+    },
+    "comunicacion_ayuntamiento": {
+      "obligatoria": true,
+      "plazo": "30_dias_otorgamiento",
+      "realizada": false
+    }
+  },
+  "acciones_procesables": [
+    "validar_parentesco_donante_donatario",
+    "verificar_consentimiento_conyuge",
+    "calcular_reducciones_isd",
+    "generar_liquidacion_isd_exenta",
+    "validar_no_sujecion_iivtnu",
+    "generar_comunicacion_donacion",
+    "asociar_expediente_gtt",
+    "vincular_documento_gestiona"
+  ],
+  "reglas_validacion": [
+    {
+      "nombre": "parentesco_directo_valido",
+      "condicion": "donatario.parentesco in ['hijo', 'hija', 'padre', 'madre']"
+    },
+    {
+      "nombre": "consentimiento_conyuge_requerido", 
+      "condicion": "donante.estado_civil == 'casado' implies conyuge_donante.consiente_donacion == true"
+    },
+    {
+      "nombre": "valor_real_coherente",
+      "condicion": "inmueble_donado.valor_real >= inmueble_donado.valor_catastral"
+    },
+    {
+      "nombre": "aceptacion_expresa",
+      "condicion": "condiciones_donacion.aceptacion_donatario == true"
+    },
+    {
+      "nombre": "dentro_plazo_autoliquidacion",
+      "condicion": "hoy <= obligaciones_formales.autoliquidacion_isd.plazo_presentacion"
+    }
+  ],
+  "alertas_sistema": [
+    {
+      "tipo": "info",
+      "mensaje": "Donación exenta de ISD por aplicación de reducciones familiares",
+      "fecha": "2024-08-15T09:30:00Z"
+    },
+    {
+      "tipo": "recordatorio",
+      "mensaje": "Pendiente presentación autoliquidación ISD (exenta) antes del 2024-11-10",
+      "fecha": "2024-08-15T09:30:00Z"
+    }
+  ],
+  "enlace_documento": "https://gestiona.alfafar.es/documents/DOC-2024-DON-001.pdf",
+  "expediente_gtt": null,
+  "expediente_gestiona": null,
+  "metadatos": {
+    "extraido_por": "LLM-GPT",
+    "nivel_confianza": 0.93,
+    "fecha_extraccion": "2024-08-15T09:30:00Z",
+    "fuente": "PDF",
+    "validado_por_humano": false,
+    "complejidad": "media",
+    "revision_legal": "automatica"
+  }
+} 

@@ -1,0 +1,41 @@
+{
+  "tipo_documento": "herencia",
+  "subtipo_documento": "aceptacion_herencia_simple",
+  "fecha_documento": "2025-03-12",
+  "numero_protocolo": "H5626/2024",
+  "notario": {
+    "nombre": "Dr. Pedro Martínez Ruiz",
+    "colegiacion": "COL958"
+  },
+  "causante": {
+    "nombre": "Ana López Sánchez",
+    "nif": "18495310C",
+    "fecha_fallecimiento": "2024-11-04",
+    "lugar_fallecimiento": "Alfafar"
+  },
+  "heredero": {
+    "nombre": "Carlos Rodríguez Martín",
+    "nif": "86388282B",
+    "parentesco": "madre",
+    "domicilio": "Plaza España 21, Alfafar, 46910",
+    "acepta_herencia": true
+  },
+  "inmueble_heredado": {
+    "descripcion": "Vivienda familiar",
+    "direccion": "Calle Real 2, Alfafar, 46910",
+    "valor_catastral": 128019,
+    "valor_real": 213823,
+    "tipo": "vivienda",
+    "referencia_catastral": "8750482YJ4513S6032XX",
+    "uso": "vivienda_habitual"
+  },
+  "calculo_isd": {
+    "comunidad_autonoma": "Valencia",
+    "grupo_parentesco": 1,
+    "base_imponible": 233751,
+    "reducciones": 52223,
+    "base_liquidable": 13749,
+    "cuota_final": 11970
+  },
+  "observaciones": "Documento sintético de herencia generado para pruebas"
+}

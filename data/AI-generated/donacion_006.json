@@ -1,0 +1,49 @@
+{
+  "tipo_documento": "donacion",
+  "subtipo_documento": "donacion_inmueble_familiar",
+  "fecha_documento": "2025-04-01",
+  "numero_protocolo": "D7525/2024",
+  "notario": {
+    "nombre": "Dr. Carlos Rodríguez Martín",
+    "colegiacion": "COL299"
+  },
+  "donante": {
+    "nombre": "Juan Pérez García",
+    "nif": "33710273H",
+    "domicilio": "Calle Real 32, Alfafar, 46910",
+    "estado_civil": "soltero"
+  },
+  "donatario": {
+    "nombre": "Carlos Rodríguez Martín",
+    "nif": "81995896Y",
+    "parentesco": "nieto",
+    "domicilio": "Calle Mayor 127, Alfafar, 46910"
+  },
+  "inmueble_donado": {
+    "descripcion": "Local comercial",
+    "direccion": "Calle Constitución 131, Alfafar, 46910",
+    "valor_catastral": 91343,
+    "valor_real": 118197,
+    "tipo": "vivienda",
+    "referencia_catastral": "6955450YJ4513S7792XX",
+    "superficie": 139.18,
+    "uso": "vivienda"
+  },
+  "calculo_isd": {
+    "comunidad_autonoma": "Valencia",
+    "grupo_parentesco": 2,
+    "base_imponible": 231798,
+    "reducciones_aplicables": [
+      {
+        "tipo": "reduccion_parentesco_directo",
+        "importe": 58729,
+        "descripcion": "Reducción por parentesco directo descendiente"
+      }
+    ],
+    "total_reducciones": 57602,
+    "base_liquidable": 29762,
+    "exencion_familiar": true,
+    "cuota_final": 1519
+  },
+  "observaciones": "Documento sintético de donación generado para pruebas"
+}
