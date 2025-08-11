@@ -5,6 +5,7 @@
 
 # Python virtual environments
 taxapp_venv/
+taxapp_env
 venv/
 env/
 ENV/
