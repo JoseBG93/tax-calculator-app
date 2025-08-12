@@ -64,3 +64,7 @@ coverage.xml
 
 # Python version management
 .python-version
+
+# AI model
+.claude
+CLAUDE.md
