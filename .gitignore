@@ -27,7 +27,7 @@ database/*.sqlite
 
 # IDE and editor files
 .vscode/
-.cursor/
+cursor/
 .idea/
 *.swp
 *.swo
