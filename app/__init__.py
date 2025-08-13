@@ -49,10 +49,9 @@ def create_app():
     CORS(app)
 
 
-    # Import and register routes (we'll create this file next)
-    # The following is a common Flask pattern to avoid circular imports (routes import app, app imports routes).
-    # Routes are the files that contain the routes of the application, and they are imported only after the app is created.
+    # Now, we're gonna to import the routes.py file and register the routes with the Flask app.
     from app import routes
+    routes.register_routes(app)
 
     # Now, it returns the configured Flask application instance.
     return app 
