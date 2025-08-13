@@ -7,5 +7,15 @@
         "tests"
     ],
     "claude.contextFiles": ["CLAUDE.md"],
-    "claude.autoReadContext": true
+    "claude.autoReadContext": true,
+    "editor.tokenColorCustomizations": {
+        "comments": "orange",
+        "strings": "green",
+        "keywords": "blue",
+        "functions": "purple",
+        "variables": "red",
+        "numbers": "yellow",
+        "booleans": "cyan",
+        "null": "gray"
+    }
 }
