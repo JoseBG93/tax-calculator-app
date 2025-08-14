@@ -1,194 +1,286 @@
 {
   "tipo_documento": "herencia",
   "subtipo_documento": "aceptacion_herencia_multiple",
-  "identificador_documento": "DOC-2024-HER-001",
-  "fecha_documento": "2024-06-20",
-  "registro_entrada": {
-    "fecha": "2024-06-25",
-    "numero": "2024/03789",
-    "orden_prioridad": 3789
-  },
+  "fecha_documento": "2025-09-05",
+  "numero_protocolo": "H8765/2024",
   "notario": {
-    "nombre": "Isabel Martín López",
-    "protocolo": "2156/2024"
+    "nombre": "Dr. Fernando Ruiz Delgado",
+    "colegiacion": "COL333"
   },
+  
   "causante": {
-    "nombre": "Antonio Ruiz Fernández",
-    "nif": "12345678A",
-    "fecha_fallecimiento": "2024-03-15",
+    "nombre": "Dolores Vázquez Herrera",
+    "nif": "48392617G",
+    "fecha_fallecimiento": "2025-06-20",
     "lugar_fallecimiento": "Alfafar",
-    "estado_civil": "viudo"
+    "estado_civil": "viuda",
+    "porcentaje_propiedad": 100.0
   },
+  
   "herederos": [
     {
-      "nombre": "Carlos Ruiz García",
-      "nif": "23456789B",
+      "nombre": "Miguel Vázquez Torres", 
+      "nif": "72849163K",
       "parentesco": "hijo",
-      "porcentaje_herencia": 33.33,
+      "grado_parentesco": 1,
+      "domicilio": "Calle de la Iglesia 56, Alfafar, 46910",
       "acepta_herencia": true,
-      "renuncia_beneficio_inventario": false
+      "porcentaje_heredado": 50.0
     },
     {
-      "nombre": "María Ruiz García", 
-      "nif": "34567890C",
+      "nombre": "Carmen Vázquez Torres", 
+      "nif": "53817294H",
       "parentesco": "hija",
-      "porcentaje_herencia": 33.33,
+      "grado_parentesco": 1,
+      "domicilio": "Avenida del País Valenciano 78, Alfafar, 46910",
       "acepta_herencia": true,
-      "renuncia_beneficio_inventario": false
+      "porcentaje_heredado": 30.0
     },
     {
-      "nombre": "José Ruiz García",
-      "nif": "45678901D", 
+      "nombre": "Antonio Vázquez Torres", 
+      "nif": "91648275P",
       "parentesco": "hijo",
-      "porcentaje_herencia": 33.34,
+      "grado_parentesco": 1,
+      "domicilio": "Plaza del Mercado 12, Alfafar, 46910",
       "acepta_herencia": true,
-      "renuncia_beneficio_inventario": false
+      "porcentaje_heredado": 20.0
     }
   ],
-  "bienes_heredados": [
-    {
-      "tipo": "inmueble",
-      "descripcion": "Vivienda familiar",
-      "direccion": "Calle Valencia 45, Alfafar, 46910",
-      "referencia_catastral": "2345678YJ4513S0002XX",
-      "valor_catastral": 95000.00,
-      "valor_real": 180000.00,
-      "uso": "vivienda_habitual",
-      "porcentaje_titularidad": 100.0
+  
+  "inmueble_heredado": {
+    "descripcion": "Casa familiar de dos plantas",
+    "direccion": "Calle Primavera 147, Alfafar, 46910",
+    "superficie_construida": 145.80,
+    "superficie_suelo": 320.00,
+    "tipo": "vivienda",
+    "subtipo": "unifamiliar",
+    "referencia_catastral": "6394827YJ4513S7485XX",
+    "clasificacion_suelo": "urbano",
+    "uso_actual": "vivienda_habitual",
+    
+    "valoracion_catastral_actual": {
+      "valor_catastral_total": 218750,
+      "valor_suelo_actual": 128000,
+      "valor_construccion": 90750,
+      "fecha_revision": "2023-01-01"
     },
-    {
-      "tipo": "cuenta_bancaria",
-      "descripcion": "Cuenta corriente Banco Santander",
-      "numero_cuenta": "ES21 0049 0001 5020 1234 5678",
-      "saldo": 45000.00,
-      "fecha_valoracion": "2024-03-15"
-    },
-    {
-      "tipo": "vehiculo",
-      "descripcion": "Seat León 2018",
-      "matricula": "1234-ABC",
-      "valor_mercado": 12000.00
+    
+    "valoracion_herencia": {
+      "valor_herencia_declarado": 153125,
+      "valor_comprobado_admin": null,
+      "valor_referencia_mercado": 295000
     }
-  ],
-  "cargas_y_deudas": [
-    {
-      "tipo": "hipoteca",
-      "descripcion": "Hipoteca inmueble principal",
-      "entidad": "Banco Santander",
-      "capital_pendiente": 35000.00,
-      "fecha_vencimiento": "2029-12-31"
-    },
-    {
-      "tipo": "gastos_entierro",
-      "descripcion": "Gastos funerarios",
-      "importe": 3500.00
-    }
-  ],
-  "masa_hereditaria": {
-    "activo_bruto": 237000.00,
-    "cargas_deducibles": 38500.00,
-    "activo_neto": 198500.00
   },
-  "reparto_herencia": [
-    {
-      "heredero_nif": "23456789B",
-      "porcentaje": 33.33,
-      "valor_recibido": 66166.67,
-      "base_imponible_isd": 66166.67
-    },
-    {
-      "heredero_nif": "34567890C", 
-      "porcentaje": 33.33,
-      "valor_recibido": 66166.67,
-      "base_imponible_isd": 66166.67
-    },
-    {
-      "heredero_nif": "45678901D",
-      "porcentaje": 33.34,
-      "valor_recibido": 66166.66,
-      "base_imponible_isd": 66166.66
-    }
-  ],
-  "calculo_isd": {
-    "comunidad_autonoma": "Valencia",
-    "grupo_parentesco": 2,
-    "reducciones_aplicables": [
-      {
-        "tipo": "reduccion_parentesco",
-        "importe": 100000.00,
-        "descripcion": "Reducción por parentesco directo descendiente"
-      }
-    ],
-    "cuotas_individuales": [
-      {
-        "heredero_nif": "23456789B",
-        "base_imponible": 66166.67,
-        "reducciones": 66166.67,
-        "base_liquidable": 0.00,
-        "cuota_tributaria": 0.00,
-        "bonificacion": 0.00,
-        "cuota_final": 0.00
-      },
-      {
-        "heredero_nif": "34567890C",
-        "base_imponible": 66166.67, 
-        "reducciones": 66166.67,
-        "base_liquidable": 0.00,
-        "cuota_tributaria": 0.00,
-        "bonificacion": 0.00,
-        "cuota_final": 0.00
-      },
-      {
-        "heredero_nif": "45678901D",
-        "base_imponible": 66166.66,
-        "reducciones": 66166.66,
-        "base_liquidable": 0.00,
-        "cuota_tributaria": 0.00,
-        "bonificacion": 0.00,
-        "cuota_final": 0.00
-      }
-    ],
-    "total_isd": 0.00
+  
+  "transmision_anterior_causante": {
+    "fecha_adquisicion": "2005-10-22",
+    "valor_adquisicion": 78000,
+    "valor_suelo_anterior": 55000,
+    "titulo_adquisicion": "compraventa",
+    "documento_anterior": "P7238/2005"
   },
-  "autoliquidacion_presentada": false,
-  "plazo_presentacion": "2024-09-15",
-  "acciones_procesables": [
-    "validar_parentesco_herederos",
-    "calcular_masa_hereditaria",
-    "aplicar_reducciones_isd",
-    "calcular_cuotas_individuales",
-    "generar_propuesta_liquidacion_isd",
-    "verificar_autoliquidacion_isd", 
-    "associar_expediente_gtt",
-    "vincular_documento_gestiona"
-  ],
-  "reglas_validacion": [
+  
+  "calculo_iivtnu_por_heredero": [
     {
-      "nombre": "suma_porcentajes_100",
-      "condicion": "sum(herederos.porcentaje_herencia) == 100"
+      "heredero": "Miguel Vázquez Torres",
+      "porcentaje": 50.0,
+      "calculo_iivtnu": {
+        "sujeto_impuesto": true,
+        "obligado_tributario": "heredero",
+        "tipo_transmision": "gratuita",
+        
+        "periodo_imposicion": {
+          "fecha_inicio": "2005-10-22",
+          "fecha_fin": "2025-06-20",
+          "años_completos": 19,
+          "meses_adicionales": 7,
+          "dias_adicionales": 29
+        },
+        
+        "base_imponible": {
+          "valor_suelo_fallecimiento": 128000,
+          "valor_suelo_adquisicion": 55000,
+          "incremento_valor_suelo": 73000,
+          "porcentaje_transmitido": 50.0,
+          "incremento_gravable": 36500
+        },
+        
+        "coeficientes": {
+          "periodo_años": 19,
+          "coeficiente_anual": 3.5,
+          "coeficiente_maximo": 30.0,
+          "coeficiente_aplicado": 30.0,
+          "tipo_inmueble": "vivienda",
+          "municipio": "Alfafar"
+        },
+        
+        "liquidacion": {
+          "base_imponible": 10950,
+          "tipo_gravamen": 30.0,
+          "cuota_integra": 3285,
+          "bonificaciones_aplicables": ["herencia_familiar"],
+          "porcentaje_bonificacion": 95.0,
+          "importe_bonificacion": 3121,
+          "cuota_liquida": 164,
+          "recargos": 0,
+          "cuota_final": 164
+        },
+        
+        "exenciones_bonificaciones": {
+          "vivienda_habitual_familiar": {
+            "aplicable": true,
+            "porcentaje": 95.0,
+            "requisitos_cumplidos": [
+              "parentesco_directo",
+              "vivienda_habitual_causante",
+              "mantenimiento_3_años"
+            ]
+          },
+          "transmision_empresarial": {
+            "aplicable": false
+          }
+        }
+      }
     },
     {
-      "nombre": "todos_aceptan_herencia",
-      "condicion": "all(herederos.acepta_herencia == true)"
+      "heredero": "Carmen Vázquez Torres",
+      "porcentaje": 30.0,
+      "calculo_iivtnu": {
+        "sujeto_impuesto": true,
+        "obligado_tributario": "heredero",
+        "tipo_transmision": "gratuita",
+        
+        "periodo_imposicion": {
+          "fecha_inicio": "2005-10-22",
+          "fecha_fin": "2025-06-20",
+          "años_completos": 19,
+          "meses_adicionales": 7,
+          "dias_adicionales": 29
+        },
+        
+        "base_imponible": {
+          "valor_suelo_fallecimiento": 128000,
+          "valor_suelo_adquisicion": 55000,
+          "incremento_valor_suelo": 73000,
+          "porcentaje_transmitido": 30.0,
+          "incremento_gravable": 21900
+        },
+        
+        "coeficientes": {
+          "periodo_años": 19,
+          "coeficiente_anual": 3.5,
+          "coeficiente_maximo": 30.0,
+          "coeficiente_aplicado": 30.0,
+          "tipo_inmueble": "vivienda",
+          "municipio": "Alfafar"
+        },
+        
+        "liquidacion": {
+          "base_imponible": 6570,
+          "tipo_gravamen": 30.0,
+          "cuota_integra": 1971,
+          "bonificaciones_aplicables": ["herencia_familiar"],
+          "porcentaje_bonificacion": 95.0,
+          "importe_bonificacion": 1872,
+          "cuota_liquida": 99,
+          "recargos": 0,
+          "cuota_final": 99
+        },
+        
+        "exenciones_bonificaciones": {
+          "vivienda_habitual_familiar": {
+            "aplicable": true,
+            "porcentaje": 95.0,
+            "requisitos_cumplidos": [
+              "parentesco_directo",
+              "vivienda_habitual_causante",
+              "mantenimiento_3_años"
+            ]
+          },
+          "transmision_empresarial": {
+            "aplicable": false
+          }
+        }
+      }
     },
     {
-      "nombre": "masa_hereditaria_positiva",
-      "condicion": "masa_hereditaria.activo_neto > 0"
-    },
-    {
-      "nombre": "dentro_plazo_presentacion",
-      "condicion": "hoy <= plazo_presentacion"
+      "heredero": "Antonio Vázquez Torres",
+      "porcentaje": 20.0,
+      "calculo_iivtnu": {
+        "sujeto_impuesto": true,
+        "obligado_tributario": "heredero",
+        "tipo_transmision": "gratuita",
+        
+        "periodo_imposicion": {
+          "fecha_inicio": "2005-10-22",
+          "fecha_fin": "2025-06-20",
+          "años_completos": 19,
+          "meses_adicionales": 7,
+          "dias_adicionales": 29
+        },
+        
+        "base_imponible": {
+          "valor_suelo_fallecimiento": 128000,
+          "valor_suelo_adquisicion": 55000,
+          "incremento_valor_suelo": 73000,
+          "porcentaje_transmitido": 20.0,
+          "incremento_gravable": 14600
+        },
+        
+        "coeficientes": {
+          "periodo_años": 19,
+          "coeficiente_anual": 3.5,
+          "coeficiente_maximo": 30.0,
+          "coeficiente_aplicado": 30.0,
+          "tipo_inmueble": "vivienda",
+          "municipio": "Alfafar"
+        },
+        
+        "liquidacion": {
+          "base_imponible": 4380,
+          "tipo_gravamen": 30.0,
+          "cuota_integra": 1314,
+          "bonificaciones_aplicables": ["herencia_familiar"],
+          "porcentaje_bonificacion": 95.0,
+          "importe_bonificacion": 1248,
+          "cuota_liquida": 66,
+          "recargos": 0,
+          "cuota_final": 66
+        },
+        
+        "exenciones_bonificaciones": {
+          "vivienda_habitual_familiar": {
+            "aplicable": true,
+            "porcentaje": 95.0,
+            "requisitos_cumplidos": [
+              "parentesco_directo",
+              "vivienda_habitual_causante",
+              "mantenimiento_3_años"
+            ]
+          },
+          "transmision_empresarial": {
+            "aplicable": false
+          }
+        }
+      }
     }
   ],
-  "enlace_documento": "https://gestiona.alfafar.es/documents/DOC-2024-HER-001.pdf",
-  "expediente_gtt": null,
-  "expediente_gestiona": null,
-  "metadatos": {
-    "extraido_por": "LLM-GPT",
-    "nivel_confianza": 0.95,
-    "fecha_extraccion": "2024-06-25T14:30:00Z",
-    "fuente": "PDF",
-    "validado_por_humano": false,
-    "complejidad": "alta"
-  }
-} 
+  
+  "resumen_total": {
+    "cuota_total_iivtnu": 329,
+    "distribución_porcentual": {
+      "Miguel_Vázquez_Torres": "50% - 164€",
+      "Carmen_Vázquez_Torres": "30% - 99€",
+      "Antonio_Vázquez_Torres": "20% - 66€"
+    }
+  },
+  
+  "marco_legal": {
+    "normativa_estatal": ["LGT", "LRHL"],
+    "ordenanza_municipal": "Ordenanza Fiscal IIVTNU Alfafar 2024",
+    "boe_referencias": [],
+    "fecha_vigencia": "2024-01-01"
+  },
+  
+  "observaciones": "Documento sintético de herencia IIVTNU - Alfafar - Herencia múltiple entre tres hermanos con bonificaciones familiares"
+}

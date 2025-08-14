@@ -7,35 +7,123 @@
     "nombre": "Dr. Pedro Martínez Ruiz",
     "colegiacion": "COL474"
   },
+  
   "causante": {
     "nombre": "Juan Pérez García",
     "nif": "33041087U",
     "fecha_fallecimiento": "2025-01-05",
-    "lugar_fallecimiento": "Alfafar"
+    "lugar_fallecimiento": "Alfafar",
+    "estado_civil": "viudo",
+    "porcentaje_propiedad": 100.0
   },
+  
   "heredero": {
-    "nombre": "Carlos Rodríguez Martín",
+    "nombre": "Carlos Rodríguez Martín", 
     "nif": "94416761U",
     "parentesco": "hijo",
+    "grado_parentesco": 1,
     "domicilio": "Avenida Valencia 183, Alfafar, 46910",
-    "acepta_herencia": true
+    "acepta_herencia": true,
+    "porcentaje_heredado": 100.0
   },
+  
   "inmueble_heredado": {
     "descripcion": "Vivienda familiar",
     "direccion": "Calle Real 151, Alfafar, 46910",
-    "valor_catastral": 142924,
-    "valor_real": 99583,
+    "superficie_construida": 95.50,
+    "superficie_suelo": 180.00,
     "tipo": "vivienda",
+    "subtipo": "unifamiliar",
     "referencia_catastral": "5847478YJ4513S8770XX",
-    "uso": "vivienda_habitual"
+    "clasificacion_suelo": "urbano",
+    "uso_actual": "vivienda_habitual",
+    
+    "valoracion_catastral_actual": {
+      "valor_catastral_total": 142924,
+      "valor_suelo_actual": 85754,
+      "valor_construccion": 57170,
+      "fecha_revision": "2023-01-01"
+    },
+    
+    "valoracion_herencia": {
+      "valor_herencia_declarado": 99583,
+      "valor_comprobado_admin": null,
+      "valor_referencia_mercado": 195000
+    }
   },
-  "calculo_isd": {
-    "comunidad_autonoma": "Valencia",
-    "grupo_parentesco": 2,
-    "base_imponible": 217797,
-    "reducciones": 70116,
-    "base_liquidable": 37625,
-    "cuota_final": 10384
+  
+  "transmision_anterior_causante": {
+    "fecha_adquisicion": "2010-09-12",
+    "valor_adquisicion": 75000,
+    "valor_suelo_anterior": 52000,
+    "titulo_adquisicion": "compraventa",
+    "documento_anterior": "P8754/2010"
   },
-  "observaciones": "Documento sintético de herencia generado para pruebas"
+  
+  "calculo_iivtnu": {
+    "sujeto_impuesto": true,
+    "obligado_tributario": "heredero",
+    "tipo_transmision": "gratuita",
+    
+    "periodo_imposicion": {
+      "fecha_inicio": "2010-09-12",
+      "fecha_fin": "2025-01-05",
+      "años_completos": 14,
+      "meses_adicionales": 3,
+      "dias_adicionales": 24
+    },
+    
+    "base_imponible": {
+      "valor_suelo_fallecimiento": 85754,
+      "valor_suelo_adquisicion": 52000,
+      "incremento_valor_suelo": 33754,
+      "porcentaje_transmitido": 100.0,
+      "incremento_gravable": 33754
+    },
+    
+    "coeficientes": {
+      "periodo_años": 14,
+      "coeficiente_anual": 3.5,
+      "coeficiente_maximo": 30.0,
+      "coeficiente_aplicado": 30.0,
+      "tipo_inmueble": "vivienda",
+      "municipio": "Alfafar"
+    },
+    
+    "liquidacion": {
+      "base_imponible": 10126,
+      "tipo_gravamen": 30.0,
+      "cuota_integra": 3038,
+      "bonificaciones_aplicables": ["herencia_familiar"],
+      "porcentaje_bonificacion": 95.0,
+      "importe_bonificacion": 2886,
+      "cuota_liquida": 152,
+      "recargos": 0,
+      "cuota_final": 152
+    },
+    
+    "exenciones_bonificaciones": {
+      "vivienda_habitual_familiar": {
+        "aplicable": true,
+        "porcentaje": 95.0,
+        "requisitos_cumplidos": [
+          "parentesco_directo",
+          "vivienda_habitual_causante",
+          "mantenimiento_3_años"
+        ]
+      },
+      "transmision_empresarial": {
+        "aplicable": false
+      }
+    }
+  },
+  
+  "marco_legal": {
+    "normativa_estatal": ["LGT", "LRHL"],
+    "ordenanza_municipal": "Ordenanza Fiscal IIVTNU Alfafar 2024",
+    "boe_referencias": [],
+    "fecha_vigencia": "2024-01-01"
+  },
+  
+  "observaciones": "Documento sintético de herencia IIVTNU - Alfafar - ESTRUCTURA MEJORADA"
 }

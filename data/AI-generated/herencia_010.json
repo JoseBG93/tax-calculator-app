@@ -1,41 +1,129 @@
 {
   "tipo_documento": "herencia",
   "subtipo_documento": "aceptacion_herencia_simple",
-  "fecha_documento": "2024-12-18",
-  "numero_protocolo": "H4375/2024",
+  "fecha_documento": "2025-07-08",
+  "numero_protocolo": "H7654/2024",
   "notario": {
-    "nombre": "Dr. Ana López Sánchez",
-    "colegiacion": "COL765"
+    "nombre": "Dra. Beatriz Sánchez Torres",
+    "colegiacion": "COL789"
   },
+  
   "causante": {
-    "nombre": "Pedro Martínez Ruiz",
-    "nif": "11596540J",
-    "fecha_fallecimiento": "2024-08-03",
-    "lugar_fallecimiento": "Alfafar"
+    "nombre": "José María González Peña",
+    "nif": "29485617B",
+    "fecha_fallecimiento": "2025-03-15",
+    "lugar_fallecimiento": "Alfafar",
+    "estado_civil": "separado",
+    "porcentaje_propiedad": 100.0
   },
+  
   "heredero": {
-    "nombre": "Juan Pérez García",
-    "nif": "24638745F",
+    "nombre": "David González Martínez", 
+    "nif": "67293851A",
     "parentesco": "hijo",
-    "domicilio": "Avenida Valencia 114, Alfafar, 46910",
-    "acepta_herencia": true
+    "grado_parentesco": 1,
+    "domicilio": "Plaza San Miguel 6, Alfafar, 46910",
+    "acepta_herencia": true,
+    "porcentaje_heredado": 100.0
   },
+  
   "inmueble_heredado": {
-    "descripcion": "Vivienda familiar",
-    "direccion": "Plaza España 81, Alfafar, 46910",
-    "valor_catastral": 118393,
-    "valor_real": 172113,
+    "descripcion": "Chalet independiente",
+    "direccion": "Urbanización Los Pinos 22, Alfafar, 46910",
+    "superficie_construida": 185.75,
+    "superficie_suelo": 450.00,
     "tipo": "vivienda",
-    "referencia_catastral": "4977654YJ4513S9760XX",
-    "uso": "vivienda_habitual"
+    "subtipo": "chalet",
+    "referencia_catastral": "1948375YJ4513S6847XX",
+    "clasificacion_suelo": "urbano",
+    "uso_actual": "vivienda_habitual",
+    
+    "valoracion_catastral_actual": {
+      "valor_catastral_total": 298650,
+      "valor_suelo_actual": 180000,
+      "valor_construccion": 118650,
+      "fecha_revision": "2023-01-01"
+    },
+    
+    "valoracion_herencia": {
+      "valor_herencia_declarado": 209055,
+      "valor_comprobado_admin": null,
+      "valor_referencia_mercado": 425000
+    }
   },
-  "calculo_isd": {
-    "comunidad_autonoma": "Valencia",
-    "grupo_parentesco": 1,
-    "base_imponible": 203715,
-    "reducciones": 62979,
-    "base_liquidable": 32968,
-    "cuota_final": 11903
+  
+  "transmision_anterior_causante": {
+    "fecha_adquisicion": "2001-06-12",
+    "valor_adquisicion": 90000,
+    "valor_suelo_anterior": 65000,
+    "titulo_adquisicion": "compraventa",
+    "documento_anterior": "P1256/2001"
   },
-  "observaciones": "Documento sintético de herencia generado para pruebas"
+  
+  "calculo_iivtnu": {
+    "sujeto_impuesto": true,
+    "obligado_tributario": "heredero",
+    "tipo_transmision": "gratuita",
+    
+    "periodo_imposicion": {
+      "fecha_inicio": "2001-06-12",
+      "fecha_fin": "2025-03-15",
+      "años_completos": 23,
+      "meses_adicionales": 9,
+      "dias_adicionales": 3
+    },
+    
+    "base_imponible": {
+      "valor_suelo_fallecimiento": 180000,
+      "valor_suelo_adquisicion": 65000,
+      "incremento_valor_suelo": 115000,
+      "porcentaje_transmitido": 100.0,
+      "incremento_gravable": 115000
+    },
+    
+    "coeficientes": {
+      "periodo_años": 23,
+      "coeficiente_anual": 3.5,
+      "coeficiente_maximo": 30.0,
+      "coeficiente_aplicado": 30.0,
+      "tipo_inmueble": "vivienda",
+      "municipio": "Alfafar"
+    },
+    
+    "liquidacion": {
+      "base_imponible": 34500,
+      "tipo_gravamen": 30.0,
+      "cuota_integra": 10350,
+      "bonificaciones_aplicables": ["herencia_familiar"],
+      "porcentaje_bonificacion": 95.0,
+      "importe_bonificacion": 9833,
+      "cuota_liquida": 517,
+      "recargos": 0,
+      "cuota_final": 517
+    },
+    
+    "exenciones_bonificaciones": {
+      "vivienda_habitual_familiar": {
+        "aplicable": true,
+        "porcentaje": 95.0,
+        "requisitos_cumplidos": [
+          "parentesco_directo",
+          "vivienda_habitual_causante",
+          "mantenimiento_3_años"
+        ]
+      },
+      "transmision_empresarial": {
+        "aplicable": false
+      }
+    }
+  },
+  
+  "marco_legal": {
+    "normativa_estatal": ["LGT", "LRHL"],
+    "ordenanza_municipal": "Ordenanza Fiscal IIVTNU Alfafar 2024",
+    "boe_referencias": [],
+    "fecha_vigencia": "2024-01-01"
+  },
+  
+  "observaciones": "Documento sintético de herencia IIVTNU - Alfafar - Chalet independiente con bonificación familiar"
 }

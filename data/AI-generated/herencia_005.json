@@ -1,41 +1,125 @@
 {
   "tipo_documento": "herencia",
   "subtipo_documento": "aceptacion_herencia_simple",
-  "fecha_documento": "2024-11-16",
-  "numero_protocolo": "H2270/2024",
+  "fecha_documento": "2025-04-10",
+  "numero_protocolo": "H3256/2024",
   "notario": {
-    "nombre": "Dr. Ana López Sánchez",
-    "colegiacion": "COL102"
+    "nombre": "Dr. Miguel Sánchez Vega",
+    "colegiacion": "COL678"
   },
+  
   "causante": {
-    "nombre": "Ana López Sánchez",
-    "nif": "57721593B",
-    "fecha_fallecimiento": "2024-07-31",
-    "lugar_fallecimiento": "Alfafar"
+    "nombre": "Rosa Martín Fernández",
+    "nif": "37582946H",
+    "fecha_fallecimiento": "2025-01-28",
+    "lugar_fallecimiento": "Alfafar",
+    "estado_civil": "soltera",
+    "porcentaje_propiedad": 100.0
   },
+  
   "heredero": {
-    "nombre": "Juan Pérez García",
-    "nif": "53933698Z",
-    "parentesco": "madre",
-    "domicilio": "Avenida Valencia 200, Alfafar, 46910",
-    "acepta_herencia": true
+    "nombre": "Pablo Martín Jiménez", 
+    "nif": "69147823J",
+    "parentesco": "nieto",
+    "grado_parentesco": 2,
+    "domicilio": "Calle Libertad 156, Alfafar, 46910",
+    "acepta_herencia": true,
+    "porcentaje_heredado": 100.0
   },
+  
   "inmueble_heredado": {
-    "descripcion": "Vivienda familiar",
-    "direccion": "Avenida Valencia 137, Alfafar, 46910",
-    "valor_catastral": 131766,
-    "valor_real": 220297,
-    "tipo": "vivienda",
-    "referencia_catastral": "5908992YJ4513S5824XX",
-    "uso": "vivienda_habitual"
+    "descripcion": "Nave industrial",
+    "direccion": "Polígono Industrial Norte, Nave 12, Alfafar, 46910",
+    "superficie_construida": 420.00,
+    "superficie_suelo": 520.00,
+    "tipo": "industrial",
+    "subtipo": "nave",
+    "referencia_catastral": "9627384YJ4513S4785XX",
+    "clasificacion_suelo": "urbano",
+    "uso_actual": "industrial",
+    
+    "valoracion_catastral_actual": {
+      "valor_catastral_total": 245680,
+      "valor_suelo_actual": 156000,
+      "valor_construccion": 89680,
+      "fecha_revision": "2023-01-01"
+    },
+    
+    "valoracion_herencia": {
+      "valor_herencia_declarado": 171976,
+      "valor_comprobado_admin": null,
+      "valor_referencia_mercado": 380000
+    }
   },
-  "calculo_isd": {
-    "comunidad_autonoma": "Valencia",
-    "grupo_parentesco": 2,
-    "base_imponible": 92818,
-    "reducciones": 24945,
-    "base_liquidable": 43737,
-    "cuota_final": 5939
+  
+  "transmision_anterior_causante": {
+    "fecha_adquisicion": "2006-03-15",
+    "valor_adquisicion": 85000,
+    "valor_suelo_anterior": 65000,
+    "titulo_adquisicion": "compraventa",
+    "documento_anterior": "P4731/2006"
   },
-  "observaciones": "Documento sintético de herencia generado para pruebas"
+  
+  "calculo_iivtnu": {
+    "sujeto_impuesto": true,
+    "obligado_tributario": "heredero",
+    "tipo_transmision": "gratuita",
+    
+    "periodo_imposicion": {
+      "fecha_inicio": "2006-03-15",
+      "fecha_fin": "2025-01-28",
+      "años_completos": 18,
+      "meses_adicionales": 10,
+      "dias_adicionales": 13
+    },
+    
+    "base_imponible": {
+      "valor_suelo_fallecimiento": 156000,
+      "valor_suelo_adquisicion": 65000,
+      "incremento_valor_suelo": 91000,
+      "porcentaje_transmitido": 100.0,
+      "incremento_gravable": 91000
+    },
+    
+    "coeficientes": {
+      "periodo_años": 18,
+      "coeficiente_anual": 3.5,
+      "coeficiente_maximo": 30.0,
+      "coeficiente_aplicado": 30.0,
+      "tipo_inmueble": "industrial",
+      "municipio": "Alfafar"
+    },
+    
+    "liquidacion": {
+      "base_imponible": 27300,
+      "tipo_gravamen": 30.0,
+      "cuota_integra": 8190,
+      "bonificaciones_aplicables": [],
+      "porcentaje_bonificacion": 0.0,
+      "importe_bonificacion": 0,
+      "cuota_liquida": 8190,
+      "recargos": 0,
+      "cuota_final": 8190
+    },
+    
+    "exenciones_bonificaciones": {
+      "vivienda_habitual_familiar": {
+        "aplicable": false,
+        "porcentaje": 0.0,
+        "requisitos_cumplidos": []
+      },
+      "transmision_empresarial": {
+        "aplicable": false
+      }
+    }
+  },
+  
+  "marco_legal": {
+    "normativa_estatal": ["LGT", "LRHL"],
+    "ordenanza_municipal": "Ordenanza Fiscal IIVTNU Alfafar 2024",
+    "boe_referencias": [],
+    "fecha_vigencia": "2024-01-01"
+  },
+  
+  "observaciones": "Documento sintético de herencia IIVTNU - Alfafar - Nave industrial heredada por nieto"
 }

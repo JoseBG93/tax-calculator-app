@@ -1,41 +1,129 @@
 {
   "tipo_documento": "herencia",
   "subtipo_documento": "aceptacion_herencia_simple",
-  "fecha_documento": "2025-05-19",
-  "numero_protocolo": "H4391/2024",
+  "fecha_documento": "2025-09-12",
+  "numero_protocolo": "H7829/2024",
   "notario": {
-    "nombre": "Dr. María González López",
-    "colegiacion": "COL424"
+    "nombre": "Dra. Lucía Rodríguez Herrera",
+    "colegiacion": "COL892"
   },
+  
   "causante": {
-    "nombre": "Pedro Martínez Ruiz",
-    "nif": "97650350T",
-    "fecha_fallecimiento": "2025-02-05",
-    "lugar_fallecimiento": "Alfafar"
+    "nombre": "Manuel García Torres",
+    "nif": "74159263R",
+    "fecha_fallecimiento": "2025-06-05",
+    "lugar_fallecimiento": "Alfafar",
+    "estado_civil": "divorciado",
+    "porcentaje_propiedad": 100.0
   },
+  
   "heredero": {
-    "nombre": "Juan Pérez García",
-    "nif": "50686791G",
-    "parentesco": "cónyuge",
-    "domicilio": "Calle Real 163, Alfafar, 46910",
-    "acepta_herencia": true
+    "nombre": "Sandra García Núñez", 
+    "nif": "83746195Q",
+    "parentesco": "hija",
+    "grado_parentesco": 1,
+    "domicilio": "Plaza de la Paz 14, Alfafar, 46910",
+    "acepta_herencia": true,
+    "porcentaje_heredado": 100.0
   },
+  
   "inmueble_heredado": {
-    "descripcion": "Vivienda familiar",
-    "direccion": "Avenida Valencia 84, Alfafar, 46910",
-    "valor_catastral": 124866,
-    "valor_real": 258570,
-    "tipo": "vivienda",
-    "referencia_catastral": "9473427YJ4513S4940XX",
-    "uso": "vivienda_habitual"
+    "descripcion": "Garaje en planta sótano",
+    "direccion": "Calle Valencia 88, Garaje 15, Alfafar, 46910",
+    "superficie_construida": 25.00,
+    "superficie_suelo": 0.0,
+    "tipo": "garaje",
+    "subtipo": "plaza_aparcamiento",
+    "referencia_catastral": "4528163YJ4513S9876XX",
+    "clasificacion_suelo": "urbano",
+    "uso_actual": "garaje",
+    
+    "valoracion_catastral_actual": {
+      "valor_catastral_total": 18450,
+      "valor_suelo_actual": 11070,
+      "valor_construccion": 7380,
+      "fecha_revision": "2023-01-01"
+    },
+    
+    "valoracion_herencia": {
+      "valor_herencia_declarado": 12915,
+      "valor_comprobado_admin": null,
+      "valor_referencia_mercado": 25000
+    }
   },
-  "calculo_isd": {
-    "comunidad_autonoma": "Valencia",
-    "grupo_parentesco": 2,
-    "base_imponible": 295464,
-    "reducciones": 26124,
-    "base_liquidable": 19793,
-    "cuota_final": 4110
+  
+  "transmision_anterior_causante": {
+    "fecha_adquisicion": "2015-02-20",
+    "valor_adquisicion": 12000,
+    "valor_suelo_anterior": 8500,
+    "titulo_adquisicion": "compraventa",
+    "documento_anterior": "P1847/2015"
   },
-  "observaciones": "Documento sintético de herencia generado para pruebas"
+  
+  "calculo_iivtnu": {
+    "sujeto_impuesto": true,
+    "obligado_tributario": "heredero",
+    "tipo_transmision": "gratuita",
+    
+    "periodo_imposicion": {
+      "fecha_inicio": "2015-02-20",
+      "fecha_fin": "2025-06-05",
+      "años_completos": 10,
+      "meses_adicionales": 3,
+      "dias_adicionales": 16
+    },
+    
+    "base_imponible": {
+      "valor_suelo_fallecimiento": 11070,
+      "valor_suelo_adquisicion": 8500,
+      "incremento_valor_suelo": 2570,
+      "porcentaje_transmitido": 100.0,
+      "incremento_gravable": 2570
+    },
+    
+    "coeficientes": {
+      "periodo_años": 10,
+      "coeficiente_anual": 3.5,
+      "coeficiente_maximo": 30.0,
+      "coeficiente_aplicado": 30.0,
+      "tipo_inmueble": "garaje",
+      "municipio": "Alfafar"
+    },
+    
+    "liquidacion": {
+      "base_imponible": 771,
+      "tipo_gravamen": 30.0,
+      "cuota_integra": 231,
+      "bonificaciones_aplicables": ["herencia_familiar"],
+      "porcentaje_bonificacion": 95.0,
+      "importe_bonificacion": 219,
+      "cuota_liquida": 12,
+      "recargos": 0,
+      "cuota_final": 12
+    },
+    
+    "exenciones_bonificaciones": {
+      "vivienda_habitual_familiar": {
+        "aplicable": true,
+        "porcentaje": 95.0,
+        "requisitos_cumplidos": [
+          "parentesco_directo",
+          "garaje_anejo_vivienda",
+          "mantenimiento_3_años"
+        ]
+      },
+      "transmision_empresarial": {
+        "aplicable": false
+      }
+    }
+  },
+  
+  "marco_legal": {
+    "normativa_estatal": ["LGT", "LRHL"],
+    "ordenanza_municipal": "Ordenanza Fiscal IIVTNU Alfafar 2024",
+    "boe_referencias": [],
+    "fecha_vigencia": "2024-01-01"
+  },
+  
+  "observaciones": "Documento sintético de herencia IIVTNU - Alfafar - Garaje con bonificación familiar"
 }

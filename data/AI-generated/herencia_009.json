@@ -1,41 +1,129 @@
 {
   "tipo_documento": "herencia",
   "subtipo_documento": "aceptacion_herencia_simple",
-  "fecha_documento": "2024-11-12",
-  "numero_protocolo": "H9449/2024",
+  "fecha_documento": "2025-08-14",
+  "numero_protocolo": "H9523/2024",
   "notario": {
-    "nombre": "Dr. Carlos Rodríguez Martín",
-    "colegiacion": "COL112"
+    "nombre": "Dr. Roberto Castillo Mendoza",
+    "colegiacion": "COL145"
   },
+  
   "causante": {
-    "nombre": "Juan Pérez García",
-    "nif": "69676009Y",
-    "fecha_fallecimiento": "2024-08-12",
-    "lugar_fallecimiento": "Alfafar"
+    "nombre": "Esperanza Ruiz Moreno",
+    "nif": "73819456P",
+    "fecha_fallecimiento": "2025-05-30",
+    "lugar_fallecimiento": "Alfafar",
+    "estado_civil": "viuda",
+    "porcentaje_propiedad": 100.0
   },
+  
   "heredero": {
-    "nombre": "Carlos Rodríguez Martín",
-    "nif": "70928548Q",
+    "nombre": "Raquel Ruiz González", 
+    "nif": "52948371E",
     "parentesco": "hija",
-    "domicilio": "Avenida Valencia 118, Alfafar, 46910",
-    "acepta_herencia": true
+    "grado_parentesco": 1,
+    "domicilio": "Calle del Carmen 128, Alfafar, 46910",
+    "acepta_herencia": true,
+    "porcentaje_heredado": 100.0
   },
+  
   "inmueble_heredado": {
-    "descripcion": "Vivienda familiar",
-    "direccion": "Calle Constitución 1, Alfafar, 46910",
-    "valor_catastral": 171268,
-    "valor_real": 130673,
-    "tipo": "vivienda",
-    "referencia_catastral": "8130493YJ4513S4006XX",
-    "uso": "vivienda_habitual"
+    "descripcion": "Trastero",
+    "direccion": "Calle San José 15, Trastero 8, Alfafar, 46910",
+    "superficie_construida": 12.50,
+    "superficie_suelo": 0.0,
+    "tipo": "trastero",
+    "subtipo": "anejo",
+    "referencia_catastral": "5847291YJ4513S1247XX",
+    "clasificacion_suelo": "urbano",
+    "uso_actual": "trastero",
+    
+    "valoracion_catastral_actual": {
+      "valor_catastral_total": 8920,
+      "valor_suelo_actual": 5352,
+      "valor_construccion": 3568,
+      "fecha_revision": "2023-01-01"
+    },
+    
+    "valoracion_herencia": {
+      "valor_herencia_declarado": 6244,
+      "valor_comprobado_admin": null,
+      "valor_referencia_mercado": 12000
+    }
   },
-  "calculo_isd": {
-    "comunidad_autonoma": "Valencia",
-    "grupo_parentesco": 1,
-    "base_imponible": 198006,
-    "reducciones": 26474,
-    "base_liquidable": 25248,
-    "cuota_final": 14925
+  
+  "transmision_anterior_causante": {
+    "fecha_adquisicion": "2017-09-14",
+    "valor_adquisicion": 6500,
+    "valor_suelo_anterior": 4200,
+    "titulo_adquisicion": "compraventa",
+    "documento_anterior": "P3671/2017"
   },
-  "observaciones": "Documento sintético de herencia generado para pruebas"
+  
+  "calculo_iivtnu": {
+    "sujeto_impuesto": true,
+    "obligado_tributario": "heredero",
+    "tipo_transmision": "gratuita",
+    
+    "periodo_imposicion": {
+      "fecha_inicio": "2017-09-14",
+      "fecha_fin": "2025-05-30",
+      "años_completos": 7,
+      "meses_adicionales": 8,
+      "dias_adicionales": 16
+    },
+    
+    "base_imponible": {
+      "valor_suelo_fallecimiento": 5352,
+      "valor_suelo_adquisicion": 4200,
+      "incremento_valor_suelo": 1152,
+      "porcentaje_transmitido": 100.0,
+      "incremento_gravable": 1152
+    },
+    
+    "coeficientes": {
+      "periodo_años": 7,
+      "coeficiente_anual": 3.5,
+      "coeficiente_maximo": 30.0,
+      "coeficiente_aplicado": 24.5,
+      "tipo_inmueble": "trastero",
+      "municipio": "Alfafar"
+    },
+    
+    "liquidacion": {
+      "base_imponible": 282,
+      "tipo_gravamen": 30.0,
+      "cuota_integra": 85,
+      "bonificaciones_aplicables": ["herencia_familiar"],
+      "porcentaje_bonificacion": 95.0,
+      "importe_bonificacion": 81,
+      "cuota_liquida": 4,
+      "recargos": 0,
+      "cuota_final": 4
+    },
+    
+    "exenciones_bonificaciones": {
+      "vivienda_habitual_familiar": {
+        "aplicable": true,
+        "porcentaje": 95.0,
+        "requisitos_cumplidos": [
+          "parentesco_directo",
+          "trastero_anejo_vivienda",
+          "mantenimiento_3_años"
+        ]
+      },
+      "transmision_empresarial": {
+        "aplicable": false
+      }
+    }
+  },
+  
+  "marco_legal": {
+    "normativa_estatal": ["LGT", "LRHL"],
+    "ordenanza_municipal": "Ordenanza Fiscal IIVTNU Alfafar 2024",
+    "boe_referencias": [],
+    "fecha_vigencia": "2024-01-01"
+  },
+  
+  "observaciones": "Documento sintético de herencia IIVTNU - Alfafar - Trastero con bonificación familiar"
 }

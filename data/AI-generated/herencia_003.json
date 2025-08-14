@@ -1,41 +1,125 @@
 {
   "tipo_documento": "herencia",
   "subtipo_documento": "aceptacion_herencia_simple",
-  "fecha_documento": "2025-06-08",
-  "numero_protocolo": "H6544/2024",
+  "fecha_documento": "2025-08-03",
+  "numero_protocolo": "H2894/2024",
   "notario": {
-    "nombre": "Dr. Ana López Sánchez",
-    "colegiacion": "COL945"
+    "nombre": "Dr. Rafael Jiménez Torres",
+    "colegiacion": "COL321"
   },
+  
   "causante": {
-    "nombre": "Ana López Sánchez",
-    "nif": "81273361R",
-    "fecha_fallecimiento": "2024-12-30",
-    "lugar_fallecimiento": "Alfafar"
+    "nombre": "Antonio Martínez Vázquez",
+    "nif": "15926348L",
+    "fecha_fallecimiento": "2025-04-18",
+    "lugar_fallecimiento": "Alfafar",
+    "estado_civil": "soltero",
+    "porcentaje_propiedad": 100.0
   },
+  
   "heredero": {
-    "nombre": "Carlos Rodríguez Martín",
-    "nif": "52253659S",
-    "parentesco": "madre",
-    "domicilio": "Calle Mayor 105, Alfafar, 46910",
-    "acepta_herencia": true
+    "nombre": "Carmen Martínez Ruiz", 
+    "nif": "63817492M",
+    "parentesco": "padre",
+    "grado_parentesco": 1,
+    "domicilio": "Calle Constitución 45, Alfafar, 46910",
+    "acepta_herencia": true,
+    "porcentaje_heredado": 100.0
   },
+  
   "inmueble_heredado": {
-    "descripcion": "Vivienda familiar",
-    "direccion": "Avenida Valencia 115, Alfafar, 46910",
-    "valor_catastral": 110017,
-    "valor_real": 82541,
-    "tipo": "vivienda",
-    "referencia_catastral": "5140640YJ4513S5041XX",
-    "uso": "vivienda_habitual"
+    "descripcion": "Local comercial",
+    "direccion": "Avenida del Cid 129, Alfafar, 46910",
+    "superficie_construida": 125.80,
+    "superficie_suelo": 125.80,
+    "tipo": "local",
+    "subtipo": "comercial",
+    "referencia_catastral": "7384926YJ4513S8394XX",
+    "clasificacion_suelo": "urbano",
+    "uso_actual": "comercial",
+    
+    "valoracion_catastral_actual": {
+      "valor_catastral_total": 186750,
+      "valor_suelo_actual": 124500,
+      "valor_construccion": 62250,
+      "fecha_revision": "2023-01-01"
+    },
+    
+    "valoracion_herencia": {
+      "valor_herencia_declarado": 130725,
+      "valor_comprobado_admin": null,
+      "valor_referencia_mercado": 285000
+    }
   },
-  "calculo_isd": {
-    "comunidad_autonoma": "Valencia",
-    "grupo_parentesco": 1,
-    "base_imponible": 167930,
-    "reducciones": 98183,
-    "base_liquidable": 9559,
-    "cuota_final": 4079
+  
+  "transmision_anterior_causante": {
+    "fecha_adquisicion": "2012-11-08",
+    "valor_adquisicion": 95000,
+    "valor_suelo_anterior": 75000,
+    "titulo_adquisicion": "compraventa",
+    "documento_anterior": "P9635/2012"
   },
-  "observaciones": "Documento sintético de herencia generado para pruebas"
+  
+  "calculo_iivtnu": {
+    "sujeto_impuesto": true,
+    "obligado_tributario": "heredero",
+    "tipo_transmision": "gratuita",
+    
+    "periodo_imposicion": {
+      "fecha_inicio": "2012-11-08",
+      "fecha_fin": "2025-04-18",
+      "años_completos": 12,
+      "meses_adicionales": 5,
+      "dias_adicionales": 10
+    },
+    
+    "base_imponible": {
+      "valor_suelo_fallecimiento": 124500,
+      "valor_suelo_adquisicion": 75000,
+      "incremento_valor_suelo": 49500,
+      "porcentaje_transmitido": 100.0,
+      "incremento_gravable": 49500
+    },
+    
+    "coeficientes": {
+      "periodo_años": 12,
+      "coeficiente_anual": 3.5,
+      "coeficiente_maximo": 30.0,
+      "coeficiente_aplicado": 30.0,
+      "tipo_inmueble": "local",
+      "municipio": "Alfafar"
+    },
+    
+    "liquidacion": {
+      "base_imponible": 14850,
+      "tipo_gravamen": 30.0,
+      "cuota_integra": 4455,
+      "bonificaciones_aplicables": [],
+      "porcentaje_bonificacion": 0.0,
+      "importe_bonificacion": 0,
+      "cuota_liquida": 4455,
+      "recargos": 0,
+      "cuota_final": 4455
+    },
+    
+    "exenciones_bonificaciones": {
+      "vivienda_habitual_familiar": {
+        "aplicable": false,
+        "porcentaje": 0.0,
+        "requisitos_cumplidos": []
+      },
+      "transmision_empresarial": {
+        "aplicable": false
+      }
+    }
+  },
+  
+  "marco_legal": {
+    "normativa_estatal": ["LGT", "LRHL"],
+    "ordenanza_municipal": "Ordenanza Fiscal IIVTNU Alfafar 2024",
+    "boe_referencias": [],
+    "fecha_vigencia": "2024-01-01"
+  },
+  
+  "observaciones": "Documento sintético de herencia IIVTNU - Alfafar - Local comercial sin bonificaciones"
 }

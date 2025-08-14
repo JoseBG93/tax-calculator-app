@@ -1,41 +1,129 @@
 {
   "tipo_documento": "herencia",
   "subtipo_documento": "aceptacion_herencia_simple",
-  "fecha_documento": "2025-03-14",
-  "numero_protocolo": "H9299/2024",
+  "fecha_documento": "2025-03-28",
+  "numero_protocolo": "H5674/2024",
   "notario": {
-    "nombre": "Dr. Juan Pérez García",
-    "colegiacion": "COL777"
+    "nombre": "Dr. Alejandro Vázquez Martín",
+    "colegiacion": "COL234"
   },
+  
   "causante": {
-    "nombre": "Juan Pérez García",
-    "nif": "25052408T",
-    "fecha_fallecimiento": "2024-11-15",
-    "lugar_fallecimiento": "Alfafar"
+    "nombre": "Carmen Jiménez Ortega",
+    "nif": "62594837W",
+    "fecha_fallecimiento": "2024-12-15",
+    "lugar_fallecimiento": "Alfafar",
+    "estado_civil": "casada",
+    "porcentaje_propiedad": 100.0
   },
+  
   "heredero": {
-    "nombre": "Pedro Martínez Ruiz",
-    "nif": "42287935B",
-    "parentesco": "cónyuge",
-    "domicilio": "Plaza España 84, Alfafar, 46910",
-    "acepta_herencia": true
+    "nombre": "Alberto Jiménez Serrano", 
+    "nif": "91835274L",
+    "parentesco": "hijo",
+    "grado_parentesco": 1,
+    "domicilio": "Calle Progreso 73, Alfafar, 46910",
+    "acepta_herencia": true,
+    "porcentaje_heredado": 100.0
   },
+  
   "inmueble_heredado": {
-    "descripcion": "Vivienda familiar",
-    "direccion": "Calle Mayor 66, Alfafar, 46910",
-    "valor_catastral": 198252,
-    "valor_real": 185085,
-    "tipo": "vivienda",
-    "referencia_catastral": "8167543YJ4513S9512XX",
-    "uso": "vivienda_habitual"
+    "descripcion": "Terreno urbano edificable",
+    "direccion": "Calle Nueva 205, Solar, Alfafar, 46910",
+    "superficie_construida": 0.0,
+    "superficie_suelo": 380.00,
+    "tipo": "suelo",
+    "subtipo": "urbano_edificable",
+    "referencia_catastral": "3695814YJ4513S2467XX",
+    "clasificacion_suelo": "urbano",
+    "uso_actual": "suelo_edificable",
+    
+    "valoracion_catastral_actual": {
+      "valor_catastral_total": 95000,
+      "valor_suelo_actual": 95000,
+      "valor_construccion": 0,
+      "fecha_revision": "2023-01-01"
+    },
+    
+    "valoracion_herencia": {
+      "valor_herencia_declarado": 66500,
+      "valor_comprobado_admin": null,
+      "valor_referencia_mercado": 152000
+    }
   },
-  "calculo_isd": {
-    "comunidad_autonoma": "Valencia",
-    "grupo_parentesco": 1,
-    "base_imponible": 218279,
-    "reducciones": 85066,
-    "base_liquidable": 21648,
-    "cuota_final": 11198
+  
+  "transmision_anterior_causante": {
+    "fecha_adquisicion": "2009-05-30",
+    "valor_adquisicion": 35000,
+    "valor_suelo_anterior": 35000,
+    "titulo_adquisicion": "compraventa",
+    "documento_anterior": "P6932/2009"
   },
-  "observaciones": "Documento sintético de herencia generado para pruebas"
+  
+  "calculo_iivtnu": {
+    "sujeto_impuesto": true,
+    "obligado_tributario": "heredero",
+    "tipo_transmision": "gratuita",
+    
+    "periodo_imposicion": {
+      "fecha_inicio": "2009-05-30",
+      "fecha_fin": "2024-12-15",
+      "años_completos": 15,
+      "meses_adicionales": 6,
+      "dias_adicionales": 15
+    },
+    
+    "base_imponible": {
+      "valor_suelo_fallecimiento": 95000,
+      "valor_suelo_adquisicion": 35000,
+      "incremento_valor_suelo": 60000,
+      "porcentaje_transmitido": 100.0,
+      "incremento_gravable": 60000
+    },
+    
+    "coeficientes": {
+      "periodo_años": 15,
+      "coeficiente_anual": 3.5,
+      "coeficiente_maximo": 30.0,
+      "coeficiente_aplicado": 30.0,
+      "tipo_inmueble": "suelo",
+      "municipio": "Alfafar"
+    },
+    
+    "liquidacion": {
+      "base_imponible": 18000,
+      "tipo_gravamen": 30.0,
+      "cuota_integra": 5400,
+      "bonificaciones_aplicables": ["herencia_familiar"],
+      "porcentaje_bonificacion": 95.0,
+      "importe_bonificacion": 5130,
+      "cuota_liquida": 270,
+      "recargos": 0,
+      "cuota_final": 270
+    },
+    
+    "exenciones_bonificaciones": {
+      "vivienda_habitual_familiar": {
+        "aplicable": true,
+        "porcentaje": 95.0,
+        "requisitos_cumplidos": [
+          "parentesco_directo",
+          "transmision_familiar",
+          "mantenimiento_3_años"
+        ]
+      },
+      "transmision_empresarial": {
+        "aplicable": false
+      }
+    }
+  },
+  
+  "marco_legal": {
+    "normativa_estatal": ["LGT", "LRHL"],
+    "ordenanza_municipal": "Ordenanza Fiscal IIVTNU Alfafar 2024",
+    "boe_referencias": [],
+    "fecha_vigencia": "2024-01-01"
+  },
+  
+  "observaciones": "Documento sintético de herencia IIVTNU - Alfafar - Terreno urbano con bonificación familiar"
 }
