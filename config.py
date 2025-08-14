@@ -61,3 +61,34 @@ class Config:
     # If not set, it defaults to allowing only 'http://localhost:3000', which is typical for local development.
     # The string is split by commas to create a list of allowed origins.
     CORS_ORIGINS = os.environ.get('CORS_ORIGINS', 'http://localhost:3000').split(',')
+
+    # LEGAL AND REGULATORY FRAMEWORK CONFIGURATION
+    # These settings define the legal and normative framework for IIVTNU tax calculations
+    
+    # Primary legislation references
+    LGT_REFERENCE = "Ley 58/2003, de 17 de diciembre, General Tributaria (BOE-A-2003-23186)"
+    LRHL_REFERENCE = "Real Decreto Legislativo 2/2004, de 5 de marzo (BOE-A-2004-4214)"
+    
+    # Current coefficient regulation (valid for 2025)
+    CURRENT_COEFFICIENT_REGULATION = "Real Decreto-ley 8/2023, de 27 de diciembre"
+    COEFFICIENT_BOE_REFERENCE = "BOE-A-2023-28318"
+    
+    # IIVTNU legal limits and defaults
+    IIVTNU_MAX_TAX_RATE = float(os.environ.get('IIVTNU_MAX_TAX_RATE', '30.0'))  # Maximum 30% per LRHL Art. 108
+    IIVTNU_MAX_FAMILY_BONUS = float(os.environ.get('IIVTNU_MAX_FAMILY_BONUS', '95.0'))  # Maximum 95% family bonus
+    
+    # Default municipal configuration (configurable for Alfafar-specific ordinances)
+    MUNICIPALITY_NAME = os.environ.get('MUNICIPALITY_NAME', 'Alfafar')
+    MUNICIPALITY_CODE = os.environ.get('MUNICIPALITY_CODE', '46910')  # INE code for Alfafar
+    
+    # Default IIVTNU tax rates (until Alfafar ordinances are accessible)
+    IIVTNU_DEFAULT_TAX_RATE = float(os.environ.get('IIVTNU_DEFAULT_TAX_RATE', '30.0'))  # Using maximum as reference
+    IIVTNU_DEFAULT_FAMILY_BONUS = float(os.environ.get('IIVTNU_DEFAULT_FAMILY_BONUS', '95.0'))  # Standard family bonus
+    
+    # Ordinance status tracking
+    MUNICIPAL_ORDINANCE_STATUS = os.environ.get('MUNICIPAL_ORDINANCE_STATUS', 'PENDING_ACCESS')
+    MUNICIPAL_ORDINANCE_YEAR = os.environ.get('MUNICIPAL_ORDINANCE_YEAR', '2024-2025')
+    
+    # Legal validation settings
+    LEGAL_VALIDATION_ENABLED = os.environ.get('LEGAL_VALIDATION_ENABLED', 'True').lower() == 'true'
+    STRICT_LEGAL_COMPLIANCE = os.environ.get('STRICT_LEGAL_COMPLIANCE', 'True').lower() == 'true'
