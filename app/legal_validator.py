@@ -83,6 +83,10 @@ class IIVTNULegalValidator:
     MAX_TAX_RATE = 30.0  # Art. 108 LRHL
     MAX_FAMILY_BONUS = 95.0  # Bonificación máxima potestativa
     
+    # PARÁMETROS ESPECÍFICOS ALFAFAR (Ordenanza 2006)
+    ALFAFAR_TAX_RATE = 29.0  # Art. 11 Ordenanza Alfafar
+    ALFAFAR_FAMILY_BONUS = 50.0  # Art. 12 Ordenanza Alfafar
+    
     # Coeficientes máximos estatales 2025 (RD-ley 8/2023)
     # Estos son los coeficientes máximos que pueden aplicar los municipios
     STATE_MAX_COEFFICIENTS = {
@@ -108,13 +112,37 @@ class IIVTNULegalValidator:
         20: 2.5,   # 20 años o más
     }
     
-    def __init__(self):
-        """Inicializa el validador con configuración legal vigente"""
-        self.legal_references = [
-            "LGT: Ley 58/2003, de 17 de diciembre, General Tributaria",
-            "LRHL: Real Decreto Legislativo 2/2004, de 5 de marzo",
-            "RD-ley 8/2023: Coeficientes máximos IIVTNU 2025"
-        ]
+    # COEFICIENTES ESPECÍFICOS ALFAFAR (Ordenanza 2006 - Art. 5)
+    # Estos coeficientes anuales se aplican por cada año del período
+    ALFAFAR_COEFFICIENTS = {
+        'range_1_5': 3.1,     # 1-5 años: 3,1% anual
+        'range_6_10': 2.8,    # 6-10 años: 2,8% anual  
+        'range_11_15': 2.7,   # 11-15 años: 2,7% anual
+        'range_16_20': 2.7,   # 16-20 años: 2,7% anual
+    }
+    
+    def __init__(self, use_alfafar_config: bool = True):
+        """
+        Inicializa el validador con configuración legal vigente
+        
+        Args:
+            use_alfafar_config: Si True, usa parámetros específicos Alfafar (por defecto)
+                              Si False, usa solo normativa estatal
+        """
+        self.use_alfafar_config = use_alfafar_config
+        
+        if use_alfafar_config:
+            self.legal_references = [
+                "LGT: Ley 58/2003, de 17 de diciembre, General Tributaria",
+                "LRHL: Real Decreto Legislativo 2/2004, de 5 de marzo",
+                "Ordenanza Fiscal IIVTNU Alfafar 2006 (BOP 31/12/2005)"
+            ]
+        else:
+            self.legal_references = [
+                "LGT: Ley 58/2003, de 17 de diciembre, General Tributaria",
+                "LRHL: Real Decreto Legislativo 2/2004, de 5 de marzo",
+                "RD-ley 8/2023: Coeficientes máximos IIVTNU 2025"
+            ]
     
     def validate_calculation(self, params: IIVTNUCalculationParams) -> ValidationResult:
         """
@@ -244,7 +272,7 @@ class IIVTNULegalValidator:
     
     def _validate_and_calculate_coefficient(self, años: int) -> Dict[str, Any]:
         """
-        Valida y calcula coeficiente según RD-ley 8/2023
+        Valida y calcula coeficiente según normativa aplicable
         
         Args:
             años: Años completos de tenencia
@@ -254,21 +282,55 @@ class IIVTNULegalValidator:
         """
         errors = []
         
-        # Determinar coeficiente según tabla estatal
         if años <= 0:
-            errors.append("RD-ley 8/2023: Período debe ser superior a 0 años")
+            errors.append("Período debe ser superior a 0 años")
             coeficiente = 0.0
-        elif años <= 19:
-            coeficiente = self.STATE_MAX_COEFFICIENTS.get(años, 3.0)
+            referencia = "Error en período"
+        elif self.use_alfafar_config:
+            # Usar coeficientes específicos de Alfafar (Ordenanza 2006)
+            coeficiente, referencia = self._get_alfafar_coefficient(años)
         else:
-            coeficiente = self.STATE_MAX_COEFFICIENTS[20]  # 20 años o más
+            # Usar coeficientes estatales máximos
+            if años <= 19:
+                coeficiente = self.STATE_MAX_COEFFICIENTS.get(años, 3.0)
+            else:
+                coeficiente = self.STATE_MAX_COEFFICIENTS[20]
+            referencia = 'RD-ley 8/2023 - Coeficientes máximos estatales'
         
         return {
             'años_tenencia': años,
             'coeficiente_aplicado': coeficiente,
-            'referencia_legal': 'RD-ley 8/2023 - Coeficientes máximos estatales',
+            'referencia_legal': referencia,
             'errors': errors
         }
+    
+    def _get_alfafar_coefficient(self, años: int) -> Tuple[float, str]:
+        """
+        Calcula coeficiente según Ordenanza Alfafar 2006 (Art. 5)
+        
+        Args:
+            años: Años completos de tenencia
+            
+        Returns:
+            Tuple con (coeficiente_total, referencia_legal)
+        """
+        if años <= 5:
+            coef_anual = self.ALFAFAR_COEFFICIENTS['range_1_5']
+        elif años <= 10:
+            coef_anual = self.ALFAFAR_COEFFICIENTS['range_6_10']
+        elif años <= 15:
+            coef_anual = self.ALFAFAR_COEFFICIENTS['range_11_15']
+        else:  # 16-20 años (máximo 20 según ordenanza)
+            coef_anual = self.ALFAFAR_COEFFICIENTS['range_16_20']
+            años = min(años, 20)  # Máximo 20 años
+        
+        # El coeficiente total es coef_anual * número de años
+        coeficiente_total = coef_anual * años
+        
+        return (
+            coeficiente_total,
+            f'Ordenanza Alfafar Art. 5 - {coef_anual}% anual × {años} años = {coeficiente_total}%'
+        )
     
     def _calculate_base_imponible(self, valor_actual: float, valor_anterior: float, coeficiente: float) -> Dict[str, Any]:
         """
@@ -291,21 +353,35 @@ class IIVTNULegalValidator:
         }
     
     def _validate_tax_rate(self, tipo_gravamen: float) -> Dict[str, Any]:
-        """Valida tipo de gravamen según LRHL Art. 108"""
+        """Valida tipo de gravamen según normativa aplicable"""
         errors = []
+        warnings = []
+        
+        # Validación básica
+        if tipo_gravamen < 0:
+            errors.append("Tipo gravamen no puede ser negativo")
         
         if tipo_gravamen > self.MAX_TAX_RATE:
             errors.append(f"LRHL Art. 108: Tipo gravamen {tipo_gravamen}% excede máximo legal {self.MAX_TAX_RATE}%")
         
-        if tipo_gravamen < 0:
-            errors.append("LRHL Art. 108: Tipo gravamen no puede ser negativo")
+        # Validación específica Alfafar
+        if self.use_alfafar_config:
+            if tipo_gravamen != self.ALFAFAR_TAX_RATE:
+                warnings.append(f"Ordenanza Alfafar establece tipo gravamen {self.ALFAFAR_TAX_RATE}% (recibido: {tipo_gravamen}%)")
+            referencia = 'Ordenanza Alfafar Art. 11 - Tipo gravamen 29%'
+            tipo_recomendado = self.ALFAFAR_TAX_RATE
+        else:
+            referencia = 'LRHL Art. 108 - Máximo 30%'
+            tipo_recomendado = self.MAX_TAX_RATE
         
         return {
             'tipo_gravamen': tipo_gravamen,
+            'tipo_recomendado': tipo_recomendado,
             'maximo_legal': self.MAX_TAX_RATE,
             'es_valido': len(errors) == 0,
             'errors': errors,
-            'referencia_legal': 'LRHL Art. 108'
+            'warnings': warnings,
+            'referencia_legal': referencia
         }
     
     def _validate_family_bonus(self, params: IIVTNUCalculationParams) -> Dict[str, Any]:
@@ -329,16 +405,21 @@ class IIVTNULegalValidator:
                 if params.vivienda_habitual:
                     aplicable = True
                     
-                    # Usar bonificación configurada o máxima por defecto
+                    # Usar bonificación según configuración
                     if params.bonificacion_familiar is not None:
+                        # Validar contra límite legal máximo
                         if params.bonificacion_familiar > self.MAX_FAMILY_BONUS:
                             errors.append(f"Bonificación {params.bonificacion_familiar}% excede máximo legal {self.MAX_FAMILY_BONUS}%")
                         else:
                             porcentaje_bonificacion = params.bonificacion_familiar
                     else:
-                        # Usar máximo legal como referencia (configurable municipalmente)
-                        porcentaje_bonificacion = self.MAX_FAMILY_BONUS
-                        warnings.append("Usando bonificación máxima legal - verificar ordenanza municipal")
+                        # Usar bonificación específica según configuración
+                        if self.use_alfafar_config:
+                            porcentaje_bonificacion = self.ALFAFAR_FAMILY_BONUS
+                            warnings.append(f"Aplicando bonificación Alfafar: {self.ALFAFAR_FAMILY_BONUS}%")
+                        else:
+                            porcentaje_bonificacion = self.MAX_FAMILY_BONUS
+                            warnings.append("Usando bonificación máxima legal - verificar ordenanza municipal")
                     
                     # Validar mantenimiento vivienda
                     if not params.mantenimiento_vivienda:
@@ -349,6 +430,12 @@ class IIVTNULegalValidator:
             else:
                 warnings.append("Bonificación familiar solo para parentesco directo")
         
+        # Determinar referencia legal según configuración
+        if self.use_alfafar_config and aplicable:
+            referencia_legal = 'Ordenanza Alfafar Art. 12 - Bonificación 50% herencias familiares'
+        else:
+            referencia_legal = 'LRHL Art. 108 - Bonificaciones potestativas'
+        
         return {
             'aplicable': aplicable,
             'porcentaje': porcentaje_bonificacion,
@@ -357,7 +444,7 @@ class IIVTNULegalValidator:
             'vivienda_habitual': params.vivienda_habitual,
             'errors': errors,
             'warnings': warnings,
-            'referencia_legal': 'LRHL Art. 108 - Bonificaciones potestativas'
+            'referencia_legal': referencia_legal
         }
     
     def _calculate_final_quota(self, cuota_integra: float, bonificacion: Dict[str, Any]) -> Dict[str, Any]:
@@ -405,33 +492,52 @@ class IIVTNULegalValidator:
         Returns:
             Dict con resumen normativo completo
         """
-        return {
-            'normativa_primaria': {
-                'LGT': 'Ley 58/2003, de 17 de diciembre, General Tributaria',
-                'LRHL': 'Real Decreto Legislativo 2/2004, de 5 de marzo',
-                'articulado_iivtnu': 'Arts. 104-110'
-            },
-            'normativa_secundaria': {
-                'coeficientes_2025': 'Real Decreto-ley 8/2023, de 27 de diciembre',
-                'jurisprudencia': 'STC 182/2021 - Inconstitucionalidad sistema anterior'
-            },
-            'limites_legales': {
-                'tipo_gravamen_maximo': f'{self.MAX_TAX_RATE}%',
-                'bonificacion_familiar_maxima': f'{self.MAX_FAMILY_BONUS}%',
-                'coeficientes_estatales': 'Tabla RD-ley 8/2023'
-            },
-            'gaps_normativos': {
-                'ordenanzas_alfafar': 'NO ACCESIBLES',
-                'tipos_gravamen_municipal': 'PENDIENTE',
-                'bonificaciones_especificas': 'PENDIENTE'
-            },
-            'validacion_implementada': {
-                'cumplimiento_lrhl': True,
-                'limites_estatales': True,
-                'bonificaciones_conformes': True,
-                'arquitectura_escalable': True
+        if self.use_alfafar_config:
+            return {
+                'configuracion_activa': 'ALFAFAR_2006',
+                'normativa_primaria': {
+                    'LGT': 'Ley 58/2003, de 17 de diciembre, General Tributaria',
+                    'LRHL': 'Real Decreto Legislativo 2/2004, de 5 de marzo',
+                    'ordenanza_municipal': 'Alfafar IIVTNU (BOP 31/12/2005)'
+                },
+                'parametros_alfafar': {
+                    'tipo_gravamen': f'{self.ALFAFAR_TAX_RATE}%',
+                    'bonificacion_familiar': f'{self.ALFAFAR_FAMILY_BONUS}%',
+                    'coeficientes': 'Sistema 2006 (3,1% - 2,8% - 2,7%)',
+                    'periodo_maximo': '20 años',
+                    'plazos_autoliquidacion': '30 días hábiles / 6 meses'
+                },
+                'validacion_implementada': {
+                    'normativa_municipal': True,
+                    'calculo_realista': True,
+                    'parametros_especificos': True,
+                    'simulacion_trabajo_real': True
+                }
             }
-        }
+        else:
+            return {
+                'configuracion_activa': 'ESTATAL_2023',
+                'normativa_primaria': {
+                    'LGT': 'Ley 58/2003, de 17 de diciembre, General Tributaria',
+                    'LRHL': 'Real Decreto Legislativo 2/2004, de 5 de marzo',
+                    'articulado_iivtnu': 'Arts. 104-110'
+                },
+                'normativa_secundaria': {
+                    'coeficientes_2025': 'Real Decreto-ley 8/2023, de 27 de diciembre',
+                    'jurisprudencia': 'STC 182/2021 - Inconstitucionalidad sistema anterior'
+                },
+                'limites_legales': {
+                    'tipo_gravamen_maximo': f'{self.MAX_TAX_RATE}%',
+                    'bonificacion_familiar_maxima': f'{self.MAX_FAMILY_BONUS}%',
+                    'coeficientes_estatales': 'Tabla RD-ley 8/2023'
+                },
+                'validacion_implementada': {
+                    'cumplimiento_lrhl': True,
+                    'limites_estatales': True,
+                    'bonificaciones_conformes': True,
+                    'arquitectura_escalable': True
+                }
+            }
 
 
 # Funciones de utilidad para integración con el sistema
