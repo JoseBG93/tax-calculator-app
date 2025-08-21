@@ -69,3 +69,6 @@ coverage.xml
 # AI model
 .claude
 CLAUDE.md
+
+# Test files
+tests.py
