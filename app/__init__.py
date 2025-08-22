@@ -1,6 +1,7 @@
+# This file create the whole Flask application. It creates several Flask's apps. That is called Application Factory Pattern.
 
-'''Flask is the Python's web framework that creates web applications and handles HTTP requests and responses.
-It manages routes (such as /calculator), templates, and serves your app on a port (like 5000).'''
+'''Flask is a Python web framework that creates web apps and handles HTTP requests and responses.
+It manages both routes and templates, and serves your app on a port (like 5000).'''
 from flask import Flask
 
 '''SQLAlchemy is the Python's ORM (Object-Relational Mapping) that works like a database manager, allowing you to interact 
@@ -31,28 +32,23 @@ def create_app():
     app = Flask(__name__)
 
     # Load configuration from config.py
-    '''app.config.from_pyfile('config.py')''' 
-    # Doing this way, we load the whole content of the config.py file (imports, database URL, comments, etc). Since we want to load only the Config class, we need to do the following:
-    app.config.from_object('config.Config') 
-    # This way, we load only the Config class from the config.py file.
+    '''app.config.from_pyfile('config.py')''' # Doing this way, we load the whole content of the config.py file (imports, database URL, comments, etc). 
+    # Since we want to load only the Config class, we need to do the following:
+    app.config.from_object('config.Config') # This way, we load only the Config class from the config.py file.
 
-    # Initialize SQLAlchemy with the app. This allows the app to interact with the database.
+    # This is the connection between the Flask app and the SQLAlchemy database, which is initialized.
     db.init_app(app)
 
-    # Initialize Migrate with the app and database. This allows the app to manage database migrations.
-    migrate.init_app(app, db)
+    # This is the connection between the Flask app, the SQLAlchemy database and the Migrate database. It allows the app to manage database migrations.
+    migrate.init_app(app, db) # Now, both SQLAlchemy and Migrate are connected to Flask app.
 
-    # Now, both SQLAlchemy and Migrate are connected to Flask app.
-
-
-    # Enable CORS for all routes and origins. This allows your frontend to communicate with your backend.
+    # Enable CORS for all routes and origins. It allows your frontend to communicate with your backend.
     CORS(app)
 
 
-    # Now, we're gonna to import the routes.py file and register the routes with the Flask app.
-    from app import routes
-    routes.register_routes(app)
+    from app import routes # Import the routes.py file from the app folder.
+    routes.register_routes(app) # Register the routes with the Flask app.
 
-    # Now, it returns the configured Flask application instance.
+    # This returns the configured Flask application instance.
     return app 
     

@@ -1,15 +1,15 @@
 '''
-  This is the entry point of the Flask application.
-  It imports the create_app function from the app package and runs the Flask development server.
-  When you run "python run.py", this file will start your web application on port 5000.
+  This is the Flask's entry point.
+  It imports the create_app function from the __init__ module within the app folder, and runs a Flask development server.
+  When you run "python run.py" in the terminal, this file starts your web app on port 5000.
   '''
-# We're gonna to import the create_app function from the app package, it means, "get the create_app function from the app package" (app/ folder, which contains the __init__.py file).
+# We're gonna to import the create_app function from __init__.py file, within the app folder. 
 from app import create_app
 
-# Create the Flask application instance using the factory pattern
+# Create a Flask instance using the factory pattern
 app = create_app()
 
-# The following condition ensures the app only runs if the script (run.py) is executed directly (not imported as a module by another file).
+# The following condition ensures the app only runs if the script (run.py) is executed directly, not imported as a module by another file.
 if __name__ == '__main__':
    # Run the Flask development server
    # debug=True enables auto-reload when you change code files
