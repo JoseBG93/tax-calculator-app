@@ -1,22 +1,16 @@
 """
 GUÍA COMPLETA DE DECORADORES EN PYTHON - BLOQUE 6
 @dataclass CON VALIDACIÓN - PARA MODELOS DE DATOS COMPLEJOS
-Tax Calculator Pro - Referencia para José
+
 """
 
-from dataclasses import dataclass, field
-from typing import List
+from dataclasses import dataclass, field # 'Field' es una función que se utiliza para definir los campos de la clase, es decir, sus atributos.
+from typing import List # 'List' es un tipo de dato que se utiliza para definir listas. Si no se le da ningún argumento, se crea una lista vacía.
 
-print("="*80)
-print("BLOQUE 6: @dataclass AVANZADO CON VALIDACIÓN")
-print("="*80)
 
 # ============================================================================
 # 6. @dataclass CON VALIDACIÓN - PARA MODELOS DE DATOS COMPLEJOS
 # ============================================================================
-
-print("\n6. @dataclass avanzado - Para nuestros modelos de datos")
-print("-" * 60)
 
 @dataclass
 class TransmisionInmobiliaria:
@@ -27,14 +21,17 @@ class TransmisionInmobiliaria:
     valor_anterior: float
     fecha_adquisicion: str
     fecha_transmision: str
-    tipo_transmision: str = "onerosa"
-    municipio: str = "Alfafar"
+    tipo_transmision: str = "onerosa" # 'onerosa' es el valor por defecto de la variable 'tipo_transmision'.
+    municipio: str = "Alfafar" # 'Alfafar' es el valor por defecto de la variable 'municipio'.
     
-    # Campo calculado automáticamente
-    errores_validacion: List[str] = field(default_factory=list)
+    # EXPLICACIÓN: field(default_factory=list) crea una NUEVA lista vacía [] para CADA objeto
+    # Sin field(): Todos los objetos compartirían la misma lista (peligroso)
+    # Con field(): Cada objeto tiene su propia lista independiente (correcto)
+    # default_factory=list ejecuta list() cada vez que se crea una nueva instancia
+    errores_validacion: List[str] = field(default_factory=list) # This is also an attribute of the class.
     
     def __post_init__(self):
-        """Se ejecuta automáticamente después de crear la instancia"""
+        """Se ejecuta automáticamente después de crear la instancia."""
         self._validar_datos()
     
     def _validar_datos(self):

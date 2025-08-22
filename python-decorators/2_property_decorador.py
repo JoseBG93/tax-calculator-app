@@ -1,12 +1,8 @@
 """
 GUÍA COMPLETA DE DECORADORES EN PYTHON - BLOQUE 2
 @property - CONVERTIR MÉTODOS EN ATRIBUTOS
-Tax Calculator Pro - Referencia para José
-"""
 
-print("="*80)
-print("BLOQUE 2: @property - CONVERTIR MÉTODOS EN ATRIBUTOS")
-print("="*80)
+"""
 
 # ============================================================================
 # 2. @property - CONVERTIR MÉTODOS EN ATRIBUTOS
@@ -26,8 +22,6 @@ print("="*80)
 # PERFECTO PARA IIVTNU: Los cálculos fiscales deben actualizarse cuando cambian los valores
 # ============================================================================
 
-print("\n2. @property - Convertir métodos en atributos")
-print("-" * 60)
 
 class CalculadoraIIVTNU:
     def __init__(self, valor_actual: float, valor_anterior: float, coeficiente: float):
@@ -50,7 +44,7 @@ class CalculadoraIIVTNU:
         """Getter para valor actual"""
         return self._valor_actual
     
-    @valor_actual.setter
+    @valor_actual.setter # 'Setter' es una función que se utiliza para añadir un valor nuevo a un atributo.
     def valor_actual(self, nuevo_valor: float):
         """Setter con validación"""
         if nuevo_valor <= 0:
@@ -59,9 +53,9 @@ class CalculadoraIIVTNU:
 
 # Ejemplo de uso
 calc = CalculadoraIIVTNU(100000, 80000, 15.5)
-print(f"Incremento: {calc.incremento_valor}")  # Se usa como atributo, no método
+print(f"Incremento: {calc.incremento_valor}")  # Se usa como atributo, no como método.
 print(f"Base imponible: {calc.base_imponible}")
-calc.valor_actual = 120000  # Usa el setter
+calc.valor_actual = 120000  # Usa el setter.
 print(f"Nueva base imponible: {calc.base_imponible}")
 
 print("\n🎯 RESUMEN BLOQUE 2:")
