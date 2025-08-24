@@ -1,15 +1,12 @@
 """
 IIVTNU Legal Validation Framework
-Tax Calculator Pro - Alfafar Municipality
 
-Este módulo implementa la validación legal completa para cálculos IIVTNU
-según la normativa estatal vigente (LGT, LRHL) y prepara la integración
-con ordenanzas municipales específicas de Alfafar.
+This module deploys a complete legal validation system to calculate IIVTNU tax properly, based on the current regulations (LGT, LRHL) and the specific municipal ordinance of Alfafar.
 
-Fundamento normativo:
-- LGT: Ley 58/2003, de 17 de diciembre, General Tributaria
-- LRHL: Real Decreto Legislativo 2/2004, de 5 de marzo (Arts. 104-110)
-- RD-ley 8/2023: Coeficientes máximos vigentes 2025
+Legal basis:
+- LGT: Law 58/2003, of December 17, General Taxation Law
+- LRHL: Royal Legislative Decree 2/2004, of March 5 (Arts. 104-110)
+- Royal Decree-Law 8/2023: Maximum coefficients in force for 2025
 """
 
 from typing import Dict, List, Optional, Tuple, Any
@@ -19,25 +16,34 @@ from enum import Enum
 import json
 
 
-class TipoTransmision(Enum):
-    """Tipos de transmisión según LRHL Art. 104"""
-    ONEROSA = "onerosa"           # Compraventa
-    GRATUITA_INTER_VIVOS = "donacion"      # Donación
-    GRATUITA_MORTIS_CAUSA = "herencia"     # Herencia
+class TransmissionType(Enum): # TIPO DE TRANSMISION
+    """Transmission types according to LRHL Art. 104"""
+    FOR_CONSIDERATION = "FOR_CONSIDERATION" # A título oneroso (sales)
+    DONATION = "DONATION"           # Donación (gifts)
+    INHERITANCE = "INHERITANCE"     # Herencia (inheritances)
 
-
-class GradoParentesco(Enum):
-    """Grados de parentesco para bonificaciones familiares"""
-    CONYUGE = 1
-    DESCENDIENTE = 2    # Hijos, nietos
-    ASCENDIENTE = 3     # Padres, abuelos
-    HERMANO = 4
-    OTROS = 99
+    @property
+    def spanish_translation(self):
+        """Returns Spanish legal term"""
+        mapping = { 
+            self.FOR_CONSIDERATION: "A título oneroso",
+            self.DONATION: "Donación",
+            self.INHERITANCE: "Herencia"
+        }
+        return mapping[self]
+    
+class DegreeOfKinship(Enum): # GRADO DE PARENTESCO
+    """Family discounts/reductions according to LRHL Art. 104"""    
+    HUSBAND_WIFE = 1
+    CHILDREN = 2    # Children, grandchildren
+    PARENTS = 3     # Parents, grandparents
+    BROTHER = 4
+    OTHER = 99
 
 
 @dataclass
-class ValidationResult:
-    """Resultado de validación legal"""
+class ValidationResult: # RESULTADO DE LA VALIDACION LEGAL
+    """Legal validation result"""
     is_valid: bool
     errors: List[str]
     warnings: List[str]
@@ -47,25 +53,25 @@ class ValidationResult:
 
 @dataclass
 class IIVTNUCalculationParams:
-    """Parámetros para cálculo IIVTNU validado legalmente"""
+    """IIVTNU calculation parameters"""
     
-    # Datos básicos de la transmisión
-    tipo_transmision: TipoTransmision
-    fecha_adquisicion: date
-    fecha_transmision: date
+    # Basic data
+    transmission_type: TransmissionType
+    acquisition_date: date
+    transmission_date: date
     
-    # Valores catastrales
-    valor_suelo_actual: float
-    valor_suelo_anterior: float
+    # Cadastral values
+    current_cadastral_value: float
+    previous_cadastral_value: float
     
-    # Configuración municipal
-    tipo_gravamen: float
-    bonificacion_familiar: Optional[float] = None
+    # Municipal configuration
+    tax_rate: float
+    family_bonus: Optional[float] = None
     
-    # Datos para bonificaciones
-    parentesco: Optional[GradoParentesco] = None
-    vivienda_habitual: bool = False
-    mantenimiento_vivienda: bool = False
+    # Data for family discounts/reductions
+    degree_of_kinship: Optional[DegreeOfKinship] = None
+    habitual_residence: bool = False
+    maintenance_of_residence: bool = False
 
 
 class IIVTNULegalValidator:
