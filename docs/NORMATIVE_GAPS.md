@@ -3,15 +3,23 @@
 
 ---
 
-## 🚨 ESTADO CRÍTICO: ORDENANZAS MUNICIPALES NO ACCESIBLES
+## ✅ ESTADO ACTUALIZADO: ORDENANZAS MUNICIPALES OBTENIDAS
 
-### Información Faltante Crítica
+### Información Normativa Actualizada
 
-#### Ordenanzas Fiscales del Ayuntamiento de Alfafar 2024-2025
+#### Ordenanzas Fiscales del Ayuntamiento de Alfafar 2022
 
-**ESTADO**: ❌ **NO ACCESIBLES**
+**ESTADO**: ✅ **ACCESIBLES Y ACTUALIZADAS**
 
-**Fuentes Consultadas sin Éxito**:
+**Fuentes Actualizadas**:
+- **Ordenanza IIVTNU 2022**: Aprobada 31/03/2022, publicada BOP 154 - 17/06/2022
+- **Estado**: VIGENTE y totalmente operativa
+- **Cambios principales**: 
+  - Bonificaciones familiares mejoradas (95%/50%)
+  - Coeficientes máximos estatales automatizados
+  - Sistema de autoliquidación modernizado
+
+**Anteriormente consultadas sin éxito**:
 
 1. **Portal Municipal Principal**
    - URL: alfafar.es/normativa-municipal/
@@ -100,7 +108,7 @@
 IIVTNU_DEFAULT_TAX_RATE = 30.0  # Máximo legal
 IIVTNU_DEFAULT_FAMILY_BONUS = 95.0  # Máximo legal
 MUNICIPALITY_NAME = 'Alfafar'
-MUNICIPALITY_CODE = '46009'  # INE
+MUNICIPALITY_CODE = '46910'  # INE
 ```
 
 #### 2. Arquitectura Escalable
