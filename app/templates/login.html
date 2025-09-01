@@ -1,0 +1,20 @@
+<!DOCTYPE html> <!-- This is the HTML5 doctype declaration. It tells the browser that the document is an HTML5 document. -->
+<html>
+<head>
+    <title style="font-size: 2rem; color: #2a7ae2;">Login</title> <!-- Title is the text shown in browser tab (with inline CSS styling) -->
+</head>
+<body>
+    <h2 style="color: #6c8ebf; font-weight: 500;">Welcome to the login page!</h2> <!-- Heading is the text shown in the body of the page (with inline CSS styling) -->
+    <form method="post" action="{{ url_for('login') }}"> 
+        <label for="username">Username:</label> <!-- 'for' attribute links this label to the input field with id="username" -->
+        <input type="text" id="username" name="username" required><br><br> <!-- 'name="username"' is what Flask receives in request.form.get('username'). 'required' prevents empty submission -->
+        
+        <label for="password">Password:</label> <!-- Links this label to the password input field -->
+        <input type="password" id="password" name="password" required><br><br> <!-- type="password" hides the text with dots for security. name="password" connects to Flask's request.form.get('password') -->
+        
+        <button type="submit" style="background-color: #ffeb3b; color: #2e7d32; font-weight: bold; border: none; padding: 10px 24px; border-radius: 6px; cursor: pointer;">
+            <span style="color: red;">Login</span>
+        </button> <!-- 'type="submit"' makes this button send the form data via POST method to the server. The button uses a happy yellow background and a smiley for a cheerful look. -->
+    </form>
+</body>
+</html>
