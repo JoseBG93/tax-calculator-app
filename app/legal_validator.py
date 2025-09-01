@@ -52,7 +52,7 @@ class ValidationResult: # RESULTADO DE LA VALIDACION LEGAL
 
 
 @dataclass
-class IIVTNUCalculationParams:
+class IIVTNUCalculationParams: # PARAMETROS DE CÁLCULO DE IIVTNU
     """IIVTNU calculation parameters"""
     
     # Basic data
@@ -74,28 +74,33 @@ class IIVTNUCalculationParams:
     maintenance_of_residence: bool = False
 
 
-class IIVTNULegalValidator:
+class IIVTNULegalValidator: 
     """
-    Validador legal para cálculos IIVTNU según normativa vigente
-    
-    Implementa:
-    - Validación contra LRHL artículos 104-110
-    - Aplicación de coeficientes RD-ley 8/2023
-    - Límites legales máximos
-    - Bonificaciones familiares conformes
+    Legal validator for IIVTNU calculations according to current regulations.
+    It's not recommended to use @dataclass for this class, because this one does not just keep the data, but also contains a complex business logic which performs legal validations.
+
+    Implements:
+    - Validation against LRHL articles 104-110
+    - Application of coefficients from Royal Decree-Law 8/2023
+    - Maximum legal limits
+    - Family bonuses in accordance with the law
     """
     
-    # Límites legales según LRHL
+  
+   # Python conventions are the following:
+   # 1. We use capital letters for constants.
+   # 2. We use lowercase for variables, attributes, parameters, modules, and packages.
+   # 3. We use snake_case for functions and methods.
+   # 4. We use PascalCase for classes.
+
+
+    # CONSTANTS
     MAX_TAX_RATE = 30.0  # Art. 108 LRHL
     MAX_FAMILY_BONUS = 95.0  # Bonificación máxima potestativa
-    
-    # PARÁMETROS ESPECÍFICOS ALFAFAR (Ordenanza 2006)
-    ALFAFAR_TAX_RATE = 29.0  # Art. 11 Ordenanza Alfafar
-    ALFAFAR_FAMILY_BONUS = 50.0  # Art. 12 Ordenanza Alfafar
-    
-    # Coeficientes máximos estatales 2025 (RD-ley 8/2023)
-    # Estos son los coeficientes máximos que pueden aplicar los municipios
-    STATE_MAX_COEFFICIENTS = {
+    ALFAFAR_TAX_RATE = 29.0  # Art. 11 Ordenanza Alfafar 2022
+    ALFAFAR_FAMILY_BONUS_FULL = 95.0  # Art. 12 - Vivienda habitual causante + sujeto pasivo (2022)
+    ALFAFAR_FAMILY_BONUS_PARTIAL = 50.0  # Art. 12 - Solo vivienda habitual sujeto pasivo (2022)
+    STATE_MAX_COEFFICIENTS = {  # Estos son los coeficientes máximos que pueden aplicar los ayuntamientos en 2025, en virtud del RD-ley 8/2023.
         1: 14.0,   # Hasta 1 año
         2: 13.0,   # Hasta 2 años
         3: 12.0,   # Hasta 3 años
@@ -117,15 +122,9 @@ class IIVTNULegalValidator:
         19: 3.0,   # Hasta 19 años
         20: 2.5,   # 20 años o más
     }
-    
-    # COEFICIENTES ESPECÍFICOS ALFAFAR (Ordenanza 2006 - Art. 5)
-    # Estos coeficientes anuales se aplican por cada año del período
-    ALFAFAR_COEFFICIENTS = {
-        'range_1_5': 3.1,     # 1-5 años: 3,1% anual
-        'range_6_10': 2.8,    # 6-10 años: 2,8% anual  
-        'range_11_15': 2.7,   # 11-15 años: 2,7% anual
-        'range_16_20': 2.7,   # 16-20 años: 2,7% anual
-    }
+    # NOTA: La Ordenanza 2022 (Art. 5.3) elimina los coeficientes específicos de Alfafar
+    # Ahora se aplican directamente los coeficientes máximos estatales vigentes del RD-ley 8/2023
+    # con actualización automática según las Leyes de Presupuestos Generales del Estado
     
     def __init__(self, use_alfafar_config: bool = True):
         """
@@ -141,7 +140,8 @@ class IIVTNULegalValidator:
             self.legal_references = [
                 "LGT: Ley 58/2003, de 17 de diciembre, General Tributaria",
                 "LRHL: Real Decreto Legislativo 2/2004, de 5 de marzo",
-                "Ordenanza Fiscal IIVTNU Alfafar 2006 (BOP 31/12/2005)"
+                "RD-ley 8/2023: Coeficientes máximos IIVTNU 2025",
+                "Ordenanza Fiscal IIVTNU Alfafar 2022 (BOP 154 - 17/06/2022)"
             ]
         else:
             self.legal_references = [
@@ -293,7 +293,7 @@ class IIVTNULegalValidator:
             coeficiente = 0.0
             referencia = "Error en período"
         elif self.use_alfafar_config:
-            # Usar coeficientes específicos de Alfafar (Ordenanza 2006)
+            # Usar coeficientes máximos estatales (Ordenanza Alfafar 2022 - Art. 5.3)
             coeficiente, referencia = self._get_alfafar_coefficient(años)
         else:
             # Usar coeficientes estatales máximos
@@ -312,7 +312,10 @@ class IIVTNULegalValidator:
     
     def _get_alfafar_coefficient(self, años: int) -> Tuple[float, str]:
         """
-        Calcula coeficiente según Ordenanza Alfafar 2006 (Art. 5)
+        Calcula coeficiente según Ordenanza Alfafar 2022 (Art. 5.3) - Coeficientes máximos estatales
+        
+        CAMBIO IMPORTANTE 2022: Ya no se usan coeficientes específicos de Alfafar.
+        Se aplican directamente los coeficientes máximos estatales vigentes.
         
         Args:
             años: Años completos de tenencia
@@ -320,22 +323,16 @@ class IIVTNULegalValidator:
         Returns:
             Tuple con (coeficiente_total, referencia_legal)
         """
-        if años <= 5:
-            coef_anual = self.ALFAFAR_COEFFICIENTS['range_1_5']
-        elif años <= 10:
-            coef_anual = self.ALFAFAR_COEFFICIENTS['range_6_10']
-        elif años <= 15:
-            coef_anual = self.ALFAFAR_COEFFICIENTS['range_11_15']
-        else:  # 16-20 años (máximo 20 según ordenanza)
-            coef_anual = self.ALFAFAR_COEFFICIENTS['range_16_20']
-            años = min(años, 20)  # Máximo 20 años
+        años = min(años, 20)  # Máximo 20 años según LRHL
         
-        # El coeficiente total es coef_anual * número de años
-        coeficiente_total = coef_anual * años
+        if años in self.STATE_MAX_COEFFICIENTS:
+            coeficiente_total = self.STATE_MAX_COEFFICIENTS[años]
+        else:
+            coeficiente_total = self.STATE_MAX_COEFFICIENTS[20]  # Usar el de 20+ años
         
         return (
             coeficiente_total,
-            f'Ordenanza Alfafar Art. 5 - {coef_anual}% anual × {años} años = {coeficiente_total}%'
+            f'Ordenanza Alfafar 2022 Art. 5.3 - Coeficiente máximo estatal: {coeficiente_total}% ({años} años)'
         )
     
     def _calculate_base_imponible(self, valor_actual: float, valor_anterior: float, coeficiente: float) -> Dict[str, Any]:
