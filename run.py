@@ -12,6 +12,11 @@ app = create_app()
 # The following condition ensures the app only runs if the script (run.py) is executed directly, not imported as a module by another file.
 if __name__ == '__main__':
    # Run the Flask development server
-   # debug=True enables auto-reload when you change code files
+   # debug=True enables auto-reload when you change Python code files
    # host='0.0.0.0' makes the app accessible from other devices on your network. Otherwise, host='127.0.0.1' means the app is only accessible from the local machine.
-  app.run(debug=True)
+   import os
+   import glob
+   os.environ['FLASK_ENV'] = 'development'
+   # Add template files to Flask's file watcher for auto-reload
+   template_files = glob.glob('app/templates/*.html')
+   app.run(debug=True, use_reloader=True, extra_files=template_files, host='127.0.0.1', port=5000)
