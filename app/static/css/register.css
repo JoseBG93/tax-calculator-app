@@ -1,0 +1,29 @@
+/* Custom popup notification styles */
+.popup-message {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #ff4444;
+    color: white;
+    padding: 15px 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    display: none;
+    z-index: 1000;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    animation: slideDown 0.3s ease;
+}
+
+/* Animation for popup entrance */
+@keyframes slideDown {
+    from { 
+        transform: translateX(-50%) translateY(-100%); 
+        opacity: 0;
+    }
+    to { 
+        transform: translateX(-50%) translateY(0); 
+        opacity: 1;
+    }
+}
