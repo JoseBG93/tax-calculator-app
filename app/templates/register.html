@@ -3,9 +3,74 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Register Page</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/register.css') }}">
 </head>
 <body>
-    
+    <h2>Let's register your account</h2>
+    <form method="post" action="{{ url_for('register') }}">
+        <label for="username">Username:</label>
+        <input type="text" name="username" value="{{ username or '' }}"><br><br>
+
+        <label for="password">Password:</label>
+        <input type="password" name="password"><br><br>
+
+        <label for="confirm_password">Confirm password:</label>
+        <input type="password" name="confirm_password"><br><br>
+
+        <button type="submit">Let's do it!</button>
+    </form>
+
+    <p>
+        Already have an account? <a href="{{ url_for('login') }}">Login</a>
+    </p>
+
+   <div id="popup" class="popup-message">
+    <span id="popup-text"></span>
+   </div>
+
+    <script>
+        // JavaScript code that runs in the browser
+        // First, we need to find our HTML elements before we can use them
+        const form = document.querySelector('form');                          // Find the form element
+        const usernameInput = document.querySelector('[name="username"]');    // Find username input field
+        const passwordInput = document.querySelector('[name="password"]');    // Find password input field
+        const confirmInput = document.querySelector('[name="confirm_password"]'); // Find confirm password input field
+        
+        function showPopup(message) {
+            const popup = document.getElementById('popup');
+            const text = document.getElementById('popup-text');
+            text.textContent = message;
+            popup.style.display = 'block';
+            setTimeout(() => {
+                popup.style.display = 'none';
+            }, 3000);
+        }
+        // Add event listener to check form before submission
+        form.addEventListener('submit', function(event) {
+            // Get values from input fields and check if they're filled
+            const username = usernameInput.value.trim();    // Get username and remove spaces
+            const password = passwordInput.value;           // Get password
+            const confirm_password = confirmInput.value;    // Get confirm password
+
+            // Check if any field is empty
+            if (!username || !password || !confirm_password) {
+                showPopup('Please, fill all fields.');         // Show error message
+                event.preventDefault();                     // Stop form submission
+                return;                                     // Exit function
+            }
+            
+            // Check if passwords match
+            if (password !== confirm_password) {
+                showPopup('Passwords do not match. Please, try again.');
+                event.preventDefault();                     // Stop form submission
+                return;                                     // Exit function
+            }
+
+
+            // If all checks pass, the form will submit as normal to Flask
+        });
+
+    </script>
 </body>
 </html>

@@ -2,19 +2,80 @@
 <html>
 <head>
     <title style="font-size: 2rem; color: #2a7ae2;">Login</title> <!-- Title is the text shown in browser tab (with inline CSS styling) -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
 </head>
 <body>
     <h2 style="color: #6c8ebf; font-weight: 500;">Welcome to the login page!</h2> <!-- Heading is the text shown in the body of the page (with inline CSS styling) -->
     <form method="post" action="{{ url_for('login') }}"> 
         <label for="username">Username:</label> <!-- 'for' attribute links this label to the input field with id="username" -->
-        <input type="text" id="username" name="username" required><br><br> <!-- 'name="username"' is what Flask receives in request.form.get('username'). 'required' prevents empty submission -->
+        <input type="text" id="username" name="username"><br><br> <!-- 'name="username"' is what Flask receives in request.form.get('username'). 'required' prevents empty submission -->
         
         <label for="password">Password:</label> <!-- Links this label to the password input field -->
-        <input type="password" id="password" name="password" required><br><br> <!-- type="password" hides the text with dots for security. name="password" connects to Flask's request.form.get('password') -->
+        <input type="password" id="password" name="password"><br><br> <!-- type="password" hides the text with dots for security. name="password" connects to Flask's request.form.get('password') -->
         
         <button type="submit" style="background-color: #ffeb3b; color: #2e7d32; font-weight: bold; border: none; padding: 10px 24px; border-radius: 6px; cursor: pointer;">
             <span style="color: red;">Login</span>
         </button> <!-- 'type="submit"' makes this button send the form data via POST method to the server. The button uses a happy yellow background and a smiley for a cheerful look. -->
+
+
+        <div id="popup" class="popup-message">
+            <span id="popup-text"></span>
+            <button type="button" id="popup-register-btn" style="display: none; margin-top: 10px; background: #fff; color: #ff4444; border: 1px solid #fff; padding: 8px 16px; border-radius: 4px; cursor: pointer;">
+                Go to Register
+            </button>
+        </div>
+        
+        <!-- Show Flask flash messages as popups -->
+    {% for message in get_flashed_messages() %}
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                showPopupWithRegister('{{ message }}');
+            });
+        </script>
+    {% endfor %}
+
+        
+        <script>
+            const form = document.querySelector('form');
+            const usernameInput = document.querySelector('[name="username"]');
+            const passwordInput = document.querySelector('[name="password"]');
+            
+            function showPopup(message) {
+                const popup = document.getElementById('popup');
+                const text = document.getElementById('popup-text');
+                const registerBtn = document.getElementById('popup-register-btn');
+                text.textContent = message;
+                registerBtn.style.display = 'none';
+                popup.style.display = 'block';
+                setTimeout(() => {
+                    popup.style.display = 'none';
+                }, 3000);
+            }
+            
+            function showPopupWithRegister(message) {
+                const popup = document.getElementById('popup');
+                const text = document.getElementById('popup-text');
+                const registerBtn = document.getElementById('popup-register-btn');
+                text.textContent = message;
+                registerBtn.style.display = 'inline-block';
+                registerBtn.onclick = (e) => {
+                    e.preventDefault();  // Prevent any form submission
+                    e.stopPropagation(); // Stop event bubbling
+                    window.location.href = '{{ url_for("register") }}';
+                };
+                popup.style.display = 'block';
+                // No auto-hide for this popup so user can click register button
+            }
+            form.addEventListener('submit', function(event) {
+                const username = usernameInput.value.trim();
+                const password = passwordInput.value;
+                if (!username || !password) {
+                    showPopup('Please, fill all fields.');
+                    event.preventDefault();
+                    return;
+                }
+            });
+        </script>
     </form>
 </body>
 </html>
