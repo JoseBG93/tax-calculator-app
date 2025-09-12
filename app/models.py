@@ -2,6 +2,8 @@
 from app import db # This imports the db object we created in __init__.py
 from datetime import datetime # For handling dates and timestamps
 from sqlalchemy import Column, Integer, String, DateTime, Float, Boolean, ForeignKey, Text
+from werkzeug.security import generate_password_hash, check_password_hash
+from flask_login import UserMixin
 # There are two ways to use relationships in SQLAlchemy with Flask:
 # 1. Import directly from SQLAlchemy: 
 #    from sqlalchemy.orm import relationship
@@ -12,11 +14,29 @@ from sqlalchemy import Column, Integer, String, DateTime, Float, Boolean, Foreig
 # If you use db.Model as your base class (as in Flask apps), prefer db.relationship for clarity and integration.
 
 
+class User(db.Model, UserMixin):
+    """Represents users of the application"""
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(50), nullable=False, unique=True)
+    password = db.Column(db.String(255), nullable=False)
+    created_at = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+    updated_at = db.Column(db.DateTime, nullable=False, default=datetime.utcnow, onupdate=datetime.utcnow)
+
+    def __repr__(self):
+        return f"<User: {self.username}>"
+
+    def set_password(self, password):
+        self.password = generate_password_hash(password)
+    
+    def check_password(self, password):
+        return check_password_hash(self.password, password)
+
+
 class People(db.Model): # We use db.Model to define a SQLAlchemy model. In this case, the model is a table called 'people'.
     """Represents people involved in the real estate transactions"""
     id = db.Column(db.Integer, primary_key=True) # Primary key is an unique identifier for each person, and it automatically includes 'unique=True', 'nullable=False' and auto-increment.
-    created_at = db.Column(db.DateTime, nullable=False, default=datetime.UTC)
-    updated_at = db.Column(db.DateTime, nullable=False, default=datetime.UTC, onupdate=datetime.UTC) # 'onupdate' means every time the record is modified, this timestamp is automatically updated.
+    created_at = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+    updated_at = db.Column(db.DateTime, nullable=False, default=datetime.utcnow, onupdate=datetime.utcnow) # 'onupdate' means every time the record is modified, this timestamp is automatically updated.
     person_type = db.Column(db.String(20), nullable=False, default='Física')
     nif = db.Column(db.String(9), nullable=False, unique=True) # 'nullable=False' means it can't be empty, so every person must have a NIF. 'Unique=True' means duplicate NIFs are not allowed.
     name = db.Column(db.String(50), nullable=False)
@@ -34,8 +54,8 @@ class Property(db.Model):
     address = db.Column(db.String(50), nullable=False, unique=True)
     cadastral_reference = db.Column(db.String(20), nullable=False, unique=True)
     cadastral_value = db.Column(db.Float, nullable=False)
-    created_at = db.Column(db.DateTime, nullable=False, default=datetime.UTC)
-    updated_at = db.Column(db.DateTime, nullable=False, default=datetime.UTC, onupdate=datetime.UTC)
+    created_at = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+    updated_at = db.Column(db.DateTime, nullable=False, default=datetime.utcnow, onupdate=datetime.utcnow)
 
     def __repr__(self):
         return f"<Property with cadastral reference {self.cadastral_reference}, located in {self.address}>"
@@ -69,8 +89,8 @@ class TaxCalculation(db.Model):
     """IIVTNU tax calculations for transmissions"""
     id = db.Column(db.Integer, primary_key=True) # Primary key is an unique identifier for each tax calculation, and it automatically includes 'unique=True', 'nullable=False' and auto-increment.
     transaction_id = db.Column(db.Integer, ForeignKey('transaction.id'), nullable=False)
-    created_at = db.Column(db.DateTime, nullable=False, default=datetime.UTC)
-    updated_at = db.Column(db.DateTime, nullable=False, default=datetime.UTC, onupdate=datetime.UTC)
+    created_at = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+    updated_at = db.Column(db.DateTime, nullable=False, default=datetime.utcnow, onupdate=datetime.utcnow)
 
     """IIVTNU calculation results"""
     taxable_base = db.Column(db.Float, nullable=False)              # Base imponible - the calculated tax base
