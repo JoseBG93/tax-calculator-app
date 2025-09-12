@@ -20,9 +20,12 @@ So, it allows your frontend (running on port 3000) to access resources from your
 Without this, browsers would block requests from the frontend (requests) to the backend (responses), for security reasons.'''
 from flask_cors import CORS
 
+'''Flask-Login is a library that handles user authentication in Flask applications. It provides a simple way to manage user sessions and authentication.'''
+from flask_login import LoginManager
 
 db = SQLAlchemy()
 migrate = Migrate()
+login_manager = LoginManager()
 
 '''Application Factory Pattern: The following function creates and configures a Flask application instance.
 Why use this pattern? It allows you to create multiple app instances with different configurations
@@ -45,7 +48,22 @@ def create_app():
     # Enable CORS for all routes and origins. It allows your frontend to communicate with your backend.
     CORS(app)
 
+    # Initialize Flask-Login
+    login_manager.init_app(app)
 
+    # Set where to redirect the user if they are not logged in.
+    login_manager.login_view = 'login'
+    login_manager.login_message = 'Please login to access this page.'
+
+    # User loader function tells Flask-Login how to load a user by ID
+    # Flask-Login stores only the user ID in the session
+    # When it needs user info, it calls this function to get the full User object
+    # Without this, Flask-Login can't work!
+    @login_manager.user_loader # This decorator registers this function with Flask-Login.
+    def load_user(user_id):
+        from app.models import User
+        return User.query.get(int(user_id))
+    
     from app import routes # Import the routes.py file from the app folder.
     routes.register_routes(app) # Register the routes with the Flask app.
 
