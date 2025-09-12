@@ -1,9 +1,8 @@
 '''Import SQLAlchemy components for database modeling'''
 from app import db # This imports the db object we created in __init__.py
 from datetime import datetime # For handling dates and timestamps
+
 from sqlalchemy import Column, Integer, String, DateTime, Float, Boolean, ForeignKey, Text
-from werkzeug.security import generate_password_hash, check_password_hash
-from flask_login import UserMixin
 # There are two ways to use relationships in SQLAlchemy with Flask:
 # 1. Import directly from SQLAlchemy: 
 #    from sqlalchemy.orm import relationship
@@ -12,6 +11,22 @@ from flask_login import UserMixin
 #    Use db.relationship() in your models without importing relationship directly.
 # Both approaches work, but it's best to be consistent. 
 # If you use db.Model as your base class (as in Flask apps), prefer db.relationship for clarity and integration.
+
+
+from werkzeug.security import generate_password_hash, check_password_hash
+
+
+from flask_login import UserMixin
+'''UserMixin is a helper class from Flask-Login that provides default implementations of methods required for user authentication. When your User class inherits from
+UserMixin, it automatically gets these essential methods:
+
+  1. is_authenticated - Returns True (users are authenticated by default)
+  2. is_active - Returns True (users are active by default)
+  3. is_anonymous - Returns False (authenticated users are not anonymous)
+  4. get_id() - Returns the user's ID as a string (uses the id attribute)
+
+  Without UserMixin, you'd have to manually implement all these methods in your User class'''
+
 
 
 class User(db.Model, UserMixin):
