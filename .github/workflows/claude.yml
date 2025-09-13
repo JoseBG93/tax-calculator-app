@@ -1,0 +1,42 @@
+# .github/workflows/claude.yml
+name: Claude Code Review
+on:
+  pull_request:
+    types: [opened, synchronize]
+  push:
+    branches: [main, develop]
+
+jobs:
+  claude-review:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          pip install anthropic requests
+
+      - name: Claude Code Review
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          echo "🤖 Claude Code Review iniciado..."
+          python -c "
+          import os
+          print('✅ ANTHROPIC_API_KEY configurada:', bool(os.getenv('ANTHROPIC_API_KEY')))
+          print('✅ GITHUB_TOKEN configurada:', bool(os.getenv('GITHUB_TOKEN')))
+          print('🎯 Repositorio:', os.getenv('GITHUB_REPOSITORY', 'No definido'))
+          "
+          echo "✅ Setup completo - Listo para Claude integration"
