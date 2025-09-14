@@ -23,7 +23,7 @@ A specialized tax calculation system exclusively focused on IIVTNU for Ayuntamie
 
 ### About
 
-This project was born from real-world experience in Spanish municipal tax administration. As a civil servant (Funcionario Interino - Auxiliar Administrativo) specializing in IIVTNU at Ayuntamiento de Alfafar's Tax Inspection department, I work with property value increase tax calculations daily using GTT/Gestiona software.
+This project was born from real-world experience in Spanish municipal tax administration. As a civil servant with expertise at Alfafar town hall's Tax Inspection department, I work with property value increase tax calculations daily using GTT/Gestiona software.
 
 **The Challenge**: The current workflow involves manual processing of property deeds for IIVTNU calculations - reading cadastral data, property values, transaction dates, involved parties, and applying municipal coefficients and bonifications. This manual process is time-consuming and error-prone, especially when dealing with complex cases like family bonifications (95%/50%) and varying annual coefficients based on ownership periods.
 
@@ -58,6 +58,7 @@ This project was born from real-world experience in Spanish municipal tax admini
 
 **Core Application:**
 - **Backend**: Flask 2.3.3 (Application Factory Pattern)
+- **Frontend**: HTML, CSS, JavaScript
 - **Database**: SQLAlchemy 3.0.5 + Flask-Migrate 4.0.5
 - **Data Processing**: pandas 2.1.4, numpy 1.25.2
 - **Validation**: marshmallow 3.20.1
@@ -67,7 +68,7 @@ This project was born from real-world experience in Spanish municipal tax admini
 **Future Integrations (Available):**
 - **Document OCR**: pdfplumber, ocrmypdf, pytesseract (Tesseract)
 - **NLP (Spanish)**: spaCy (es_core_news_md), dateparser
-- **Frontend**: HTML, CSS, JavaScript
+- 
 - **HTTP client**: requests
 
 **Development Tools:**
