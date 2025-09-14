@@ -31,34 +31,34 @@ class Config:
     # This URI tells the application where and how to connect to the database.
     # By default, it uses a local SQLite database file located at 'database/app.db'.
     # You can override this by setting the 'DATABASE_URL' environment variable to another database URI,
-    # such as for PostgreSQL, MySQL, or another supported backend.
+    # such PostgreSQL, MySQL, or another supported backend.
     # Example for PostgreSQL: 'postgresql://user:password@localhost/dbname'
     # This approach allows easy switching between development (local SQLite) and production (remote DB) environments.
     SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL', 'sqlite:///database/app.db')
     SQLALCHEMY_TRACK_MODIFICATIONS = False  # prevents unnecessary overhead by disabling modification tracking
 
     # File uploads
-    UPLOAD_FOLDER = os.environ.get('UPLOAD_FOLDER', 'data/uploads')
+    UPLOAD_FOLDER = os.environ.get('UPLOAD_FOLDER', 'data/AI-generated')
     MAX_CONTENT_LENGTH = int(os.environ.get('MAX_CONTENT_LENGTH', 16777216))  # bytes
-    # ALLOWED_EXTENSIONS defines which file types are permitted for upload in the application.
+    # ALLOWED_EXTENSIONS defines what file types are permitted to be uploaded in the application.
     # It reads the 'ALLOWED_EXTENSIONS' environment variable, which should be a comma-separated string (e.g., 'pdf,jpg,jpeg,png').
     # If the variable is not set, it defaults to allowing 'pdf', 'jpg', 'jpeg', and 'png' files.
     # The string is split by commas to create a list, and then converted to a set for efficient membership checks.
     ALLOWED_EXTENSIONS = set(os.environ.get('ALLOWED_EXTENSIONS', 'pdf,jpg,jpeg,png').split(','))
 
     # NLP (Natural Language Processing) configuration
-    # SPACY_MODEL specifies which spaCy language model the application should use for NLP tasks.
+    # SPACY_MODEL specifies which spaCy language model app should use for NLP tasks.
     # It attempts to read the model name from the 'SPACY_MODEL' environment variable.
     # If 'SPACY_MODEL' is not set in the environment, it defaults to 'es_core_news_md' (a medium-sized Spanish model).
     # This approach allows easy switching between different spaCy models (e.g., for other languages or model sizes)
     # without changing the code—just by setting the environment variable.
     SPACY_MODEL = os.environ.get('SPACY_MODEL', 'es_core_news_md')
 
-    # CORS_ORIGINS specifies which external domains are permitted to access resources from this application via Cross-Origin Resource Sharing (CORS).
+    # CORS_ORIGINS specifies which external domains are allowed to access app resources through Cross-Origin Resource Sharing (CORS).
     # This setting is important for web security, as it controls which frontends or external services can interact with the backend API from the browser.
-    # By configuring CORS_ORIGINS, you can restrict or allow requests from specific origins, helping to prevent unauthorized cross-origin requests.
+    # By configuring CORS_ORIGINS, you can handle requests from specific origins, helping to prevent unauthorized cross-origin requests.
     # The value is read from the 'CORS_ORIGINS' environment variable as a comma-separated string (e.g., 'http://localhost:3000,https://myapp.com').
-    # If not set, it defaults to allowing only 'http://localhost:3000', which is typical for local development.
+    # If not set, it assign 'http://localhost:3000' by default.
     # The string is split by commas to create a list of allowed origins.
     CORS_ORIGINS = os.environ.get('CORS_ORIGINS', 'http://localhost:3000').split(',')
 
@@ -67,7 +67,7 @@ class Config:
     
     # Primary legislation references
     LGT_REFERENCE = "Ley 58/2003, de 17 de diciembre, General Tributaria (BOE-A-2003-23186)"
-    LRHL_REFERENCE = "Real Decreto Legislativo 2/2004, de 5 de marzo (BOE-A-2004-4214)"
+    LRHL_REFERENCE = "Real Decreto Legislativo 2/2004, de 5 de marzo, por el que se aprueba el texto refundido de la Ley reguladora de las Haciendas Locales (BOE-A-2004-4214)"
     
     # Current coefficient regulation (valid for 2025)
     CURRENT_COEFFICIENT_REGULATION = "Real Decreto-ley 8/2023, de 27 de diciembre"

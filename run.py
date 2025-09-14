@@ -12,7 +12,7 @@ The application will start on http://127.0.0.1:5000 with debug mode enabled.
 import os
 import glob
 
-# Import the create_app function from the app module 
+# Import the create_app function from module '__init__.py', within the app directory 
 from app import create_app
 
 

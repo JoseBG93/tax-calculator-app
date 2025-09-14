@@ -73,7 +73,7 @@ tax-calculator-pro/
 ├── run.py                 # Punto de entrada (ejecutor)
 ├── app/
 │   ├── __init__.py       # Fábrica de aplicación (núcleo)
-│   ├── models.py         # Modelos de base de datos ← PRÓXIMO PASO
+│   ├── models.py         # Modelos de base de datos
 │   ├── routes.py         # Rutas web (URLs)
 │   ├── services.py       # Lógica de negocio (cálculos IIVTNU)
 │   └── legal_validator.py # Validación legal
@@ -100,30 +100,7 @@ DETALLE:
 7. Usuario: Ve el resultado en su navegador
 
 
-6. PRÓXIMOS PASOS - MODELS.PY
-=============================
-
-app/models.py definirá:
-
-Person (Personas)
-├── id, nif, nombre, tipo_persona
-├── Relación: Una persona puede tener múltiples transmisiones
-
-Property (Propiedades)  
-├── id, referencia_catastral, valor_actual, direccion
-├── Relación: Una propiedad puede tener múltiples transmisiones
-
-Transmission (Transmisiones)
-├── id, fecha_transmision, tipo_transmision
-├── Relación: person_id (transmitente), person_id (adquirente), property_id
-├── Relación: Una transmisión genera un cálculo fiscal
-
-TaxCalculation (Cálculos IIVTNU)
-├── id, base_imponible, cuota_integra, cuota_liquida
-├── Relación: transmission_id (cada cálculo pertenece a una transmisión)
-
-
-7. VENTAJAS DE ESTA ARQUITECTURA
+6. VENTAJAS DE ESTA ARQUITECTURA
 ===============================
 
 ✅ SEPARACIÓN DE RESPONSABILIDADES:
