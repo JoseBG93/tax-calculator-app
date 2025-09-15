@@ -8,7 +8,58 @@ from flask import (
   flash,          # Stores a temporary message that appears on the next request (the next page load), then disappears.
     )
 from app.models import User
-from app import db
+from app import db, limiter
+import re
+import html
+
+# Security validation functions
+def validate_username(username):
+    """Validate username format and security"""
+    if not username or len(username.strip()) == 0:
+        return False, "Username cannot be empty"
+    
+    username = username.strip()
+    
+    # Check length
+    if len(username) < 3 or len(username) > 50:
+        return False, "Username must be between 3 and 50 characters"
+    
+    # Check for valid characters (alphanumeric, underscore, hyphen)
+    if not re.match(r'^[a-zA-Z0-9_-]+$', username):
+        return False, "Username can only contain letters, numbers, underscores, and hyphens"
+    
+    return True, "Valid"
+
+def validate_password(password):
+    """Validate password strength"""
+    if not password or len(password.strip()) == 0:
+        return False, "Password cannot be empty"
+    
+    password = password.strip()
+    
+    # Check minimum length
+    if len(password) < 8:
+        return False, "Password must be at least 8 characters long"
+    
+    # Check for at least one uppercase letter
+    if not re.search(r'[A-Z]', password):
+        return False, "Password must contain at least one uppercase letter"
+    
+    # Check for at least one lowercase letter
+    if not re.search(r'[a-z]', password):
+        return False, "Password must contain at least one lowercase letter"
+    
+    # Check for at least one digit
+    if not re.search(r'\d', password):
+        return False, "Password must contain at least one number"
+    
+    return True, "Valid"
+
+def sanitize_input(input_string):
+    """Sanitize user input to prevent XSS"""
+    if not input_string:
+        return ""
+    return html.escape(input_string.strip())
 
 # This function will register app routes
 def register_routes(app):
@@ -23,7 +74,8 @@ def register_routes(app):
   app.add_url_rule('/logout', 'logout', logout, methods=['POST'])
   app.add_url_rule('/calculator', 'calculator', calculator, methods=['GET', 'POST'])
   app.add_url_rule('/history', 'history', history, methods=['GET', 'POST'])
-  app.add_url_rule('/debug_users', 'debug_users', debug_users, methods=['GET'])
+  # DEBUG ROUTE DISABLED FOR SECURITY - Exposes password hashes
+  # app.add_url_rule('/debug_users', 'debug_users', debug_users, methods=['GET'])
 
 
 def root():
@@ -34,6 +86,7 @@ def index():
   return render_template('index.html')
 
 
+@limiter.limit("5 per minute")  # Rate limit registration attempts
 def register():
   """
   This function will handle the registration process.
@@ -42,27 +95,49 @@ def register():
   if request.method == 'GET':
     return render_template('register.html')
   elif request.method == 'POST':
-    username = request.form.get('username', '').strip()
-    password = request.form.get('password', '').strip()
-    confirm_password = request.form.get('confirm_password', '').strip()
-    # Python does not have a native switch statement, but we can simulate it using match-case (Python 3.10+).
-    # We'll use a tuple to match the different cases.
-    match (password == confirm_password, bool(username and password)):
-      case (False, _):
+    # Get and sanitize form data
+    username = sanitize_input(request.form.get('username', ''))
+    password = request.form.get('password', '')  # Don't sanitize passwords
+    confirm_password = request.form.get('confirm_password', '')
+    
+    # Validate username
+    username_valid, username_msg = validate_username(username)
+    if not username_valid:
+        flash(username_msg)
+        return render_template('register.html', username=username)
+    
+    # Validate password
+    password_valid, password_msg = validate_password(password)
+    if not password_valid:
+        flash(password_msg)
+        return render_template('register.html', username=username)
+    
+    # Check password confirmation
+    if password != confirm_password:
         flash('Passwords do not match. Please try again.')
         return render_template('register.html', username=username)
-      case (True, False):
-        flash('Please fill all fields.')
-        return redirect(url_for('register'))
-      case (True, True):
+    
+    # Check if username already exists
+    existing_user = User.query.filter_by(username=username).first()
+    if existing_user:
+        flash('Username already exists. Please choose a different one.')
+        return render_template('register.html', username=username)
+    
+    try:
+        # Create new user
         new_user = User(username=username)
         new_user.set_password(password)
         db.session.add(new_user)
         db.session.commit()
         flash('Registration successful! Please login.')
         return redirect(url_for('login'))
+    except Exception as e:
+        db.session.rollback()
+        flash('Registration failed. Please try again.')
+        return render_template('register.html', username=username)
 
 
+@limiter.limit("10 per minute")  # Rate limit login attempts
 def login():
   """
   This function will handle the login process.
@@ -75,18 +150,29 @@ def login():
     return render_template('login.html')
 
   elif request.method == 'POST':  # POST stands for post the form data. In other words, the user is submitting the login form.
-    # Process login... extracting the form data
-    username = request.form.get('username', '').strip()
-    password = request.form.get('password', '').strip()
+    # Process login... extracting and sanitizing the form data
+    username = sanitize_input(request.form.get('username', ''))
+    password = request.form.get('password', '')  # Don't sanitize passwords
+    
+    # Basic validation
+    if not username or not password:
+        flash("Please fill in all fields.")
+        return redirect(url_for('login', show_flash=True))
 
-    # Check database for user credentials
-    user = User.query.filter_by(username=username).first()
-    if user and user.check_password(password):
-        session['logged_in'] = True
-        session['username'] = username
-        return redirect(url_for('dashboard'))
-    else:
-        flash("Invalid credentials. Not registered yet?")
+    try:
+        # Check database for user credentials
+        user = User.query.filter_by(username=username).first()
+        if user and user.check_password(password):
+            session['logged_in'] = True
+            session['username'] = username
+            # Regenerate session ID to prevent session fixation attacks
+            session.permanent = True
+            return redirect(url_for('dashboard'))
+        else:
+            flash("Invalid credentials. Not registered yet?")
+            return redirect(url_for('login', show_flash=True))
+    except Exception as e:
+        flash("Login failed. Please try again.")
         return redirect(url_for('login', show_flash=True))
     
 
@@ -112,17 +198,23 @@ def logout():
 
 def debug_users():
   """
-  DEBUG ROUTE: Shows all registered users from database (REMOVE IN PRODUCTION)
+  DEBUG ROUTE: DISABLED FOR SECURITY REASONS
+  This route exposed sensitive password hashes and has been disabled.
+  In production, use proper admin panels with authentication.
   """
-  users = User.query.all()
-  if not users:
-    return "<h2>No users registered yet in database</h2>"
+  # SECURITY FIX: Route disabled to prevent password hash exposure
+  # If debug info is needed, implement proper authentication first
+  return "Debug route disabled for security reasons", 403
   
-  html = "<h2>Registered Users (Database):</h2><ul>"
-  for user in users:
-    html += f"<li><strong>ID:</strong> {user.id} | <strong>Username:</strong> {user.username} | <strong>Password:</strong> {user.password} | <strong>Created:</strong> {user.created_at}</li>"
-  html += "</ul>"
-  return html
+  # Original insecure code (DO NOT UNCOMMENT):
+  # users = User.query.all()
+  # if not users:
+  #   return "<h2>No users registered yet in database</h2>"
+  # html = "<h2>Registered Users (Database):</h2><ul>"
+  # for user in users:
+  #   html += f"<li><strong>ID:</strong> {user.id} | <strong>Username:</strong> {user.username} | <strong>Password:</strong> {user.password} | <strong>Created:</strong> {user.created_at}</li>"
+  # html += "</ul>"
+  # return html
 
 
 def calculator():
