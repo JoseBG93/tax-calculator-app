@@ -7,6 +7,7 @@ from flask import (
   session,        # Stores user session data between requests
   flash,          # Stores a temporary message that appears on the next request (the next page load), then disappears.
     )
+from flask_login import login_user, logout_user, login_required
 from app.models import User
 from app import db, limiter
 import re
@@ -163,10 +164,8 @@ def login():
         # Check database for user credentials
         user = User.query.filter_by(username=username).first()
         if user and user.check_password(password):
-            session['logged_in'] = True
-            session['username'] = username
-            # Regenerate session ID to prevent session fixation attacks
-            session.permanent = True
+            # Flask-Login handles session management automatically
+            login_user(user, remember=True)  # remember=True creates persistent session
             return redirect(url_for('dashboard'))
         else:
             flash("Invalid credentials. Not registered yet?")
@@ -176,23 +175,24 @@ def login():
         return redirect(url_for('login', show_flash=True))
     
 
+@login_required  # Flask-Login automatically redirects to login if not authenticated
 def dashboard():
   """
   This function will handle the dashboard process.
   It will render the dashboard template and handle the dashboard form submission.
   """
-  if 'logged_in' not in session or not session['logged_in']:
-    return redirect(url_for('login'))
-  
+  # No need to check session manually - @login_required handles it
   return render_template('dashboard.html')
 
 
+@login_required  # Only logged-in users can logout
 def logout():
   """
   This function will handle the logout process.
   It will redirect the user to the login page.
   """
-  session.clear() # Clears all session data
+  logout_user()  # Flask-Login handles clearing the session
+  flash('You have been logged out successfully.')
   return redirect(url_for('login'))
 
 
@@ -217,6 +217,7 @@ def debug_users():
   # return html
 
 
+@login_required # Only logged-in users can access this function.
 def calculator():
   """
   This function will handle the calculate process.
@@ -224,6 +225,7 @@ def calculator():
   return render_template('calculator.html')
 
 
+@login_required # Only logged-in users can access this function.
 def history():
   """
   This function will handle the history process.
