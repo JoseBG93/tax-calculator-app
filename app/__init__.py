@@ -23,9 +23,21 @@ from flask_cors import CORS
 '''Flask-Login is a library that handles user authentication in Flask applications. It provides a simple way to manage user sessions and authentication.'''
 from flask_login import LoginManager
 
+'''Flask-WTF provides CSRF protection and form handling for Flask applications.'''
+from flask_wtf.csrf import CSRFProtect
+
+'''Flask-Limiter provides rate limiting functionality to prevent abuse and DoS attacks.'''
+from flask_limiter import Limiter
+from flask_limiter.util import get_remote_address
+
 db = SQLAlchemy()
 migrate = Migrate()
 login_manager = LoginManager()
+csrf = CSRFProtect()
+limiter = Limiter(
+    key_func=get_remote_address,
+    default_limits=["100 per hour"]
+)
 
 '''Application Factory Pattern: The following function creates and configures a Flask application instance.
 Why use this pattern? It allows you to create multiple app instances with different configurations
@@ -54,6 +66,28 @@ def create_app():
     # Set where to redirect the user if they are not logged in.
     login_manager.login_view = 'login'
     login_manager.login_message = 'Please login to access this page.'
+    
+    # Initialize CSRF protection
+    csrf.init_app(app)
+    
+    # Initialize rate limiting
+    limiter.init_app(app)
+    
+    # Add security headers
+    @app.after_request
+    def add_security_headers(response):
+        """Add security headers to all responses"""
+        if app.config.get('SECURITY_HEADERS_ENABLED', True):
+            # Prevent clickjacking
+            response.headers['X-Frame-Options'] = 'DENY'
+            # Prevent MIME type sniffing
+            response.headers['X-Content-Type-Options'] = 'nosniff'
+            # Enable XSS protection
+            response.headers['X-XSS-Protection'] = '1; mode=block'
+            # Force HTTPS in production (when cookie secure is enabled)
+            if app.config.get('SESSION_COOKIE_SECURE'):
+                response.headers['Strict-Transport-Security'] = 'max-age=31536000; includeSubDomains'
+        return response
 
     # User loader function tells Flask-Login how to load a user by ID
     # Flask-Login stores only the user ID in the session
