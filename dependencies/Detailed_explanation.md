@@ -318,7 +318,48 @@ y reciben un token que usan para acceder a recursos protegidos sin volver a iden
 
 
 
-### 22. CRYPTOGRAPHY (Encriptación)
+### 22. FLASK-LOGIN (Autenticación de Usuarios)
+**Versión:** 0.6.3
+
+**ARCHIVOS RELACIONADOS:**
+- `app/__init__.py` → Configuración del gestor de sesiones de usuario
+- `app/routes.py` → Decoradores para rutas protegidas (@login_required)
+- `app/models.py` → Modelo User con métodos requeridos por Flask-Login
+
+**FUNCIONALIDAD DETALLADA:**
+Flask-Login gestiona las sesiones de usuario de forma segura. Proporciona decoradores para proteger rutas que requieren
+autenticación, gestiona el login/logout automático, y mantiene la información del usuario actual en la sesión.
+Es fundamental para crear un sistema de usuarios con acceso controlado a diferentes funcionalidades de la aplicación.
+
+
+### 23. FLASK-WTF (Formularios Web y CSRF)
+**Versión:** 1.2.1
+
+**ARCHIVOS RELACIONADOS:**
+- `app/forms.py` → Definición de formularios con validación automática
+- `app/routes.py` → Validación de formularios en las rutas
+- `templates/` → Formularios HTML con protección CSRF automática
+
+**FUNCIONALIDAD DETALLADA:**
+Flask-WTF integra WTForms con Flask y añade protección CSRF automática. Te permite crear formularios con validación
+del lado del servidor, protección contra ataques CSRF (Cross-Site Request Forgery), y gestión automática de archivos
+subidos. Es esencial para cualquier aplicación web que maneje formularios de forma segura.
+
+
+### 24. FLASK-LIMITER (Control de Tasa)
+**Versión:** 3.8.0
+
+**ARCHIVOS RELACIONADOS:**
+- `app/__init__.py` → Configuración de límites de tasa globales
+- `app/routes.py` → Límites específicos por endpoint (@limiter.limit)
+
+**FUNCIONALIDAD DETALLADA:**
+Flask-Limiter protege tu aplicación contra abuso y ataques de denegación de servicio (DoS) limitando el número de
+peticiones que un usuario puede hacer en un período de tiempo. Puedes configurar límites globales o específicos
+por ruta, por IP, o por usuario autenticado. Es fundamental para mantener la disponibilidad y seguridad del servicio.
+
+
+### 25. CRYPTOGRAPHY (Encriptación)
 **Versión:** 41.0.8
 
 **ARCHIVOS RELACIONADOS:**

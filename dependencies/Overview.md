@@ -2,9 +2,9 @@
 
 ## 📊 RESUMEN GENERAL
 
-**Fecha de análisis:** 6 de agosto de 2025  
-**Entorno virtual:** `taxapp`  
-**Total de paquetes instalados:** 49  
+**Fecha de análisis:** 15 de septiembre de 2025  
+**Entorno virtual:** `taxapp_env`  
+**Total de paquetes instalados:** 48  
 **Estado:** ✅ Perfectamente sincronizado  
 
 ---
@@ -15,8 +15,10 @@
 ```
 Flask==2.3.3                    # Microframework web principal
 Flask-Cors==4.0.0               # Cross-Origin Resource Sharing
+Flask-Login==0.6.3              # Gestión de sesiones de usuario
 Flask-Migrate==4.0.5            # Migraciones de base de datos
 Flask-SQLAlchemy==3.0.5         # ORM para Flask
+Flask-WTF==1.2.1                # Formularios web y protección CSRF
 Werkzeug==3.1.3                 # Utilidades WSGI (base de Flask)
 Jinja2==3.1.6                   # Motor de plantillas
 MarkupSafe==3.0.2               # Seguridad para Jinja2
@@ -44,6 +46,11 @@ tzdata==2025.2                  # Datos de zonas horarias
 ### 🔧 VALIDACIÓN Y SERIALIZACIÓN
 ```
 marshmallow==3.20.1             # Validación y serialización de datos
+```
+
+### 🛡️ SEGURIDAD Y CONTROL DE ACCESO
+```
+Flask-Limiter==3.8.0            # Control de tasa y protección DoS
 ```
 
 ### 🌐 COMUNICACIÓN HTTP
@@ -115,10 +122,11 @@ setuptools==59.6.0              # Herramientas de instalación
 ## 📋 DESGLOSE ESTADÍSTICO
 
 ### 📊 POR CATEGORÍA:
-- **Framework Web:** 10 paquetes
+- **Framework Web:** 12 paquetes
 - **Base de Datos:** 3 paquetes
 - **Procesamiento de Datos:** 5 paquetes
 - **Validación:** 1 paquete
+- **Seguridad y Control:** 1 paquete
 - **Comunicación HTTP:** 5 paquetes
 - **Configuración:** 3 paquetes
 - **Testing:** 5 paquetes
@@ -127,12 +135,11 @@ setuptools==59.6.0              # Herramientas de instalación
 - **Ordenamiento:** 1 paquete
 - **Verificación de Tipos:** 3 paquetes
 - **Plantillas:** 2 paquetes
-- **Gestión:** 2 paquetes
 
 ### 📈 POR TIPO:
-- **Dependencias principales:** 22 paquetes
-- **Subdependencias:** 27 paquetes
-- **Total:** 49 paquetes
+- **Dependencias principales:** 24 paquetes
+- **Subdependencias:** 24 paquetes
+- **Total:** 48 paquetes
 
 ---
 
@@ -188,9 +195,58 @@ prometheus-client==0.19.0       # Monitoreo
 
 ### 📄 requirements.txt (ACTUAL)
 ```
-# Ubicación: /home/jose/My_Projects/tax-calculator-pro/requirements.txt
-# Contenido: 49 dependencias instaladas actualmente
-# Estado: ✅ Sincronizado con entorno virtual
+alembic==1.16.4
+black==23.11.0
+blinker==1.9.0
+certifi==2025.8.3
+charset-normalizer==3.4.2
+click==8.2.1
+exceptiongroup==1.3.0
+flake8==6.1.0
+Flask==2.3.3
+Flask-Cors==4.0.0
+Flask-Login==0.6.3
+Flask-Migrate==4.0.5
+Flask-SQLAlchemy==3.0.5
+Flask-WTF==1.2.1
+Flask-Limiter==3.8.0
+greenlet==3.2.3
+idna==3.10
+iniconfig==2.1.0
+isort==5.12.0
+itsdangerous==2.2.0
+Jinja2==3.1.6
+Mako==1.3.10
+MarkupSafe==3.0.2
+marshmallow==3.20.1
+mccabe==0.7.0
+mypy==1.7.1
+mypy_extensions==1.1.0
+numpy==1.25.2
+packaging==25.0
+pandas==2.1.4
+pathspec==0.12.1
+platformdirs==4.3.8
+pluggy==1.6.0
+pycodestyle==2.11.1
+pyflakes==3.1.0
+pytest==7.4.3
+pytest-flask==1.3.0
+python-dateutil==2.9.0.post0
+python-dotenv==1.0.0
+pytz==2025.2
+requests==2.31.0
+six==1.17.0
+SQLAlchemy==2.0.42
+tomli==2.2.1
+typing_extensions==4.14.1
+tzdata==2.25.2
+urllib3==2.5.0
+Werkzeug==3.1.3
+
+# Ubicación: /home/jose/My_Projects/tax-calculator-pro/dependencies/requirements.txt
+# Total: 48 dependencias instaladas actualmente
+# Estado: ✅ Sincronizado con entorno virtual taxapp_env
 ```
 
 
@@ -248,7 +304,7 @@ python -c "import black, flake8, mypy; print('✅ Herramientas de desarrollo ins
 ## 📝 NOTAS IMPORTANTES
 
 ### 🔧 CONFIGURACIÓN:
-- **Entorno virtual:** `taxapp`
+- **Entorno virtual:** `taxapp_env`
 - **Python:** 3.10.12
 - **Ubicación:** `/home/jose/My_Projects/tax-calculator-pro/`
 - **IDE:** VS Code/Cursor configurado
@@ -265,5 +321,5 @@ python -c "import black, flake8, mypy; print('✅ Herramientas de desarrollo ins
 
 ---
 
-*Última actualización: 6 de agosto de 2025*
-*Estado: ✅ Listo para desarrollo* 
+*Última actualización: 15 de septiembre de 2025*
+*Estado: ✅ Listo para desarrollo con seguridad implementada* 
