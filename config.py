@@ -92,3 +92,20 @@ class Config:
     # Legal validation settings
     LEGAL_VALIDATION_ENABLED = os.environ.get('LEGAL_VALIDATION_ENABLED', 'True').lower() == 'true'
     STRICT_LEGAL_COMPLIANCE = os.environ.get('STRICT_LEGAL_COMPLIANCE', 'True').lower() == 'true'
+    
+    # SECURITY CONFIGURATION
+    # Session security
+    SESSION_COOKIE_SECURE = os.environ.get('SESSION_COOKIE_SECURE', 'False').lower() == 'true'  # HTTPS only in production
+    SESSION_COOKIE_HTTPONLY = True  # Prevent XSS attacks
+    SESSION_COOKIE_SAMESITE = 'Lax'  # CSRF protection
+    
+    # CSRF protection
+    WTF_CSRF_ENABLED = True
+    WTF_CSRF_TIME_LIMIT = int(os.environ.get('WTF_CSRF_TIME_LIMIT', '3600'))  # 1 hour
+    
+    # Rate limiting
+    RATELIMIT_STORAGE_URI = os.environ.get('RATELIMIT_STORAGE_URI', 'memory://')
+    RATELIMIT_DEFAULT = os.environ.get('RATELIMIT_DEFAULT', '100 per hour')
+    
+    # Security headers
+    SECURITY_HEADERS_ENABLED = os.environ.get('SECURITY_HEADERS_ENABLED', 'True').lower() == 'true'
