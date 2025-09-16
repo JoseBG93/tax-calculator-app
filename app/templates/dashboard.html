@@ -1,16 +1,174 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Dashboard</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Tax Calculator Pro</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-    <h2>Welcome to your dashboard!</h2>
-    <p>
-        Hello, {{ session.get('username', 'User') }}! You are logged in.
-    </p>
-    <form method="post" action="{{ url_for('logout') }}">
-        <button type="submit">Logout</button>
-    </form>
+    <!-- Header Section -->
+    <header class="dashboard-header">
+        <div class="header-content">
+            <div class="logo-section">
+                <i class="fas fa-calculator"></i>
+                <h1>Tax Calculator Pro</h1>
+            </div>
+            <div class="user-badge">
+                <i class="fas fa-user-circle"></i>
+                <span>{{ current_user.username }}</span>
+                {% if current_user.is_admin %}
+                    <span class="admin-badge">ADMIN</span>
+                {% endif %}
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Dashboard Container -->
+    <main class="dashboard-main">
+        <div class="dashboard-container">
+            <!-- Welcome Section -->
+            <section class="welcome-section">
+                <h2>Welcome back, {{ current_user.username }}!</h2>
+                <p class="welcome-subtitle">Ready to calculate Spanish municipal taxes with precision</p>
+                
+                {% if current_user.is_admin %}
+                <div class="admin-panel-link">
+                    <a href="{{ url_for('admin_dashboard') }}" class="admin-button">
+                        <i class="fas fa-shield-alt"></i>
+                        Admin Panel
+                    </a>
+                </div>
+                {% endif %}
+            </section>
+
+            <!-- User Information Cards -->
+            <section class="info-cards">
+                <div class="info-card account-card">
+                    <div class="card-header">
+                        <i class="fas fa-user-cog"></i>
+                        <h3>Account Information</h3>
+                    </div>
+                    <div class="card-content">
+                        <div class="info-item">
+                            <label>Account Type:</label>
+                            <span class="account-type {% if current_user.is_admin %}admin{% else %}user{% endif %}">
+                                {% if current_user.is_admin %}
+                                    <i class="fas fa-crown"></i> Administrator
+                                {% else %}
+                                    <i class="fas fa-user"></i> Regular User
+                                {% endif %}
+                            </span>
+                        </div>
+                        <div class="info-item">
+                            <label>Member Since:</label>
+                            <span>{{ current_user.created_at.strftime('%B %d, %Y') }}</span>
+                        </div>
+                        <div class="info-item">
+                            <label>Last Login:</label>
+                            <span>{{ current_user.last_login.strftime('%Y-%m-%d at %H:%M') if current_user.last_login else 'This is your first login!' }}</span>
+                        </div>
+                        <div class="info-item">
+                            <label>Total Sessions:</label>
+                            <span class="login-count">{{ current_user.login_count }}</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-card quick-stats">
+                    <div class="card-header">
+                        <i class="fas fa-chart-line"></i>
+                        <h3>Quick Stats</h3>
+                    </div>
+                    <div class="card-content">
+                        <div class="stat-item">
+                            <div class="stat-number">0</div>
+                            <div class="stat-label">Calculations Today</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">0</div>
+                            <div class="stat-label">Total Calculations</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">€0.00</div>
+                            <div class="stat-label">Total Taxes Calculated</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Main Actions -->
+            <section class="main-actions">
+                <h3>Available Actions</h3>
+                <div class="action-grid">
+                    <a href="{{ url_for('calculator') }}" class="action-card calculator-card">
+                        <div class="card-icon">
+                            <i class="fas fa-calculator"></i>
+                        </div>
+                        <div class="card-content">
+                            <h4>IIVTNU Calculator</h4>
+                            <p>Calculate Property Value Increase Tax for Spanish municipalities</p>
+                            <span class="card-footer">Start Calculation →</span>
+                        </div>
+                    </a>
+
+                    <a href="{{ url_for('history') }}" class="action-card history-card">
+                        <div class="card-icon">
+                            <i class="fas fa-history"></i>
+                        </div>
+                        <div class="card-content">
+                            <h4>Calculation History</h4>
+                            <p>Review your previous tax calculations and results</p>
+                            <span class="card-footer">View History →</span>
+                        </div>
+                    </a>
+
+                    <div class="action-card features-card">
+                        <div class="card-icon">
+                            <i class="fas fa-cog"></i>
+                        </div>
+                        <div class="card-content">
+                            <h4>Account Settings</h4>
+                            <p>Manage your preferences and account information</p>
+                            <span class="card-footer">Coming Soon</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Recent Activity -->
+            <section class="recent-activity">
+                <h3>Recent Activity</h3>
+                <div class="activity-card">
+                    <div class="activity-placeholder">
+                        <i class="fas fa-info-circle"></i>
+                        <p>No recent calculations to display</p>
+                        <p class="activity-subtitle">Start using the calculator to see your activity here</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer Actions -->
+    <footer class="dashboard-footer">
+        <div class="footer-content">
+            <div class="footer-info">
+                <p>Tax Calculator Pro - Spanish Municipal Tax System</p>
+                <p class="footer-subtitle">Specialized in IIVTNU calculations for Ayuntamiento de Alfafar</p>
+            </div>
+            <div class="footer-actions">
+                <form method="post" action="{{ url_for('logout') }}" class="logout-form">
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                    <button type="submit" class="logout-button">
+                        <i class="fas fa-sign-out-alt"></i>
+                        Logout
+                    </button>
+                </form>
+            </div>
+        </div>
+    </footer>
 </body>
 </html>
 
