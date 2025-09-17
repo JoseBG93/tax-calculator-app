@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Management - Tax Calculator Pro</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}">
+</head>
+<body>
+    <div class="admin-container">
+        <!-- Flash Messages -->
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <div class="flash-messages">
+                    {% for message in messages %}
+                        <div class="flash-message info">{{ message }}</div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+        
+        <div class="admin-header">
+            <div>
+                <h1 class="admin-title">User Management</h1>
+                <p class="welcome-user">Manage all registered users</p>
+            </div>
+            <span class="admin-badge">Administrator Panel</span>
+        </div>
+        
+        <h2 class="section-title">All Users ({{ users|length }} total)</h2>
+        <table class="users-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Username</th>
+                    <th>Status</th>
+                    <th>Role</th>
+                    <th>Last Login</th>
+                    <th>Login Count</th>
+                    <th>Registered</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in users %}
+                <tr>
+                    <td>{{ user.id }}</td>
+                    <td>
+                        {{ user.username }}
+                        {% if user.id == current_user.id %}
+                            <span class="admin-tag">YOU</span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if user.is_active %}
+                            <span class="active-tag">Active</span>
+                        {% else %}
+                            <span class="inactive-tag">Disabled</span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if user.is_admin %}
+                            <span class="admin-tag">Admin</span>
+                        {% else %}
+                            User
+                        {% endif %}
+                    </td>
+                    <td>{{ user.last_login.strftime('%Y-%m-%d %H:%M') if user.last_login else 'Never' }}</td>
+                    <td>{{ user.login_count }}</td>
+                    <td>{{ user.created_at.strftime('%Y-%m-%d %H:%M') }}</td>
+                    <td>
+                        <div class="action-buttons">
+                            {% if user.id != current_user.id %}
+                                <!-- Toggle Active Status -->
+                                <form action="{{ url_for('admin_toggle_user', user_id=user.id) }}" method="POST" style="display: inline;">
+                                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                                    {% if user.is_active %}
+                                        <button type="submit" class="btn btn-sm btn-warning" onclick="return confirm('Disable user {{ user.username }}?')">Disable</button>
+                                    {% else %}
+                                        <button type="submit" class="btn btn-sm btn-secondary" onclick="return confirm('Enable user {{ user.username }}?')">Enable</button>
+                                    {% endif %}
+                                </form>
+                                
+                                <!-- Toggle Admin Status -->
+                                <form action="{{ url_for('admin_promote_user', user_id=user.id) }}" method="POST" style="display: inline;">
+                                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                                    {% if user.is_admin %}
+                                        <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Remove admin privileges from {{ user.username }}?')">Remove Admin</button>
+                                    {% else %}
+                                        <button type="submit" class="btn btn-sm btn-primary" onclick="return confirm('Grant admin privileges to {{ user.username }}?')">Make Admin</button>
+                                    {% endif %}
+                                </form>
+                            {% else %}
+                                <span style="color: #999; font-size: 12px;">Cannot modify own account</span>
+                            {% endif %}
+                        </div>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        
+        <div class="btn-group">
+            <a href="{{ url_for('admin_dashboard') }}" class="btn btn-primary">Back to Admin Dashboard</a>
+            <a href="{{ url_for('dashboard') }}" class="btn btn-secondary">Back to Main Dashboard</a>
+            <form action="{{ url_for('logout') }}" method="POST" style="display: inline;">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                <button type="submit" class="btn btn-danger">Logout</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
