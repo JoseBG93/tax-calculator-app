@@ -34,6 +34,13 @@ class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(50), nullable=False, unique=True)
     password = db.Column(db.String(255), nullable=False)
+    
+    # Admin and account management fields
+    is_admin = db.Column(db.Boolean, nullable=False, default=False)  # Admin role flag
+    is_active = db.Column(db.Boolean, nullable=False, default=True)  # Account enable/disable
+    last_login = db.Column(db.DateTime, nullable=True)  # Track last login time
+    login_count = db.Column(db.Integer, nullable=False, default=0)  # Track login frequency
+    
     created_at = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, nullable=False, default=datetime.utcnow, onupdate=datetime.utcnow)
 
