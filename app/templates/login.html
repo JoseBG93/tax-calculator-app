@@ -7,8 +7,9 @@
 <body>
     <h2 style="color: #6c8ebf; font-weight: 500;">Welcome to the login page!</h2> <!-- Heading is the text shown in the body of the page (with inline CSS styling) -->
     <form method="post" action="{{ url_for('login') }}"> 
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
         <label for="username">Username:</label> <!-- 'for' attribute links this label to the input field with id="username" -->
-        <input type="text" id="username" name="username"><br><br> <!-- 'name="username"' is what Flask receives in request.form.get('username'). 'required' prevents empty submission -->
+        <input type="text" id="username" name="username"><br><br> <!-- 'name="username"' is what Flask receives in request.form.get('username'). JavaScript handles validation -->
         
         <label for="password">Password:</label> <!-- Links this label to the password input field -->
         <input type="password" id="password" name="password"><br><br> <!-- type="password" hides the text with dots for security. name="password" connects to Flask's request.form.get('password') -->
