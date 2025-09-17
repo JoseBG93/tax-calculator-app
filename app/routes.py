@@ -7,9 +7,11 @@ from flask import (
   session,        # Stores user session data between requests
   flash,          # Stores a temporary message that appears on the next request (the next page load), then disappears.
     )
-from flask_login import login_user, logout_user, login_required
+from flask_login import login_user, logout_user, login_required, current_user
 from app.models import User
 from app import db, limiter
+from functools import wraps
+from datetime import datetime
 import re
 import html
 
@@ -62,6 +64,18 @@ def sanitize_input(input_string):
         return ""
     return html.escape(input_string.strip())
 
+# Admin authentication decorator
+def admin_required(f):
+    """Decorator to require admin privileges for routes"""
+    @wraps(f)
+    @login_required  # Must be logged in first
+    def decorated_function(*args, **kwargs):
+        if not current_user.is_admin:
+            flash('Access denied. Administrator privileges required.')
+            return redirect(url_for('dashboard'))
+        return f(*args, **kwargs)
+    return decorated_function
+
 # This function will register app routes
 def register_routes(app):
   """
@@ -75,6 +89,13 @@ def register_routes(app):
   app.add_url_rule('/logout', 'logout', logout, methods=['POST'])
   app.add_url_rule('/calculator', 'calculator', calculator, methods=['GET', 'POST'])
   app.add_url_rule('/history', 'history', history, methods=['GET', 'POST'])
+  
+  # Admin routes for user management
+  app.add_url_rule('/admin', 'admin_dashboard', admin_dashboard, methods=['GET'])
+  app.add_url_rule('/admin/users', 'admin_users', admin_users, methods=['GET'])
+  app.add_url_rule('/admin/users/<int:user_id>/toggle', 'admin_toggle_user', admin_toggle_user, methods=['POST'])
+  app.add_url_rule('/admin/users/<int:user_id>/promote', 'admin_promote_user', admin_promote_user, methods=['POST'])
+  
   # DEBUG ROUTE DISABLED FOR SECURITY - Exposes password hashes
   # app.add_url_rule('/debug_users', 'debug_users', debug_users, methods=['GET'])
 
@@ -164,6 +185,16 @@ def login():
         # Check database for user credentials
         user = User.query.filter_by(username=username).first()
         if user and user.check_password(password):
+            # Check if account is active
+            if not user.is_active:
+                flash("Your account has been disabled. Contact administrator.")
+                return redirect(url_for('login', show_flash=True))
+            
+            # Update login statistics
+            user.last_login = datetime.utcnow()
+            user.login_count += 1
+            db.session.commit()
+            
             # Flask-Login handles session management automatically
             login_user(user, remember=True)  # remember=True creates persistent session
             return redirect(url_for('dashboard'))
@@ -231,3 +262,60 @@ def history():
   This function will handle the history process.
   """
   return render_template('history.html')
+
+
+# Admin routes
+@admin_required
+def admin_dashboard():
+    """Admin dashboard showing system statistics"""
+    total_users = User.query.count()
+    active_users = User.query.filter_by(is_active=True).count()
+    admin_users = User.query.filter_by(is_admin=True).count()
+    
+    # Get recent registrations (last 5)
+    recent_users = User.query.order_by(User.created_at.desc()).limit(5).all()
+    
+    return render_template('admin/dashboard.html',
+                         total_users=total_users,
+                         active_users=active_users,
+                         admin_users=admin_users,
+                         recent_users=recent_users)
+
+
+@admin_required
+def admin_users():
+    """List all users with management options"""
+    users = User.query.order_by(User.created_at.desc()).all()
+    return render_template('admin/users.html', users=users)
+
+
+@admin_required
+def admin_toggle_user(user_id):
+    """Toggle user active status"""
+    if user_id == current_user.id:
+        flash("Cannot disable your own account.")
+        return redirect(url_for('admin_users'))
+    
+    user = User.query.get_or_404(user_id)
+    user.is_active = not user.is_active
+    db.session.commit()
+    
+    status = "enabled" if user.is_active else "disabled"
+    flash(f"User {user.username} has been {status}.")
+    return redirect(url_for('admin_users'))
+
+
+@admin_required
+def admin_promote_user(user_id):
+    """Toggle admin status for a user"""
+    if user_id == current_user.id:
+        flash("Cannot modify your own admin status.")
+        return redirect(url_for('admin_users'))
+    
+    user = User.query.get_or_404(user_id)
+    user.is_admin = not user.is_admin
+    db.session.commit()
+    
+    status = "promoted to admin" if user.is_admin else "removed from admin"
+    flash(f"User {user.username} has been {status}.")
+    return redirect(url_for('admin_users'))
