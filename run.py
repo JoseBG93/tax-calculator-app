@@ -28,12 +28,15 @@ def main():
     template_files = glob.glob('app/templates/*.html')
     
     # Run the Flask development server with proper configuration
+    # Port can be set via environment variable or defaults to 5000
+    port = int(os.environ.get('PORT', 5000))
+    
     app.run(
         debug=True,
         use_reloader=True,
         extra_files=template_files,
         host='127.0.0.1',
-        port=5000
+        port=port
     )
 
 
