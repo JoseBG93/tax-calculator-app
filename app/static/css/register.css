@@ -1,29 +1,79 @@
-/* Custom popup notification styles */
-.popup-message {
-    position: fixed;
-    top: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: #ff4444;
-    color: white;
-    padding: 15px 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-    display: none;
-    z-index: 1000;
-    font-family: Arial, sans-serif;
-    font-size: 14px;
-    animation: slideDown 0.3s ease;
+/* Base form styles */
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    line-height: 1.6;
+    color: #333;
 }
 
-/* Animation for popup entrance */
-@keyframes slideDown {
-    from { 
-        transform: translateX(-50%) translateY(-100%); 
-        opacity: 0;
-    }
-    to { 
-        transform: translateX(-50%) translateY(0); 
-        opacity: 1;
+form {
+    max-width: 350px;
+    margin: 0 auto;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 500;
+    color: #374151;
+}
+
+input[type="text"],
+input[type="password"] {
+    width: 100%;
+    padding: 8px 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    font-size: 15px;
+    transition: border-color 0.2s ease;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus {
+    outline: none;
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+button[type="submit"] {
+    width: 100%;
+    padding: 10px 20px;
+    background: #3b82f6;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    margin-top: 10px;
+}
+
+button[type="submit"]:hover {
+    background: #2563eb;
+}
+
+button[type="submit"]:active {
+    transform: translateY(1px);
+}
+
+/* Link styles */
+p {
+    text-align: center;
+    margin-top: 20px;
+}
+
+a {
+    color: #3b82f6;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Responsive adjustments */
+@media (max-width: 480px) {
+    form {
+        padding: 0 20px;
     }
 }

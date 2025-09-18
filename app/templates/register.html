@@ -5,19 +5,56 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register Page</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/register.css') }}">
+    <style>
+        .field-wrapper{position:relative;display:block;margin-bottom:20px;max-width:350px}
+        .input-group{display:flex;align-items:center;gap:10px}
+        .hint-box{position:absolute;left:calc(100% + 80px);top:50%;transform:translateY(-50%);background:#fef3c7;border:1px solid #fbbf24;border-radius:8px;padding:10px 14px;box-shadow:0 2px 8px rgba(251,191,36,0.1);font-size:0.85em;color:#92400e;max-width:240px;min-width:180px;opacity:0;visibility:hidden;transition:opacity 0.3s ease,visibility 0.3s ease;z-index:50}
+        .hint-box.success{background:#d1fae5;border-color:#34d399;color:#065f46}
+        .hint-box:before{content:"";position:absolute;right:100%;top:50%;transform:translateY(-50%);border-width:6px;border-style:solid;border-color:transparent #fbbf24 transparent transparent}
+        .hint-box.success:before{border-color:transparent #34d399 transparent transparent}
+        .field-wrapper.show-hint .hint-box{opacity:1;visibility:visible}
+        
+        .toggle-password{background:none;border:none;color:#6b7280;cursor:pointer;padding:5px;font-size:20px;line-height:1;transition:color 0.2s ease;flex-shrink:0}
+        .toggle-password:hover{color:#374151}
+        
+        .error-message{position:fixed;top:-60px;left:50%;transform:translateX(-50%);background:#fee2e2;border:1px solid #f87171;color:#991b1b;padding:12px 20px;border-radius:8px;box-shadow:0 4px 12px rgba(239,68,68,0.15);font-size:0.9em;transition:top 0.4s ease;z-index:1000;max-width:400px}
+        .error-message.show{top:20px}
+        
+        @media (max-width: 768px){
+            .hint-box{position:fixed;left:50%;top:auto;bottom:20px;transform:translateX(-50%);right:auto}
+            .hint-box:before{display:none}
+        }
+    </style>
 </head>
 <body>
     <h2>Let's register your account</h2>
-    <form method="post" action="{{ url_for('register') }}">
+    <form method="post" action="{{ url_for('register') }}" novalidate>
         <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
-        <label for="username">Username:</label>
-        <input type="text" name="username" value="{{ username or '' }}"><br><br>
+        <div class="field-wrapper">
+            <label for="username">Username:</label>
+            <div class="input-group">
+                <input type="text" id="username" name="username" value="{{ username or '' }}" autocomplete="username" required minlength="3" novalidate>
+            </div>
+            <div class="hint-box" id="username-hint">Choose a username with at least 3 characters</div>
+        </div>
 
-        <label for="password">Password:</label>
-        <input type="password" name="password"><br><br>
+        <div class="field-wrapper">
+            <label for="password">Password:</label>
+            <div class="input-group">
+                <input type="password" id="password" name="password" autocomplete="new-password" required minlength="12" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9]).{12,}$" novalidate>
+                <button type="button" class="toggle-password" id="toggle-password" aria-label="Toggle password visibility">👁️</button>
+            </div>
+            <div class="hint-box" id="password-hint">Use 12+ characters with uppercase, lowercase, number and symbol</div>
+        </div>
 
-        <label for="confirm_password">Confirm password:</label>
-        <input type="password" name="confirm_password"><br><br>
+        <div class="field-wrapper">
+            <label for="confirm_password">Confirm password:</label>
+            <div class="input-group">
+                <input type="password" id="confirm_password" name="confirm_password" autocomplete="new-password" required minlength="12" novalidate>
+                <button type="button" class="toggle-password" id="toggle-confirm" aria-label="Toggle confirm password visibility">👁️</button>
+            </div>
+            <div class="hint-box" id="confirm-hint">Re-enter your password to confirm</div>
+        </div>
 
         <button type="submit">Let's do it!</button>
     </form>
@@ -26,9 +63,7 @@
         Already have an account? <a href="{{ url_for('login') }}">Login</a>
     </p>
 
-   <div id="popup" class="popup-message">
-    <span id="popup-text"></span>
-   </div>
+    <div id="error-message" class="error-message" role="alert"></div>
 
     <script>
         // JavaScript code that runs in the browser
@@ -38,40 +73,144 @@
         const passwordInput = document.querySelector('[name="password"]');    // Find password input field
         const confirmInput = document.querySelector('[name="confirm_password"]'); // Find confirm password input field
         
-        function showPopup(message) {
-            const popup = document.getElementById('popup');
-            const text = document.getElementById('popup-text');
-            text.textContent = message;
-            popup.style.display = 'block';
+        // Error message handling
+        const errorMessage = document.getElementById('error-message');
+        
+        function showErrorMessage(message) {
+            errorMessage.textContent = message;
+            errorMessage.classList.add('show');
             setTimeout(() => {
-                popup.style.display = 'none';
-            }, 3000);
+                errorMessage.classList.remove('show');
+            }, 4000);
         }
-        // Add event listener to check form before submission
-        form.addEventListener('submit', function(event) {
-            // Get values from input fields and check if they're filled
-            const username = usernameInput.value.trim();    // Get username and remove spaces
-            const password = passwordInput.value;           // Get password
-            const confirm_password = confirmInput.value;    // Get confirm password
 
-            // Check if any field is empty
-            if (!username || !password || !confirm_password) {
-                showPopup('Please, fill all fields.');         // Show error message
-                event.preventDefault();                     // Stop form submission
-                return;                                     // Exit function
-            }
+        // Prevent native validation bubbles
+        form.addEventListener('invalid', function(event) {
+            event.preventDefault();
+        }, true);
+
+        // Validation functions
+        function isUsernameValid() {
+            return usernameInput.value.trim().length >= 3;
+        }
+        
+        function isPasswordValid() {
+            const pw = passwordInput.value;
+            return pw.length >= 12 && 
+                   /[a-z]/.test(pw) && 
+                   /[A-Z]/.test(pw) && 
+                   /\d/.test(pw) && 
+                   /[^A-Za-z0-9]/.test(pw);
+        }
+        
+        function isConfirmValid() {
+            return confirmInput.value.length > 0 && confirmInput.value === passwordInput.value;
+        }
+        
+        // Update hint visibility based on validation
+        function updateHintVisibility(input, isValid) {
+            const wrapper = input.closest('.field-wrapper');
+            const hint = wrapper.querySelector('.hint-box');
             
-            // Check if passwords match
-            if (password !== confirm_password) {
-                showPopup('Passwords do not match. Please, try again.');
-                event.preventDefault();                     // Stop form submission
-                return;                                     // Exit function
+            if (input.value.length > 0) {
+                if (isValid) {
+                    wrapper.classList.remove('show-hint');
+                    hint.classList.add('success');
+                } else {
+                    wrapper.classList.add('show-hint');
+                    hint.classList.remove('success');
+                }
+            } else {
+                wrapper.classList.remove('show-hint');
             }
-
-
-            // If all checks pass, the form will submit as normal to Flask
+        }
+        
+        // Clear custom validity and update hints while typing
+        usernameInput.addEventListener('input', () => {
+            usernameInput.setCustomValidity('');
+            updateHintVisibility(usernameInput, isUsernameValid());
+        });
+        
+        passwordInput.addEventListener('input', () => {
+            passwordInput.setCustomValidity('');
+            updateHintVisibility(passwordInput, isPasswordValid());
+            // Also update confirm hint if it has content
+            if (confirmInput.value.length > 0) {
+                updateHintVisibility(confirmInput, isConfirmValid());
+            }
+        });
+        
+        confirmInput.addEventListener('input', () => {
+            confirmInput.setCustomValidity('');
+            updateHintVisibility(confirmInput, isConfirmValid());
+        });
+        
+        // Password visibility toggles
+        document.getElementById('toggle-password').addEventListener('click', () => {
+            const type = passwordInput.type === 'password' ? 'text' : 'password';
+            passwordInput.type = type;
+            document.getElementById('toggle-password').textContent = type === 'password' ? '👁️' : '👁️‍🗨️';
+        });
+        
+        document.getElementById('toggle-confirm').addEventListener('click', () => {
+            const type = confirmInput.type === 'password' ? 'text' : 'password';
+            confirmInput.type = type;
+            document.getElementById('toggle-confirm').textContent = type === 'password' ? '👁️' : '👁️‍🗨️';
+        });
+        
+        // Prevent native validation tooltips
+        document.querySelectorAll('input').forEach(input => {
+            input.addEventListener('invalid', (e) => {
+                e.preventDefault();
+            });
         });
 
+        // Handle form submission and validation
+        form.addEventListener('submit', function(event) {
+            const username = usernameInput.value.trim();
+            const password = passwordInput.value;
+            const confirmPassword = confirmInput.value;
+
+            // Check if form is valid
+            if (!form.checkValidity()) {
+                event.preventDefault();
+                
+                // Find first invalid field
+                if (!usernameInput.validity.valid) {
+                    if (usernameInput.validity.valueMissing) {
+                        showErrorMessage('😊 Please choose a username to get started!');
+                    } else if (usernameInput.validity.tooShort) {
+                        showErrorMessage(`Username needs at least ${usernameInput.minLength} characters`);
+                    }
+                    usernameInput.focus();
+                } else if (!passwordInput.validity.valid) {
+                    if (passwordInput.validity.valueMissing) {
+                        showErrorMessage('🔐 Please create a secure password');
+                    } else if (passwordInput.validity.tooShort) {
+                        showErrorMessage(`Password needs at least ${passwordInput.minLength} characters`);
+                    } else if (passwordInput.validity.patternMismatch) {
+                        showErrorMessage('💪 Password needs uppercase, lowercase, number and symbol');
+                    }
+                    passwordInput.focus();
+                } else if (!confirmInput.validity.valid) {
+                    if (confirmInput.validity.valueMissing) {
+                        showErrorMessage('Please confirm your password');
+                    }
+                    confirmInput.focus();
+                }
+                return;
+            }
+
+            // Check password match
+            if (password !== confirmPassword) {
+                event.preventDefault();
+                showErrorMessage('🔄 Passwords don\'t match. Please try again!');
+                confirmInput.focus();
+                return;
+            }
+
+            // If all checks pass, the form will submit
+        });
     </script>
 </body>
 </html>
