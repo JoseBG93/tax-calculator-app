@@ -57,8 +57,24 @@ def create_app():
     # This is the connection between the Flask app, the SQLAlchemy database and the Migrate database. It allows the app to manage database migrations.
     migrate.init_app(app, db) # Now, both SQLAlchemy and Migrate are connected to Flask app.
 
-    # Enable CORS for all routes and origins. It allows your frontend to communicate with your backend.
-    CORS(app)
+    # Enable CORS using the allowed origins defined in the configuration. This prevents unexpected
+    # cross-origin requests from being accepted while still allowing the trusted frontends to
+    # communicate with the backend.
+    allowed_origins = [
+        origin.strip()
+        for origin in app.config.get('CORS_ORIGINS', [])
+        if origin and origin.strip()
+    ]
+    CORS(
+        app,
+        resources={
+            r"/*": {
+                "origins": allowed_origins,
+                "methods": ["GET", "POST", "OPTIONS"],
+                "allow_headers": ["Content-Type", "Authorization"],
+            }
+        },
+    )
 
     # Initialize Flask-Login
     login_manager.init_app(app)
