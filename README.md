@@ -128,6 +128,32 @@ tax-calculator-pro/
    flask db upgrade
    ```
 
+### Environment Configuration 🔐
+
+Every Flask environment (development, staging, production, CI, etc.) **must** provide a strong `SECRET_KEY` so cookies and
+session data remain tamper-proof. Generate a unique 32-byte value per environment and store it through your preferred secrets
+management solution (for local development this usually means a `.env` file; in production rely on your platform's secret
+manager or environment variables).
+
+Use one of the following commands to provision a key:
+
+```bash
+# Python standard library – outputs a 64 character hex string representing 32 random bytes
+python -c "import secrets; print(secrets.token_hex(32))"
+
+# Alternatively, with OpenSSL
+openssl rand -hex 32
+```
+
+Once generated, export the value before starting the app:
+
+```bash
+export SECRET_KEY="<paste-your-unique-hex-string-here>"
+```
+
+> ℹ️ Reuse of the same key across environments is discouraged—rotating them independently limits the blast radius of leaked
+> credentials and aligns with Flask's security recommendations.
+
 #### Prerequisites (for OCR/NLP)
 
 - System packages (Ubuntu/Debian):
