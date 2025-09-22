@@ -1,11 +1,29 @@
-# The 'os' module is imported to access environment variables and interact with the operating system, 
+# The 'os' module is imported to access environment variables and interact with the operating system,
 # which is essential for retrieving configuration values (like secret keys, database URIs, etc.) from the environment.
+import logging
 import os
 
-# The 'load_dotenv' function from the 'dotenv' package is imported to automatically load environment variables 
-# from a .env file into the process environment. This allows configuration to be managed outside the codebase, 
+# The 'load_dotenv' function from the 'dotenv' package is imported to automatically load environment variables
+# from a .env file into the process environment. This allows configuration to be managed outside the codebase,
 # supporting best practices for security and flexibility across different environments (development, production, etc.).
 from dotenv import load_dotenv
+
+logger = logging.getLogger(__name__)
+
+
+def _require_secret_key() -> str:
+    """Return the SECRET_KEY environment variable or raise a helpful error."""
+
+    secret_key = os.environ.get("SECRET_KEY")
+    if not secret_key:
+        message = (
+            "SECRET_KEY environment variable is required. Generate a unique 32-byte "
+            "value for each environment (e.g. with `python -c \"import secrets; "
+            "print(secrets.token_hex(32))\"`) and set it before starting the app."
+        )
+        logger.critical(message)
+        raise RuntimeError(message)
+    return secret_key
 
 # The 'load_dotenv' function is called to load environment variables from the .env file into the process environment.
 # This ensures that all configuration values are properly set based on the environment variables defined in the .env file.
@@ -16,9 +34,9 @@ class Config:
 
     # SECRET_KEY is used to sign cookies and sessions in Flask, ensuring the integrity and confidentiality of session data.
     # It is obtained from the 'SECRET_KEY' environment variable (recommended in production for greater security).
-    # If not defined, it uses the default value 'dev-key-fallback' (only appropriate for development).
+    # If the environment variable is missing, the application will raise a RuntimeError to avoid running with insecure defaults.
     # os.environ is a special Python dictionary that contains all the environment variables from the operating system.
-    SECRET_KEY = os.environ.get('SECRET_KEY', 'dev-key-fallback')
+    SECRET_KEY = _require_secret_key()
 
     # The value of DEBUG is obtained from the .env file as a string (for example, 'True' or 'False').
     # To ensure Flask interprets it correctly as a boolean, it is converted to lowercase and compared to 'true'.
