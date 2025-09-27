@@ -10,71 +10,12 @@ from flask import (
 from flask_login import login_user, logout_user, login_required, current_user
 from app.models import User
 from app import db, limiter
+from app.security_validations import validate_username, validate_password, sanitize_input, admin_required, validate_and_sanitize_username
 from functools import wraps
 from datetime import datetime
 import re
 import html
 
-# Security validation functions
-def validate_username(username):
-    """Validate username format and security"""
-    if not username or len(username.strip()) == 0:
-        return False, "Username cannot be empty"
-    
-    username = username.strip()
-    
-    # Check length
-    if len(username) < 3 or len(username) > 50:
-        return False, "Username must be between 3 and 50 characters"
-    
-    # Check for valid characters (alphanumeric, underscore, hyphen)
-    if not re.match(r'^[a-zA-Z0-9_-]+$', username):
-        return False, "Username can only contain letters, numbers, underscores, and hyphens"
-    
-    return True, "Valid"
-
-def validate_password(password):
-    """Validate password strength"""
-    if not password or len(password.strip()) == 0:
-        return False, "Password cannot be empty"
-    
-    password = password.strip()
-    
-    # Check minimum length
-    if len(password) < 8:
-        return False, "Password must be at least 8 characters long"
-    
-    # Check for at least one uppercase letter
-    if not re.search(r'[A-Z]', password):
-        return False, "Password must contain at least one uppercase letter"
-    
-    # Check for at least one lowercase letter
-    if not re.search(r'[a-z]', password):
-        return False, "Password must contain at least one lowercase letter"
-    
-    # Check for at least one digit
-    if not re.search(r'\d', password):
-        return False, "Password must contain at least one number"
-    
-    return True, "Valid"
-
-def sanitize_input(input_string):
-    """Sanitize user input to prevent XSS"""
-    if not input_string:
-        return ""
-    return html.escape(input_string.strip())
-
-# Admin authentication decorator
-def admin_required(f):
-    """Decorator to require admin privileges for routes"""
-    @wraps(f)
-    @login_required  # Must be logged in first
-    def decorated_function(*args, **kwargs):
-        if not current_user.is_admin:
-            flash('Access denied. Administrator privileges required.')
-            return redirect(url_for('dashboard'))
-        return f(*args, **kwargs)
-    return decorated_function
 
 # This function will register app routes
 def register_routes(app):
@@ -83,10 +24,10 @@ def register_routes(app):
   """
   app.add_url_rule('/', 'root', root) # When the user visits the root URL through either port 5000 or 5001, the index function will be called, showing the message "Tax Calculator Pro is running!"
   app.add_url_rule('/index','index', index) # Also, user can type '/index' in the browser, and the same message will be shown.
-  app.add_url_rule('/login', 'login', login, methods=['GET', 'POST'])
-  app.add_url_rule('/dashboard', 'dashboard', dashboard)
   app.add_url_rule('/register', 'register', register, methods=['GET', 'POST'])
+  app.add_url_rule('/login', 'login', login, methods=['GET', 'POST'])
   app.add_url_rule('/logout', 'logout', logout, methods=['POST'])
+  app.add_url_rule('/dashboard', 'dashboard', dashboard)
   app.add_url_rule('/calculator', 'calculator', calculator, methods=['GET', 'POST'])
   app.add_url_rule('/history', 'history', history, methods=['GET', 'POST'])
   
@@ -117,15 +58,15 @@ def register():
   if request.method == 'GET':
     return render_template('register.html')
   elif request.method == 'POST':
-    # Get and sanitize form data
-    username = sanitize_input(request.form.get('username', ''))
+    # Get form data
+    raw_username = request.form.get('username', '')
     password = request.form.get('password', '')  # Don't sanitize passwords
     confirm_password = request.form.get('confirm_password', '')
     
-    # Validate username
-    username_valid, username_msg = validate_username(username)
+    # 🔒 SECURITY: Enhanced username validation and sanitization
+    username_valid, username, username_msg = validate_and_sanitize_username(raw_username)
     if not username_valid:
-        flash(username_msg)
+        flash(f"Username validation failed: {username_msg}")
         return render_template('register.html', username=username)
     
     # Validate password
