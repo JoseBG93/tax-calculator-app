@@ -45,6 +45,10 @@ Why use this pattern? It allows you to create multiple app instances with differ
 def create_app():
     #Create a Flask application instance
     app = Flask(__name__)
+    
+    # 🔒 SECURITY: Enable auto-escaping for all templates to prevent XSS
+    # This automatically escapes HTML characters in {{ variable }} expressions
+    app.jinja_env.autoescape = True
 
     # Load configuration from config.py
     '''app.config.from_pyfile('config.py')''' # Doing this way, we load the whole content of the config.py file (imports, database URL, comments, etc). 
@@ -92,7 +96,7 @@ def create_app():
     # Add security headers
     @app.after_request
     def add_security_headers(response):
-        """Add security headers to all responses"""
+        """Add comprehensive security headers to all responses"""
         if app.config.get('SECURITY_HEADERS_ENABLED', True):
             # Prevent clickjacking
             response.headers['X-Frame-Options'] = 'DENY'
@@ -100,9 +104,32 @@ def create_app():
             response.headers['X-Content-Type-Options'] = 'nosniff'
             # Enable XSS protection
             response.headers['X-XSS-Protection'] = '1; mode=block'
+            
+            # 🔒 CRITICAL: Content Security Policy - Blocks malicious scripts
+            # This prevents execution of any inline scripts or external scripts from untrusted sources
+            csp_policy = (
+                "default-src 'self'; "                    # Only allow resources from same origin
+                "script-src 'self' 'unsafe-inline'; "     # Allow scripts from same origin and inline (for onclick handlers)
+                "style-src 'self' 'unsafe-inline'; "      # Allow styles from same origin and inline
+                "img-src 'self' data:; "                   # Allow images from same origin and data URLs
+                "font-src 'self'; "                       # Allow fonts from same origin
+                "connect-src 'self'; "                     # Allow AJAX/fetch requests to same origin only
+                "form-action 'self'; "                     # Allow form submissions to same origin only
+                "base-uri 'self'; "                        # Prevent base tag injection
+                "object-src 'none'; "                      # Block plugins like Flash
+                "upgrade-insecure-requests; "              # Upgrade HTTP to HTTPS automatically
+                "block-all-mixed-content"                  # Block mixed HTTP/HTTPS content
+            )
+            response.headers['Content-Security-Policy'] = csp_policy
+            
             # Force HTTPS in production (when cookie secure is enabled)
             if app.config.get('SESSION_COOKIE_SECURE'):
                 response.headers['Strict-Transport-Security'] = 'max-age=31536000; includeSubDomains'
+                
+            # 🔒 Additional security headers
+            response.headers['Referrer-Policy'] = 'strict-origin-when-cross-origin'  # Control referrer information
+            response.headers['Permissions-Policy'] = 'geolocation=(), microphone=(), camera=()'  # Disable dangerous APIs
+            
         return response
 
     # User loader function tells Flask-Login how to load a user by ID
