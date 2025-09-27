@@ -96,3 +96,57 @@ Used for routine maintenance tasks and other changes that don't modify the appli
 - **chore vs. build**: `build` is for changes that affect external dependencies the application needs to run *(e.g., updating a library in package.json)*. `chore` is for changes to the tools that support the development process itself.
 - **chore vs. ci**: `ci` is specifically for changes to the Continuous Integration pipeline *(e.g., editing a GitHub Actions workflow)*. `chore` covers other miscellaneous developer-facing tasks.
 - **chore vs. refactor**: `refactor` is for restructuring existing application code without changing its behavior. `chore` is for tasks that don't touch the production source code at all.
+
+
+| Scope     | Description                                                        |
+|-----------|--------------------------------------------------------------------|
+| api       | Changes to the API (endpoints, request/response formats).          |
+| auth      | Changes related to authentication or authorization.                |
+| ui        | Changes to the User Interface (components, styles, layouts).       |
+| database  | Changes affecting the database (migrations, queries, schema).      |
+| settings  | Changes to configuration files or user-facing settings.            |
+| deps      | Adding, updating, or removing dependencies.                        |
+| config    | General configuration changes not covered by other scopes.         |
+| core      | Changes to fundamental, central business logic.                    |
+
+
+### 📝 **Examples of Conventional Commit Messages (2025)**
+
+Below are some up-to-date, real-world examples of how to structure your commit messages using the types and scopes defined above. These follow the [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) specification and are adapted for modern, multi-language projects:
+
+#### **feat(api): Add endpoint for batch tax calculation**
+> Introduces a new `/api/v2/taxes/batch-calculate` endpoint to support bulk operations.
+
+#### **fix(auth): Correct token expiration logic**
+> Fixes a bug where user sessions expired prematurely due to incorrect time calculation.
+
+#### **refactor(core): Simplify property value assessment algorithm**
+> Rewrites the core assessment logic for better readability and maintainability.
+
+#### **perf(database): Optimize query for annual report generation**
+> Improves performance of the annual report by adding indexes and rewriting the SQL query.
+
+#### **build(deps): Upgrade pandas to v2.2.0 for compatibility**
+> Updates the pandas dependency to the latest version to resolve security warnings.
+
+#### **ci(github): Add code coverage reporting to workflow**
+> Integrates Codecov to the GitHub Actions pipeline for better test coverage visibility.
+
+#### **chore(settings): Update Prettier config for consistent formatting**
+> Adjusts Prettier settings to enforce trailing commas and 120 character line length.
+
+#### **docs(ui): Add usage examples for the new dashboard widgets**
+> Updates the documentation to include screenshots and code samples for dashboard components.
+
+#### **test(core): Add unit tests for tax calculation edge cases**
+> Covers scenarios with negative values and zero-amount transactions.
+
+---
+
+**Tips for Writing Commit Messages in 2025:**
+- Use the present tense ("add" not "added" or "adds").
+- Keep the subject line under 72 characters.
+- Add a body if the change is complex or needs context.
+- When applicable, mention related issues or tickets in your commit message (for example, `Closes #123`).
+
+---
