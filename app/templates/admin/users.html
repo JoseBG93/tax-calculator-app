@@ -5,6 +5,77 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Management - Tax Calculator Pro</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}">
+    <script>
+        // 🔒 SECURITY: Safe JavaScript string escaping function
+        function safeEscape(str) {
+            // Escape all dangerous characters for JavaScript strings
+            return str.replace(/\\/g, '\\\\')  // Escape backslashes first
+                     .replace(/'/g, "\\'")     // Escape single quotes  
+                     .replace(/"/g, '\\"')     // Escape double quotes
+                     .replace(/\n/g, '\\n')    // Escape newlines
+                     .replace(/\r/g, '\\r')    // Escape carriage returns
+                     .replace(/\t/g, '\\t');   // Escape tabs
+        }
+        
+        // 🔒 SECURITY: Safe confirmation dialogs with enhanced validation
+        function confirmUserAction(action, username) {
+            // Validate input
+            if (!username || username.trim() === '') {
+                alert('Error: Invalid username data');
+                return false;
+            }
+            
+            const safeUsername = safeEscape(username.trim());
+            
+            // Additional security check for municipal systems
+            if (safeUsername.toLowerCase().includes('admin') && action === 'Disable') {
+                return confirm('⚠️ WARNING: You are about to disable a user with admin-like name.\n\n' + 
+                             action + ' user "' + safeUsername + '"?\n\n' +
+                             'This action can be reversed later.');
+            }
+            
+            return confirm('🔄 ' + action + ' user "' + safeUsername + '"?\n\n' +
+                          'This action will take effect immediately.');
+        }
+        
+        function confirmAdminAction(action, username) {
+            // Validate input
+            if (!username || username.trim() === '') {
+                alert('Error: Invalid username data');
+                return false;
+            }
+            
+            const safeUsername = safeEscape(username.trim());
+            
+            // Enhanced warnings for admin privilege changes
+            if (action === 'Remove') {
+                return confirm('⚠️ CRITICAL: Remove admin privileges?\n\n' + 
+                             'User "' + safeUsername + '" will lose administrative access.\n\n' +
+                             'This action should only be done with authorization.');
+            } else {
+                return confirm('🔐 GRANT ADMIN ACCESS\n\n' + 
+                             'User "' + safeUsername + '" will become administrator.\n\n' +
+                             'Admins can manage all users and system settings.\n' +
+                             'Continue?');
+            }
+        }
+        
+        // 🔒 SECURITY: Validate form submissions
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add form validation
+            const forms = document.querySelectorAll('form[action*="admin_"]');
+            forms.forEach(form => {
+                form.addEventListener('submit', function(e) {
+                    const usernameInput = form.querySelector('.username-data');
+                    if (usernameInput && (!usernameInput.value || usernameInput.value.trim() === '')) {
+                        e.preventDefault();
+                        alert('Error: Invalid user data. Please refresh the page.');
+                        return false;
+                    }
+                });
+            });
+        });
+    </script>
 </head>
 <body>
     <div class="admin-container">
@@ -46,9 +117,12 @@
                 <tr>
                     <td>{{ user.id }}</td>
                     <td>
-                        {{ user.username }}
+                        <span class="username-display" title="User ID: {{ user.id }}">{{ user.username }}</span>
                         {% if user.id == current_user.id %}
                             <span class="admin-tag">YOU</span>
+                        {% endif %}
+                        {% if user.username|length > 15 %}
+                            <span class="username-warning" title="Username is quite long">⚠️</span>
                         {% endif %}
                     </td>
                     <td>
@@ -74,20 +148,22 @@
                                 <!-- Toggle Active Status -->
                                 <form action="{{ url_for('admin_toggle_user', user_id=user.id) }}" method="POST" style="display: inline;">
                                     <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                                    <input type="hidden" class="username-data" value="{{ user.username|e }}">
                                     {% if user.is_active %}
-                                        <button type="submit" class="btn btn-sm btn-warning" onclick="return confirm('Disable user {{ user.username }}?')">Disable</button>
+                                        <button type="submit" class="btn btn-sm btn-warning" onclick="return confirmUserAction('Disable', this.parentNode.querySelector('.username-data').value)">Disable</button>
                                     {% else %}
-                                        <button type="submit" class="btn btn-sm btn-secondary" onclick="return confirm('Enable user {{ user.username }}?')">Enable</button>
+                                        <button type="submit" class="btn btn-sm btn-secondary" onclick="return confirmUserAction('Enable', this.parentNode.querySelector('.username-data').value)">Enable</button>
                                     {% endif %}
                                 </form>
                                 
                                 <!-- Toggle Admin Status -->
                                 <form action="{{ url_for('admin_promote_user', user_id=user.id) }}" method="POST" style="display: inline;">
                                     <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                                    <input type="hidden" class="username-data" value="{{ user.username|e }}">
                                     {% if user.is_admin %}
-                                        <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Remove admin privileges from {{ user.username }}?')">Remove Admin</button>
+                                        <button type="submit" class="btn btn-sm btn-danger" onclick="return confirmAdminAction('Remove', this.parentNode.querySelector('.username-data').value)">Remove Admin</button>
                                     {% else %}
-                                        <button type="submit" class="btn btn-sm btn-primary" onclick="return confirm('Grant admin privileges to {{ user.username }}?')">Make Admin</button>
+                                        <button type="submit" class="btn btn-sm btn-primary" onclick="return confirmAdminAction('Grant', this.parentNode.querySelector('.username-data').value)">Make Admin</button>
                                     {% endif %}
                                 </form>
                             {% else %}
