@@ -1,7 +1,7 @@
 # Tax Calculator Pro - Comprehensive Project Review
 
 **Review Date**: January 15, 2025  
-**Last Updated**: September 15, 2025 - Major security improvements: CSRF protection, rate limiting, input validation, session security, and comprehensive security headers implemented  
+**Last Updated**: September 27, 2025 - Auth consistency fixed with Flask-Login, CSRF + rate limiting added, security headers and input validation in place; initial CORS tests added  
 **Project**: Tax Calculator Pro - Flask Web Application for Spanish Municipal Tax Calculations (IIVTNU)  
 **Developer**: José - Auxiliar Administrativo, Inspección Tributaria, Ayuntamiento de Alfafar  
 **Reviewer**: Claude Code Assistant  
@@ -16,11 +16,11 @@ This document provides a comprehensive technical review of the Tax Calculator Pr
 |--------|--------|-------|
 | **Architecture** | ✅ Well-structured | B+ |
 | **Database Design** | ✅ Good relationships | B+ |
-| **Core Functionality** | ❌ Missing | F |
+| **Core Functionality** | ⚠️ Partial (auth, admin, views) | C- |
 | **Security** | ✅ Major improvements | B+ |
-| **Testing** | ❌ No coverage | F |
+| **Testing** | ⚠️ Minimal (CORS tests) | D |
 | **Documentation** | ⚠️ Partial | C |
-| **Overall Project** | ⚠️ Security Fixed | **C+** |
+| **Overall Project** | ⚠️ Improved security, partial features | **C+** |
 
 ## Table of Contents
 
@@ -46,15 +46,15 @@ tax-calculator-pro/
 ├── app/                          # Flask application core
 │   ├── __init__.py              ✅ Application Factory (working)
 │   ├── models.py                ✅ Database models (complete)
-│   ├── routes.py                ⚠️  Basic routes (security issues)
-│   ├── services.py              ❌ Empty (0 bytes)
-│   ├── utils.py                 ❌ Empty (0 bytes)
+│   ├── routes.py                ✅ Auth routes, admin, rate limits
+│   ├── services.py              ❌ Empty (needs business logic)
+│   ├── utils.py                 ❌ Empty (needs helpers)
 │   ├── legal_validator.py      ✅ Legal framework (complete)
 │   └── templates/               ⚠️  Basic HTML (needs styling)
 ├── config.py                    ✅ Configuration management
 ├── run.py                       ✅ Application entry point
-├── requirements.txt             ✅ Flask-Login added
-├── test.py                      ❌ Empty (no tests)
+├── dependencies/requirements.txt ✅ Dependencies pinned (Flask-Login 0.6.3, Flask-WTF, Flask-Limiter)
+├── tests/                       ✅ Basic pytest structure
 ├── database/                    ✅ SQLite storage
 ├── migrations/                  ✅ Alembic migrations
 ├── static/                      ⚠️  Basic assets
@@ -99,8 +99,8 @@ from flask_login import LoginManager  # Import successful!
 ### 1. Empty Core Business Logic Modules 🔴
 **Severity**: CRITICAL  
 **Files Affected**:
-- `app/services.py` (0 bytes)
-- `app/utils.py` (0 bytes)
+- `app/services.py` (empty)
+- `app/utils.py` (empty)
 
 **Impact**: No tax calculation functionality exists  
 
@@ -147,37 +147,24 @@ return "Debug route disabled for security reasons", 403
 pip install Flask-Login==0.6.3
 ```
 
-### 3. No Test Coverage 🔴
+### 3. Minimal Test Coverage 🔴
 **Severity**: CRITICAL  
-**File**: `test.py` (1 line only)  
+**Files**: `tests/test_cors.py`, `tests/conftest.py`  
 
 **Current State**:
 ```python
-# Test file contains only:
-# Empty test file
+# tests/test_cors.py validates allowed/disallowed origins headers
 ```
 
-**Impact**: No way to verify functionality or prevent regressions
+**Impact**: Coverage is still very low; only CORS behavior is tested
 
 ---
 
 ## High Priority Issues
 
-### 4. Authentication System Inconsistency 🟡
-**Severity**: HIGH  
-**Issue**: Mixed authentication patterns  
-
-**Current Implementation Problems**:
-- Flask-Login configured but not used
-- Routes use `session['logged_in']` instead
-- No consistent auth checking mechanism
-
-```python
-# Current inconsistent approach:
-if 'logged_in' in session:  # Session-based
-    # vs
-@login_required  # Flask-Login decorator (not working)
-```
+### 4. Authentication System Consistency 🟡 (Improved)
+**Severity**: MEDIUM  
+**Status**: Improved — now using Flask-Login for session management and `@login_required` across protected routes; admin routes guarded with `@admin_required`. Further hardening and tests pending.
 
 ### 5. Missing IIVTNU Tax Calculation Implementation 🟡
 **Severity**: HIGH  
@@ -190,16 +177,14 @@ if 'logged_in' in session:  # Session-based
 - Tax quota determination
 - Legal validation integration
 
-### 6. No Input Validation 🟡
+### 6. Input Validation Coverage 🟡
 **Severity**: HIGH  
-**Affected Routes**: All form submissions  
-
-**Missing Validations**:
+**Current**: Username/password validation, sanitation, length limits implemented in `app/security_validations.py`; CSRF enabled.  
+**Missing**:
 - DNI/NIE format validation
 - Cadastral reference format
-- Date range validations
-- Numeric value bounds checking
-- SQL injection prevention
+- Date range validations (tax inputs)
+- Numeric bounds checking (tax inputs)
 
 ---
 
@@ -276,7 +261,7 @@ __table_args__ = (
 |-------|----------|----------|--------|
 | ~~Password hash exposure~~ | ~~CRITICAL~~ | ~~routes.py:113~~ | ✅ FIXED |
 | ~~No CSRF protection~~ | ~~HIGH~~ | ~~All forms~~ | ✅ FIXED |
-| Debug mode in production | HIGH | config.py | ⚠️ Possible |
+| Debug mode in production | HIGH | run.py | ⚠️ Dev server uses debug=True |
 | ~~No rate limiting~~ | ~~MEDIUM~~ | ~~All routes~~ | ✅ FIXED |
 | ~~Session security~~ | ~~MEDIUM~~ | ~~config.py~~ | ✅ FIXED |
 | ~~No input sanitization~~ | ~~HIGH~~ | ~~All inputs~~ | ✅ FIXED |
@@ -301,7 +286,7 @@ __table_args__ = (
    - Global rate limit: 100 requests per hour
    - Memory-based storage (configurable for Redis in production)
 
-3. **Input Validation & Sanitization** ✅ COMPLETE
+3. **Input Validation & Sanitization** ✅ PARTIAL
    - Username validation: 3-50 chars, alphanumeric + underscore/hyphen
    - Password validation: minimum 8 chars, uppercase, lowercase, digit
    - HTML escape for all user inputs to prevent XSS
@@ -319,20 +304,21 @@ __table_args__ = (
    - X-XSS-Protection: 1; mode=block
    - HSTS for HTTPS environments
 
-6. **Enhanced Error Handling** ✅ COMPLETE
+6. **Enhanced Error Handling** ✅ PARTIAL
    - Database rollback on registration errors
    - Try-catch blocks for all critical operations
    - User-friendly error messages without sensitive data exposure
 
 **Configuration Enhancements**:
 ```python
-# New security settings in config.py
+# Key security settings (config.py, app/__init__.py)
 SESSION_COOKIE_HTTPONLY = True
 SESSION_COOKIE_SAMESITE = 'Lax'
 WTF_CSRF_ENABLED = True
 WTF_CSRF_TIME_LIMIT = 3600
 RATELIMIT_DEFAULT = '100 per hour'
 SECURITY_HEADERS_ENABLED = True
+# After-request security headers + CSP set in app/__init__.py
 ```
 
 ### Security Recommendations (Updated)
@@ -475,7 +461,7 @@ SECURITY_HEADERS_ENABLED = True
 | Implement utils.py | 4 hours | Support functions |
 | Add input validation | 4 hours | Security/stability |
 | Create basic tests | 6 hours | Quality assurance |
-| Add CSRF protection | 2 hours | Security |
+| Add CSRF protection | 2 hours | Security | ✅ COMPLETED |
 
 ### Priority 3: Enhancements (Week 4-5)
 
@@ -525,7 +511,7 @@ Day 3-5:
 
 ### Phase 3: Security & Quality (Week 3)
 ```
-□ Add CSRF protection
+☑ Add CSRF protection
 □ Implement proper logging
 □ Create comprehensive test suite
 □ Add security middleware
@@ -557,8 +543,8 @@ Day 3-5:
 ### Minimum Viable Product (MVP)
 - [ ] Application starts without errors
 - [ ] Can calculate basic IIVTNU tax
-- [ ] User authentication works
-- [ ] Basic security implemented
+- [x] User authentication works (Flask-Login)
+- [x] Basic security implemented (CSRF, rate limits, headers)
 - [ ] 50% test coverage
 
 ### Production Ready

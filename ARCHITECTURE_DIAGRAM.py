@@ -18,8 +18,11 @@ Terminal: python run.py
     ├── Importa Config desde config.py
     ├── Crea app = Flask(__name__)
     ├── Configura app.config.from_object(Config)
-    ├── Inicializa db.init_app(app) 
-    ├── Configura CORS(app)
+    ├── Inicializa db.init_app(app)
+    ├── Configura CORS(app) con orígenes permitidos por env
+    ├── Inicializa CSRFProtect + Flask-Limiter (rate limiting)
+    ├── Inicia LoginManager (Flask-Login)
+    ├── Añade cabeceras de seguridad + CSP en after_request
     ├── Importa routes desde routes.py
     └── Retorna app completa
          ↓
@@ -38,9 +41,11 @@ Terminal: python run.py
     load_dotenv() en config.py
          ↓  
     class Config:
-    ├── SECRET_KEY = os.environ.get('SECRET_KEY', 'fallback')
+    ├── SECRET_KEY = (obligatoria, sin fallback)
     ├── DEBUG = os.environ.get('DEBUG', 'False').lower() == 'true'  
     ├── SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL', 'sqlite:///database/app.db')
+    ├── CORS_ORIGINS = os.environ.get('CORS_ORIGINS', 'http://localhost:3000')
+    ├── SECURITY_HEADERS_ENABLED = True
     └── MUNICIPALITY_NAME = os.environ.get('MUNICIPALITY_NAME', 'Alfafar')
          ↓
     Flask app en __init__.py
@@ -54,12 +59,19 @@ app/__init__.py (NÚCLEO)
 ├── db = SQLAlchemy()          # Base de datos
 ├── migrate = Migrate()        # Migraciones 
 ├── cors = CORS()              # Permisos web
+├── csrf = CSRFProtect()       # Protección CSRF
+├── limiter = Limiter(...)     # Rate limiting
+├── login_manager = LoginManager() # Autenticación
 └── create_app():
     ├── app = Flask(__name__)
     ├── app.config.from_object(Config)  ← Lee configuración
     ├── db.init_app(app)               ← Conecta base de datos
     ├── migrate.init_app(app, db)      ← Activa migraciones
     ├── CORS(app)                      ← Configura permisos web
+    ├── csrf.init_app(app)             ← Activa CSRF
+    ├── limiter.init_app(app)          ← Activa rate limiting
+    ├── login_manager.init_app(app)    ← Activa autenticación
+    ├── after_request: cabeceras de seguridad (CSP, X-Frame-Options, etc.)
     ├── from app import routes         ← Importa rutas web
     └── return app                     ← Devuelve app completa
 
@@ -91,13 +103,15 @@ Usuario → Navegador → Flask Routes → Services → Models → Database
    ← ← ← ← ← Templates ← ← ← ← ← ← ← ← Results ← ← ← ← ← ← ←
 
 DETALLE:
-1. Usuario visita: http://localhost:5000/calcular
-2. Flask routes.py: @app.route('/calcular') → función calcular_iivtnu()
-3. Services: Lógica de cálculo del impuesto
-4. Models: Consulta/guarda datos en base de datos  
-5. Database: SQLite almacena personas, propiedades, transmisiones
-6. Templates: HTML con resultados
-7. Usuario: Ve el resultado en su navegador
+1. Usuario visita: http://localhost:5000/login o /register (CSRF activo; límites de tasa)
+2. Autenticación: Flask-Login crea sesión segura (cookies HTTPOnly, SameSite=Lax)
+3. Usuario autenticado accede a /dashboard, /calculator, /history (requiere login)
+4. Admin accede a /admin, /admin/users (requiere rol admin)
+5. Futuro: Services calculará IIVTNU, validará con legal_validator y persistirá resultados
+6. Models: Consulta/guarda datos en base de datos  
+7. Database: SQLite almacena usuarios y dominio IIVTNU
+8. Templates: HTML con resultados
+9. Usuario: Ve el resultado en su navegador
 
 
 6. VENTAJAS DE ESTA ARQUITECTURA
@@ -122,6 +136,7 @@ DETALLE:
 
 ✅ SEGURIDAD:
    - Variables sensibles en .env (no en código)
-   - Configuración centralizada
-   - Validación legal integrada
+   - CSRF + Rate limiting + Cabeceras de seguridad (CSP, X-Frame-Options, etc.)
+   - Autenticación con Flask-Login y protección de rutas admin
+   - Validación legal integrada (módulo preparado)
 """

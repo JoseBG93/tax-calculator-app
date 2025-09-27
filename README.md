@@ -38,17 +38,16 @@ This project was born from real-world experience in Spanish municipal tax admini
 ### Features ✨
 
 **Current Implementation:**
-- ✅ IIVTNU tax calculations for Alfafar municipality
-- ✅ Legal framework compliance (LRHL articles 104-110)
-- ✅ Municipal ordinance integration (2022 parameters)
-- ✅ Family bonification system (95%/50% rates)
-- ✅ Dual calculation system (Alfafar vs State parameters)
+- ✅ Flask app with Application Factory, CORS, CSRF, rate limiting and security headers
+- ✅ User authentication with Flask-Login; admin routes protected with `@admin_required`
 - ✅ Database models for tax domain (SQLAlchemy)
-- ✅ Flask application with proper architecture
+- ✅ Legal validation framework module scaffolded (`app/legal_validator.py`)
+- ✅ Basic templates: `index`, `login`, `register`, `dashboard`, `calculator`, `history`, admin views
+- ✅ Initial tests for CORS behavior (`tests/test_cors.py`)
 - ✅ Enhanced synthetic data (33 IIVTNU test cases)
 
 **Planned Features:**
-- 🔄 Web interface for tax calculations
+- 🔄 Business logic in `services.py` for IIVTNU calculations
 - 🔄 Document parsing and OCR integration
 - 🔄 Automated legal validation workflows
 - 🔄 Transaction history and reporting
@@ -58,8 +57,9 @@ This project was born from real-world experience in Spanish municipal tax admini
 
 **Core Application:**
 - **Backend**: Flask 2.3.3 (Application Factory Pattern)
+- **Auth/Security**: Flask-Login 0.6.3, Flask-WTF 1.2.1 (CSRF), Flask-Limiter 3.8.0, security headers (CSP, X-Frame-Options, etc.)
 - **Frontend**: HTML, CSS, JavaScript
-- **Database**: SQLAlchemy 3.0.5 + Flask-Migrate 4.0.5
+- **Database**: SQLAlchemy 2.0.42 + Flask-Migrate 4.0.5
 - **Data Processing**: pandas 2.1.4, numpy 1.25.2
 - **Validation**: marshmallow 3.20.1
 - **Configuration**: python-dotenv 1.0.0
@@ -83,9 +83,9 @@ tax-calculator-pro/
 ├── app/                    # Flask application core
 │   ├── __init__.py         # ✅ Application Factory Pattern
 │   ├── models.py           # ✅ SQLAlchemy database models
-│   ├── routes.py           # ✅ HTTP endpoints and views
-│   ├── services.py         # Tax calculation business logic
-│   ├── utils.py            # Helper functions and utilities
+│   ├── routes.py           # ✅ HTTP endpoints and views (auth, admin, calculator shell)
+│   ├── services.py         # 🔄 Tax calculation business logic (pending)
+│   ├── utils.py            # 🔄 Helper functions and utilities (pending)
 │   └── legal_validator.py  # ✅ IIVTNU legal framework
 ├── data/                   # ✅ 33 enhanced IIVTNU test cases
 ├── docs/                   # ✅ Legal documentation
@@ -95,7 +95,8 @@ tax-calculator-pro/
 ├── static/                 # Frontend assets (CSS, JS, images)
 ├── templates/              # HTML Jinja2 templates
 ├── database/               # SQLite database storage
-├── dependencies/           # ✅ requirements.txt (46 packages)
+├── dependencies/           # ✅ requirements.txt (pinned packages)
+├── tests/                  # ✅ pytest suite (CORS tests)
 ├── run.py                  # ✅ Flask application entry point
 └── config.py               # ✅ Environment configuration
 ```
@@ -154,6 +155,12 @@ export SECRET_KEY="<paste-your-unique-hex-string-here>"
 > ℹ️ Reuse of the same key across environments is discouraged—rotating them independently limits the blast radius of leaked
 > credentials and aligns with Flask's security recommendations.
 
+Also consider configuring CORS origins for development:
+
+```bash
+export CORS_ORIGINS="http://localhost:3000"
+```
+
 #### Prerequisites (for OCR/NLP)
 
 - System packages (Ubuntu/Debian):
@@ -169,10 +176,15 @@ export SECRET_KEY="<paste-your-unique-hex-string-here>"
 python run.py
 ```
 
-The application will start on `http://localhost:5000` with:
-- Root endpoint: `/` 
-- Index page: `/index`
-- IIVTNU calculation endpoints (in development)
+The application will start on `http://localhost:5000` with routes like:
+- `/` → redirects to `/index`
+- `/index` → home page
+- `/register` (GET/POST) → user registration (rate limited)
+- `/login` (GET/POST) → login (rate limited)
+- `/logout` (POST) → logout (requires login)
+- `/dashboard` → protected page (requires login)
+- `/calculator`, `/history` → shells for future IIVTNU features (require login)
+- `/admin`, `/admin/users` → admin area (requires admin role)
 
 **Current Status:** Core Flask application is running with database models ready for IIVTNU calculations.
 
@@ -193,7 +205,7 @@ pytest                      # Testing
 3. Access application: `http://localhost:5000`
 4. Run tests: `pytest` (when test suite is implemented)
 
-**Current Phase:** Database models and legal framework completed. Next: Web interface development.
+**Current Phase:** Auth + security hardening completed; database models and templates ready. Next: implement business logic in `services.py` and integrate legal validator into calculator flow, followed by test coverage.
 
 
 ### License 📄
