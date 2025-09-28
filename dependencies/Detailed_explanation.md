@@ -370,7 +370,57 @@ Cryptography proporciona funciones de encriptación y desencriptación para prot
 de contribuyentes, claves de API, y datos confidenciales del sistema.
 
 
+# CONFIGURACIÓN DE ENTORNO REQUERIDA (Estado actual)
 
+**Variables críticas:**
+- `SECRET_KEY`: Obligatoria para iniciar la app y para las pruebas. Puedes generar una clave con:
+  ```bash
+  python -c "import secrets; print(secrets.token_hex(32))"
+  ```
+  Para desarrollo/pruebas:
+  ```bash
+  export SECRET_KEY="test-secret-key"
+  ```
+- `CORS_ORIGINS`: Lista separada por comas. Por defecto: `http://localhost:3000`. En las pruebas se establece un origen permitido específico en `tests/conftest.py`.
+- `SQLALCHEMY_DATABASE_URI`: Por defecto `sqlite:///database/app.db`. Puedes sobrescribir con `DATABASE_URL`.
+- `RATELIMIT_STORAGE_URI` y `RATELIMIT_DEFAULT`: Por defecto `memory://` y `100 per hour`. Ajustables por entorno.
+
+# EJECUCIÓN DE PRUEBAS (pytest)
+
+```bash
+cd tax-calculator-pro
+source taxapp_env/bin/activate
+pip install -r dependencies/requirements.txt
+export SECRET_KEY="test-secret-key"
+pytest -q
+```
+
+Ejemplos:
+- Ejecutar un archivo: `pytest tests/test_cors.py -v`
+- Ejecutar un test puntual: `pytest tests/test_cors.py::test_preflight_allows_origin`
+
+# SOLUCIÓN DE PROBLEMAS COMUNES
+
+- Error `ModuleNotFoundError: No module named 'flask_limiter'`:
+  - Asegúrate de activar el entorno virtual y de instalar dependencias: `pip install -r dependencies/requirements.txt`.
+- Error `RuntimeError: SECRET_KEY environment variable is required`:
+  - Exporta `SECRET_KEY` antes de iniciar la app o ejecutar pruebas.
+- Importaciones de pruebas no alineadas con `config.py`:
+  - El proyecto expone una clase `Config` (no constantes sueltas). Ajusta tests a:
+    ```python
+    import os
+    from config import Config
+    def test_config_defaults(monkeypatch):
+        monkeypatch.setenv("SECRET_KEY", "test")
+        assert isinstance(Config.DEBUG, bool)
+        assert Config.SQLALCHEMY_DATABASE_URI.startswith("sqlite:///")
+    ```
+
+# ESTADO ACTUAL DEL PROYECTO
+
+- Aplicación Flask funcional con CORS, CSRF, Flask-Login, y rate limiting configurado.
+- Dependencias fijadas en `dependencies/requirements.txt` (incluye `Flask-Limiter`).
+- Pruebas de CORS operativas; requieren `SECRET_KEY` en el entorno para cargarse correctamente.
 
 # ========================================
 # RESUMEN DE INTEGRACIÓN EN EL PROYECTO
