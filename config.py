@@ -127,3 +127,8 @@ class Config:
     
     # Security headers
     SECURITY_HEADERS_ENABLED = os.environ.get('SECURITY_HEADERS_ENABLED', 'True').lower() == 'true'
+
+    # Superadmin configuration (who can manage admin status and settings)
+    # Prefer a stable user ID; fallback to username for convenience.
+    SUPERADMIN_USER_ID = os.environ.get('SUPERADMIN_USER_ID')  # optional numeric ID as string
+    SUPERADMIN_USERNAME = os.environ.get('SUPERADMIN_USERNAME', 'Josh93')
