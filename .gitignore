@@ -2,6 +2,7 @@
 .env
 .env.local
 .env.*.local
+secrets_generator.py
 
 # Python virtual environments
 taxapp_env/
