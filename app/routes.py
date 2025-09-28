@@ -10,7 +10,7 @@ from flask import (
 from flask_login import login_user, logout_user, login_required, current_user
 from app.models import User
 from app import db, limiter
-from app.security_validations import validate_username, validate_password, sanitize_input, admin_required, validate_and_sanitize_username
+from app.security_validations import validate_username, validate_password, sanitize_input, admin_required, validate_and_sanitize_username, superadmin_required
 from functools import wraps
 from datetime import datetime
 import re
@@ -32,8 +32,9 @@ def register_routes(app):
   app.add_url_rule('/history', 'history', history, methods=['GET', 'POST'])
   
   # Admin routes for user management
-  app.add_url_rule('/admin', 'admin_dashboard', admin_dashboard, methods=['GET'])
-  app.add_url_rule('/admin/users', 'admin_users', admin_users, methods=['GET'])
+  app.add_url_rule('/admin', 'admin_dashboard', admin_dashboard, methods=['GET', 'POST'])
+  app.add_url_rule('/admin/users', 'admin_users', admin_users, methods=['GET', 'POST'])
+  app.add_url_rule('/admin/settings', 'admin_settings', admin_settings, methods=['GET', 'POST'])
   app.add_url_rule('/admin/users/<int:user_id>/toggle', 'admin_toggle_user', admin_toggle_user, methods=['POST'])
   app.add_url_rule('/admin/users/<int:user_id>/promote', 'admin_promote_user', admin_promote_user, methods=['POST'])
   
@@ -217,20 +218,20 @@ def admin_dashboard():
     recent_users = User.query.order_by(User.created_at.desc()).limit(5).all()
     
     return render_template('admin/dashboard.html',
-                         total_users=total_users,
-                         active_users=active_users,
-                         admin_users=admin_users,
-                         recent_users=recent_users)
+        total_users=total_users,
+        active_users=active_users,
+        admin_users=admin_users,
+        recent_users=recent_users)
 
 
-@admin_required
+@superadmin_required
 def admin_users():
     """List all users with management options"""
     users = User.query.order_by(User.created_at.desc()).all()
     return render_template('admin/users.html', users=users)
 
 
-@admin_required
+@superadmin_required
 def admin_toggle_user(user_id):
     """Toggle user active status"""
     if user_id == current_user.id:
@@ -246,7 +247,7 @@ def admin_toggle_user(user_id):
     return redirect(url_for('admin_users'))
 
 
-@admin_required
+@superadmin_required
 def admin_promote_user(user_id):
     """Toggle admin status for a user"""
     if user_id == current_user.id:
@@ -260,3 +261,48 @@ def admin_promote_user(user_id):
     status = "promoted to admin" if user.is_admin else "removed from admin"
     flash(f"User {user.username} has been {status}.")
     return redirect(url_for('admin_users'))
+
+
+@superadmin_required
+def admin_settings():
+    """Allow superadmin to change own username and password securely"""
+    if request.method == 'GET':
+        return render_template('admin/settings.html')
+
+    # POST
+    current_password = request.form.get('current_password', '')
+    new_username_raw = request.form.get('new_username', '')
+    new_password = request.form.get('new_password', '')
+    confirm_password = request.form.get('confirm_password', '')
+
+    # Validate current password
+    if not current_user.check_password(current_password):
+        flash('Current password is incorrect.')
+        return render_template('admin/settings.html')
+
+    # Optional username change with validation/sanitization
+    if new_username_raw:
+        valid, new_username, msg = validate_and_sanitize_username(new_username_raw)
+        if not valid:
+            flash(f"Username validation failed: {msg}")
+            return render_template('admin/settings.html')
+        # Ensure uniqueness
+        if User.query.filter_by(username=new_username).first() and new_username != current_user.username:
+            flash('Username already taken.')
+            return render_template('admin/settings.html')
+        current_user.username = new_username
+
+    # Optional password change
+    if new_password or confirm_password:
+        ok, msg = validate_password(new_password)
+        if not ok:
+            flash(msg)
+            return render_template('admin/settings.html')
+        if new_password != confirm_password:
+            flash('New passwords do not match.')
+            return render_template('admin/settings.html')
+        current_user.set_password(new_password)
+
+    db.session.commit()
+    flash('Settings updated successfully.')
+    return redirect(url_for('admin_settings'))
