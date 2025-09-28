@@ -4,6 +4,7 @@ import html
 from functools import wraps
 from flask import redirect, url_for, flash
 from flask_login import login_required, current_user
+from flask import current_app
 
 
 def validate_username(username):
@@ -127,5 +128,36 @@ def admin_required(f):
         if not current_user.is_admin:
             flash('Access denied. Administrator privileges required.')
             return redirect(url_for('dashboard'))
+        return f(*args, **kwargs)
+    return decorated_function
+
+
+def superadmin_required(f):
+    """Decorator to require superadmin privileges for routes
+
+    Only the user whose username matches Config.SUPERADMIN_USERNAME is allowed.
+    This is stricter than admin_required and ensures a single account manages
+    admin privileges and sensitive settings.
+    """
+    @wraps(f)
+    @login_required
+    def decorated_function(*args, **kwargs):
+        expected_username = current_app.config.get('SUPERADMIN_USERNAME', 'Josh93')
+        expected_user_id = current_app.config.get('SUPERADMIN_USER_ID')
+        if not current_user.is_authenticated:
+            return redirect(url_for('login'))
+        # Prefer ID match if configured; else fallback to username match
+        if expected_user_id is not None:
+            try:
+                if str(current_user.id) != str(expected_user_id):
+                    flash('Access denied. Superadmin privileges required.')
+                    return redirect(url_for('dashboard'))
+            except Exception:
+                flash('Access denied. Superadmin privileges required.')
+                return redirect(url_for('dashboard'))
+        else:
+            if current_user.username != expected_username:
+                flash('Access denied. Superadmin privileges required.')
+                return redirect(url_for('dashboard'))
         return f(*args, **kwargs)
     return decorated_function
