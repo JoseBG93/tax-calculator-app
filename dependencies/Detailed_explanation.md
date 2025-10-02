@@ -381,7 +381,7 @@ de contribuyentes, claves de API, y datos confidenciales del sistema.
   ```bash
   export SECRET_KEY="test-secret-key"
   ```
-- `CORS_ORIGINS`: Lista separada por comas. Por defecto: `http://localhost:3000`. En las pruebas se establece un origen permitido específico en `tests/conftest.py`.
+- `CORS_ORIGINS`: Lista separada por comas. Por defecto: `http://localhost:3000,http://127.0.0.1:3000,http://localhost:5001,http://127.0.0.1:5001`. En las pruebas se establece un origen permitido específico en `tests/conftest.py`.
 - `SQLALCHEMY_DATABASE_URI`: Por defecto `sqlite:///database/app.db`. Puedes sobrescribir con `DATABASE_URL`.
 - `RATELIMIT_STORAGE_URI` y `RATELIMIT_DEFAULT`: Por defecto `memory://` y `100 per hour`. Ajustables por entorno.
 
