@@ -29,6 +29,12 @@ def _require_secret_key() -> str:
 # This ensures that all configuration values are properly set based on the environment variables defined in the .env file.
 load_dotenv()
 
+# --- DATABASE PATH CONFIGURATION ---
+# Calculate absolute path to project root and database file
+# This must be done OUTSIDE the Config class so __file__ resolves correctly
+BASE_DIR = os.path.abspath(os.path.dirname(__file__))  # /home/jose/my_Works/my_projects/tax-calculator-pro
+DATABASE_PATH = os.path.join(BASE_DIR, 'database', 'app.db')  # Full path to database file
+
 class Config:
     """Configuración base para la aplicación Flask"""
 
@@ -38,6 +44,8 @@ class Config:
     # os.environ is a special Python dictionary that contains all the environment variables from the operating system.
     SECRET_KEY = _require_secret_key()
 
+
+
     # The value of DEBUG is obtained from the .env file as a string (for example, 'True' or 'False').
     # To ensure Flask interprets it correctly as a boolean, it is converted to lowercase and compared to 'true'.
     # This way, if you set DEBUG=True (or any case variation) in .env, debug mode will be enabled.
@@ -45,15 +53,23 @@ class Config:
     # This conversion is important because environment variables are always received as text.
     DEBUG = os.environ.get('DEBUG', 'False').lower() == 'true'
 
+
+
     # SQLALCHEMY_DATABASE_URI specifies the database connection string used by SQLAlchemy.
     # This URI tells the application where and how to connect to the database.
     # By default, it uses a local SQLite database file located at 'database/app.db'.
+    # We use an ABSOLUTE path to avoid issues with relative paths when running Flask Shell or from different directories.
+    # The DATABASE_PATH variable is calculated outside this class (see lines 35-36 above).
     # You can override this by setting the 'DATABASE_URL' environment variable to another database URI,
     # such PostgreSQL, MySQL, or another supported backend.
     # Example for PostgreSQL: 'postgresql://user:password@localhost/dbname'
     # This approach allows easy switching between development (local SQLite) and production (remote DB) environments.
-    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL', 'sqlite:///database/app.db')
+    
+    # SQLite URI format: sqlite:/// followed by absolute path (4 slashes total for absolute paths)
+    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL', f'sqlite:///{DATABASE_PATH}')
     SQLALCHEMY_TRACK_MODIFICATIONS = False  # prevents unnecessary overhead by disabling modification tracking
+
+
 
     # File uploads
     UPLOAD_FOLDER = os.environ.get('UPLOAD_FOLDER', 'data/AI-generated')
@@ -64,6 +80,8 @@ class Config:
     # The string is split by commas to create a list, and then converted to a set for efficient membership checks.
     ALLOWED_EXTENSIONS = set(os.environ.get('ALLOWED_EXTENSIONS', 'pdf,jpg,jpeg,png').split(','))
 
+
+
     # NLP (Natural Language Processing) configuration
     # SPACY_MODEL specifies which spaCy language model app should use for NLP tasks.
     # It attempts to read the model name from the 'SPACY_MODEL' environment variable.
@@ -72,13 +90,17 @@ class Config:
     # without changing the code—just by setting the environment variable.
     SPACY_MODEL = os.environ.get('SPACY_MODEL', 'es_core_news_md')
 
+
+
     # CORS_ORIGINS specifies which external domains are allowed to access app resources through Cross-Origin Resource Sharing (CORS).
     # This setting is important for web security, as it controls which frontends or external services can interact with the backend API from the browser.
     # By configuring CORS_ORIGINS, you can handle requests from specific origins, helping to prevent unauthorized cross-origin requests.
-    # The value is read from the 'CORS_ORIGINS' environment variable as a comma-separated string (e.g., 'http://localhost:3000,https://myapp.com').
+    # The value is read from the 'CORS_ORIGINS' environment variable (within the .env file) as a comma-separated string (e.g., 'http://localhost:3000,https://myapp.com').
     # If not set, it assign 'http://localhost:3000' by default.
     # The string is split by commas to create a list of allowed origins.
-    CORS_ORIGINS = os.environ.get('CORS_ORIGINS', 'http://localhost:3000').split(',')
+    CORS_ORIGINS = os.environ.get('CORS_ORIGINS', 'http://localhost:3000,http://127.0.0.1:3000,http://localhost:5001,http://127.0.0.1:5001').split(',')
+
+
 
     # LEGAL AND REGULATORY FRAMEWORK CONFIGURATION
     # These settings define the legal and normative framework for IIVTNU tax calculations
@@ -111,13 +133,15 @@ class Config:
     LEGAL_VALIDATION_ENABLED = os.environ.get('LEGAL_VALIDATION_ENABLED', 'True').lower() == 'true'
     STRICT_LEGAL_COMPLIANCE = os.environ.get('STRICT_LEGAL_COMPLIANCE', 'True').lower() == 'true'
     
+
+
     # SECURITY CONFIGURATION
     # Session security
     SESSION_COOKIE_SECURE = os.environ.get('SESSION_COOKIE_SECURE', 'False').lower() == 'true'  # HTTPS only in production
     SESSION_COOKIE_HTTPONLY = True  # Prevent XSS attacks
     SESSION_COOKIE_SAMESITE = 'Lax'  # CSRF protection
     
-    # CSRF protection
+    # CSRF (Cross-Site Request Forgery) protection by Flask-WTF
     WTF_CSRF_ENABLED = True
     WTF_CSRF_TIME_LIMIT = int(os.environ.get('WTF_CSRF_TIME_LIMIT', '3600'))  # 1 hour
     
