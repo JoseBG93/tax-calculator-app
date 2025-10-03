@@ -24,6 +24,8 @@ from flask_cors import CORS
 from flask_login import LoginManager
 
 '''Flask-WTF provides CSRF protection and form handling for Flask applications.'''
+'''CSRF stands for Cross-Site Request Forgery. It is a security mechanism that protects against attacks where an attacker forces a user to execute unwanted actions 
+on a web application in which they are currently authenticated.'''
 from flask_wtf.csrf import CSRFProtect
 
 '''Flask-Limiter provides rate limiting functionality to prevent abuse and DoS attacks.'''
@@ -61,21 +63,54 @@ def create_app():
     # This is the connection between the Flask app, the SQLAlchemy database and the Migrate database. It allows the app to manage database migrations.
     migrate.init_app(app, db) # Now, both SQLAlchemy and Migrate are connected to Flask app.
 
-    # Enable CORS using the allowed origins defined in the configuration. This prevents unexpected
+   
+    # --- CORS Configuration Explanation ---
+    # The following code sets up Cross-Origin Resource Sharing (CORS) for the Flask app.
+    # It enables CORS using the allowed origins defined in config.py. This prevents unexpected
     # cross-origin requests from being accepted while still allowing the trusted frontends to
     # communicate with the backend.
+    # 
+    # 1. The list comprehension:
+    #    allowed_origins = [
+    #        origin.strip()
+    #        for origin in app.config.get('CORS_ORIGINS', [])
+    #        if origin and origin.strip()
+    #    ]
+    #    - This collects all origins (domains) allowed to access the backend, as defined in the app's config (CORS_ORIGINS).
+    #    - 'for' iterates over each origin in the list.
+    #    - 'if' filters out any empty or whitespace-only strings.
+    #    - 'origin.strip()' removes leading/trailing whitespace from each origin string.
+    #
+    # 2. The CORS() call:
+    #    CORS(
+    #        app,
+    #        resources={
+    #            r"/*": {
+    #                "origins": allowed_origins,
+    #                "methods": ["GET", "POST", "OPTIONS"],
+    #                "allow_headers": ["Content-Type", "Authorization"],
+    #            }
+    #        },
+    #    )
+    #    - 'resources' defines which routes CORS applies to. Here, r"/*" (a raw string) means "all routes".
+    #    - 'origins' restricts which domains can make requests (using the cleaned list above).
+    #    - 'methods' specifies which HTTP methods are allowed from cross-origin requests.
+    #    - 'allow_headers' (should be 'allowed_headers', but Flask-CORS uses 'allow_headers') lists which headers can be sent by the client.
+    #    - 'Headers' are the information that the client sends to the server.
+    #    - This setup ensures only trusted frontends (like your React app on localhost:3000) can interact with the backend, and only with safe methods and headers.
+
     allowed_origins = [
-        origin.strip()
+        origin.strip()  # Clean up each origin string from the config
         for origin in app.config.get('CORS_ORIGINS', [])
-        if origin and origin.strip()
+        if origin and origin.strip()  # Skip empty or whitespace-only entries
     ]
     CORS(
         app,
         resources={
-            r"/*": {
+            r"/*": {  # Apply CORS to all routes (the 'r' means "raw string", so backslashes are not escaped)
                 "origins": allowed_origins,
                 "methods": ["GET", "POST", "OPTIONS"],
-                "allow_headers": ["Content-Type", "Authorization"],
+                "allow_headers": ["Content-Type", "Authorization"],  # Only allow these headers from the client
             }
         },
     )
@@ -94,15 +129,23 @@ def create_app():
     limiter.init_app(app)
     
     # Add security headers
-    @app.after_request
+    @app.after_request # The method 'after_request' is a Flask decorator that runs after each request.
     def add_security_headers(response):
         """Add comprehensive security headers to all responses"""
         if app.config.get('SECURITY_HEADERS_ENABLED', True):
-            # Prevent clickjacking
-            response.headers['X-Frame-Options'] = 'DENY'
-            # Prevent MIME type sniffing
+
+            # Prevent clickjacking by telling browsers not to allow this site to be displayed in a frame or iframe.
+            # This helps protect your site from UI redress attacks (where a malicious site tries to trick users into clicking on something different from what they perceive).
+            response.headers['X-Frame-Options'] = 'DENY'  # 'response' is a Flask Response object representing the HTTP response that will be sent to the client.
+            # You can set headers on it to control browser behavior and enhance security.
+
+            # Prevent MIME type sniffing by instructing browsers to strictly follow the declared Content-Type of files. MIME stands for Multipurpose Internet Mail Extensions.
+            # This stops browsers from trying to guess (sniff) the file type, which can prevent certain types of attacks where a file is interpreted as something more dangerous than intended.
             response.headers['X-Content-Type-Options'] = 'nosniff'
-            # Enable XSS protection
+
+            # Enable basic cross-site scripting (XSS) protection in browsers that support this header.
+            # This tells the browser to block the page if it detects reflected XSS attacks.
+            # Note: Modern browsers may ignore this header, but it can still provide some protection in older browsers.
             response.headers['X-XSS-Protection'] = '1; mode=block'
             
             # 🔒 CRITICAL: Content Security Policy - Blocks malicious scripts
@@ -124,6 +167,9 @@ def create_app():
             
             # Force HTTPS in production (when cookie secure is enabled)
             if app.config.get('SESSION_COOKIE_SECURE'):
+                # This header enforces HTTP Strict Transport Security (HSTS), telling browsers to only use HTTPS for future requests to this domain.
+                # 'max-age=31536000' means the browser should remember to enforce HTTPS for 1 year (in seconds).
+                # 'includeSubDomains' applies this rule to all subdomains as well.
                 response.headers['Strict-Transport-Security'] = 'max-age=31536000; includeSubDomains'
                 
             # 🔒 Additional security headers
@@ -143,6 +189,12 @@ def create_app():
     
     from app import routes # Import the routes.py file from the app folder.
     routes.register_routes(app) # Register the routes with the Flask app.
+
+    # Initialize Flask-Admin (admin panel)
+    # This creates a visual web interface at /admin for database management
+    # Only accessible by authenticated users with is_admin=True
+    from app.admin import init_admin
+    init_admin(app)
 
     # This returns the configured Flask application instance.
     return app 
