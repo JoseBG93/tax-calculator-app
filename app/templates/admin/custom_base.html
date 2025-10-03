@@ -1,0 +1,54 @@
+{% extends 'admin/base.html' %}
+
+{# 
+PLANTILLA BASE PERSONALIZADA PARA FLASK-ADMIN
+==============================================
+
+Esta plantilla hereda de la plantilla base de Flask-Admin y añade
+personalizaciones específicas para el proyecto Tax Calculator Pro.
+
+HERENCIA DE PLANTILLAS:
+- admin/base.html → Plantilla base de Flask-Admin (incluida en la librería)
+- custom_base.html → Nuestra personalización (este archivo)
+#}
+
+{% block brand %}
+<a class="navbar-brand" href="{{ admin_view.admin.url }}">
+    <strong>🏛️ Tax Calculator Pro</strong> - Panel de Administración
+</a>
+{% endblock %}
+
+{% block tail %}
+{{ super() }}
+<style>
+    /* Estilos personalizados para el panel de administración */
+    .navbar-brand {
+        font-size: 1.2rem;
+        color: #fff !important;
+    }
+    
+    .navbar {
+        background-color: #2c3e50 !important;
+    }
+    
+    /* Personalización de botones */
+    .btn-primary {
+        background-color: #3498db;
+        border-color: #3498db;
+    }
+    
+    .btn-primary:hover {
+        background-color: #2980b9;
+        border-color: #2980b9;
+    }
+    
+    /* Mensajes de bienvenida */
+    .admin-welcome {
+        padding: 20px;
+        background: #ecf0f1;
+        border-radius: 5px;
+        margin: 20px 0;
+    }
+</style>
+{% endblock %}
+
