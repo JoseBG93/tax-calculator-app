@@ -49,7 +49,7 @@ Terminal: python run.py
     ├── DEBUG = os.environ.get('DEBUG', 'False').lower() == 'true'
     ├── SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL', 'sqlite:///database/app.db')
     ├── SQLALCHEMY_TRACK_MODIFICATIONS = False
-    ├── CORS_ORIGINS = os.environ.get('CORS_ORIGINS', 'http://localhost:3000').split(',')
+    ├── CORS_ORIGINS = os.environ.get('CORS_ORIGINS', 'http://localhost:3000,http://127.0.0.1:3000,http://localhost:5001,http://127.0.0.1:5001').split(',')
     ├── SECURITY_HEADERS_ENABLED = os.environ.get('SECURITY_HEADERS_ENABLED','True').lower()=='true'
     ├── SESSION_COOKIE_SECURE/HTTPONLY/SAMESITE ('Lax')
     ├── WTF_CSRF_ENABLED = True; WTF_CSRF_TIME_LIMIT = 3600
