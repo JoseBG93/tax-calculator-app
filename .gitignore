@@ -3,6 +3,7 @@
 .env.local
 .env.*.local
 secrets_generator.py
+aliases_usage_summary.md
 
 # Python virtual environments
 taxapp_env/
