@@ -31,9 +31,7 @@
 | scripts     | Changes to utility scripts (e.g., maintenance, setup, migration).        |
 | infra       | Infrastructure changes (deployment, Docker, CI/CD, cloud configs).       |
 | tests       | Changes to test files, test data, or test infrastructure.                |
-| docs        | Changes to documentation or comments.                                    |
-| i18n        | Internationalization and localization changes.                           |
-| accessibility| Improvements related to accessibility (a11y).                           |
+| docs        | Changes to documentation or comments.                                    |                        
 | security    | Security-related changes (vulnerabilities, permissions, etc.).           |
 | logging     | Changes to logging or monitoring.                                        |
 | analytics   | Changes related to analytics or tracking.                                |
