@@ -40,6 +40,7 @@ python-dateutil==2.9.0.post0
 python-dotenv==1.0.0
 pytz==2025.2
 requests==2.31.0
+setuptools>=69.0.3,<81  # Pin para evitar ruptura con pkg_resources
 six==1.17.0
 SQLAlchemy==2.0.42
 tomli==2.2.1
