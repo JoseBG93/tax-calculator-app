@@ -2,8 +2,6 @@
 .env
 .env.local
 .env.*.local
-secrets_generator.py
-aliases_usage_summary.md
 
 # Python virtual environments
 taxapp_env/
@@ -71,7 +69,3 @@ coverage.xml
 # AI model
 .claude
 CLAUDE.md
-
-# Test files
-test.py
-create_admin.py
