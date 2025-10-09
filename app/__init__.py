@@ -1,5 +1,12 @@
 # This file create the whole Flask application. It creates several Flask's apps. That is called Application Factory Pattern.
 
+# Suppress pkg_resources deprecation warning from Flask-Admin
+# This warning comes from setuptools deprecating pkg_resources API
+# Flask-Admin 1.6.1 still uses it, but it's fixed in future versions
+# We pin setuptools<81 in requirements.txt to prevent breaking changes
+import warnings
+warnings.filterwarnings('ignore', message='pkg_resources is deprecated as an API')
+
 '''Flask is a Python web framework that creates web apps and handles HTTP requests and responses.
 It manages both routes and templates, and serves your app on a port (like 5000).'''
 from flask import Flask
