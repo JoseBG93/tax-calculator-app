@@ -14,18 +14,30 @@
 | ci         | Continuous Integration configuration changes                       |
 | perf       | Performance improvements                                           |
 | chore      | Maintenance tasks that don't modify source code or tests           |
+| revert     | Revert the commit before                                           |
 
 
 | Scope     | Description                                                        |
 |-----------|--------------------------------------------------------------------|
-| api       | Changes to the API (endpoints, request/response formats).          |
-| auth      | Changes related to authentication or authorization.                |
-| ui        | Changes to the User Interface (components, styles, layouts).       |
-| database  | Changes affecting the database (migrations, queries, schema).      |
-| settings  | Changes to configuration files or user-facing settings.            |
-| deps      | Adding, updating, or removing dependencies.                        |
-| config    | General configuration changes not covered by other scopes.         |
-| core      | Changes to fundamental, central business logic.                    |
+| api         | Changes to the API (endpoints, request/response formats).                |
+| auth        | Changes related to authentication or authorization.                      |
+| ui          | Changes to the User Interface (components, styles, layouts).             |
+| database    | Changes affecting the database (migrations, queries, schema).            |
+| settings    | Changes to configuration files or user-facing settings.                  |
+| deps        | Adding, updating, or removing dependencies.                              |
+| config      | General configuration changes not covered by other scopes.               |
+| core        | Changes to fundamental, central business logic.                          |
+| cli         | Changes to command-line interface tools or commands.                     |
+| scripts     | Changes to utility scripts (e.g., maintenance, setup, migration).        |
+| infra       | Infrastructure changes (deployment, Docker, CI/CD, cloud configs).       |
+| tests       | Changes to test files, test data, or test infrastructure.                |
+| docs        | Changes to documentation or comments.                                    |
+| i18n        | Internationalization and localization changes.                           |
+| accessibility| Improvements related to accessibility (a11y).                           |
+| security    | Security-related changes (vulnerabilities, permissions, etc.).           |
+| logging     | Changes to logging or monitoring.                                        |
+| analytics   | Changes related to analytics or tracking.                                |
+| styles      | Changes to styling, CSS, or visual appearance (non-functional).          |
 ---
 
 ## 🚀 **feat**: New Capabilities
