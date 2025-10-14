@@ -29,6 +29,7 @@ database/*.sqlite
 .vscode/
 cursor/
 .cursor/
+.windsurf/
 .idea/
 *.swp
 *.swo
