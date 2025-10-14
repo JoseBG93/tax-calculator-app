@@ -1,7 +1,7 @@
 # 📋 Resumen de Reorganización de Alias
 
 **Fecha:** 7 de octubre de 2025  
-**Estado:** ✅ Completado exitosamente
+**Estado:** ✅ Completado
 
 ---
 
@@ -18,7 +18,7 @@ Se ha reorganizado completamente el sistema de alias dividiendo los comandos en 
 
 ### 1. **`~/.bash_aliases`** (Alias Generales)
 
-**Ubicación:** `/home/jose/.bash_aliases`
+**Ubicación:** `/home/user/.bash_aliases`
 
 **Contenido:**
 - ✅ Funciones generales: `github()`, `anagui()`, `git_init_dev()`, `runjs()`, `myaliases()`
