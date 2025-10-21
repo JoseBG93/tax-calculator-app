@@ -80,25 +80,64 @@ This project was born from real-world experience in Spanish municipal tax admini
 
 ```
 tax-calculator-pro/
-├── app/                    # Flask application core
-│   ├── __init__.py         # ✅ Application Factory Pattern
-│   ├── models.py           # ✅ SQLAlchemy database models
-│   ├── routes.py           # ✅ HTTP endpoints and views (auth, admin, calculator shell)
-│   ├── services.py         # 🔄 Tax calculation business logic (pending)
-│   ├── utils.py            # 🔄 Helper functions and utilities (pending)
-│   └── legal_validator.py  # ✅ IIVTNU legal framework
-├── data/                   # ✅ 33 enhanced IIVTNU test cases
-├── docs/                   # ✅ Legal documentation
-│   ├── LEGAL_FRAMEWORK.md  # ✅ LRHL articles 104-110
-│   ├── NORMATIVE_GAPS.md   # Legal compliance notes
-│   └── normativa-municipal/ # ✅ Alfafar ordinance PDFs
-├── static/                 # Frontend assets (CSS, JS, images)
-├── templates/              # HTML Jinja2 templates
-├── database/               # SQLite database storage
-├── dependencies/           # ✅ requirements.txt (pinned packages)
-├── tests/                  # ✅ pytest suite (CORS tests)
-├── run.py                  # ✅ Flask application entry point
-└── config.py               # ✅ Environment configuration
+├── app/                       # Flask application core
+│   ├── __init__.py            # ✅ Application Factory Pattern
+│   ├── models.py              # ✅ SQLAlchemy database models
+│   ├── routes.py              # ✅ HTTP endpoints and views (auth, admin, calculator)
+│   ├── admin.py               # ✅ Flask-Admin panel configuration
+│   ├── services.py            # 🔄 Tax calculation business logic (pending)
+│   ├── security_validations.py # ✅ Input validation and sanitization
+│   ├── legal_validator.py     # ✅ IIVTNU legal framework and compliance
+│   └── utils.py               # 🔄 Helper functions and utilities (pending)
+│
+├── scripts/                   # 🆕 Management and utility scripts
+│   ├── create_admin.py        # ✅ Superadmin account creation/management
+│   ├── change_password.py     # ✅ Secure password change utility
+│   ├── list_users.py          # ✅ User listing and status
+│   ├── secrets_generator.py   # ✅ Generate secure SECRET_KEY
+│   ├── bash_aliases.sh        # ✅ Development workflow aliases
+│   └── ARCHITECTURE_DIAGRAM.py # ✅ Generate architecture diagrams
+│
+├── docs/                      # 📚 Comprehensive documentation
+│   ├── README.md              # 🆕 Documentation index and guide
+│   ├── LEGAL_FRAMEWORK.md     # ✅ LRHL articles 104-110
+│   ├── NORMATIVE_GAPS.md      # ✅ Compliance gaps and validations
+│   ├── ADMIN_PANEL_GUIDE.md   # ✅ Admin panel usage guide
+│   ├── COMMIT_CONVENTIONS.md  # ✅ Git commit standards
+│   ├── PROJECT_REVIEW.md      # ✅ Project status and decisions
+│   ├── ALIASES_USAGE.md       # ✅ Development aliases reference
+│   ├── COMANDOS_RAPIDOS_BD.md # ✅ Database commands quick reference
+│   ├── normativa-municipal/   # ✅ Alfafar ordinance PDFs
+│   └── flask_shell_guides/    # ✅ Flask shell interactive guides
+│
+├── learning/                  # 🆕 Personal learning materials
+│   ├── README.md              # 🆕 Learning resources index
+│   ├── python-decorators/     # Decorator patterns and examples
+│   └── python-modules/        # Module usage guides and examples
+│
+├── data/                      # ✅ Test data and fixtures
+│   └── synthetic_iivtnu_cases/ # 33 enhanced IIVTNU test cases
+│
+├── tests/                     # ✅ pytest test suite
+│   ├── conftest.py            # Test configuration
+│   └── test_cors.py           # CORS behavior tests
+│
+├── migrations/                # ✅ Database migrations (Flask-Migrate)
+├── database/                  # SQLite database storage
+├── dependencies/              # 📦 Requirements and package documentation
+│   ├── requirements.txt       # ✅ Pinned Python packages
+│   ├── Overview.md            # Package overview
+│   └── Detailed_explanation.md # Detailed dependency documentation
+│
+├── .github/                   # CI/CD and automation
+│   ├── workflows/             # GitHub Actions workflows
+│   └── scripts/               # CI/CD utility scripts
+│
+├── run.py                     # ✅ Flask application entry point
+├── config.py                  # ✅ Environment configuration
+├── .env.example               # 🆕 Environment variables template
+├── .gitignore                 # Git ignore rules
+└── README.md                  # ✅ This file - Project documentation
 ```
 
 
@@ -171,6 +210,21 @@ export CORS_ORIGINS="http://localhost:3000"
 
 ### Usage ▶️
 
+**Initial Setup:**
+```bash
+# 1. Generate secure SECRET_KEY
+python scripts/secrets_generator.py
+
+# 2. Export the generated key
+export SECRET_KEY="<your-generated-key>"
+
+# 3. Create superadmin account
+python scripts/create_admin.py
+
+# 4. (Optional) List all users
+python scripts/list_users.py
+```
+
 **Run the Flask application:**
 ```bash
 python run.py
@@ -185,6 +239,15 @@ The application will start on `http://localhost:5000` with routes like:
 - `/dashboard` → protected page (requires login)
 - `/calculator`, `/history` → shells for future IIVTNU features (require login)
 - `/admin`, `/admin/users` → admin area (requires admin role)
+
+**Management Scripts:**
+All utility scripts are located in `scripts/` directory:
+- `create_admin.py` - Create/update superadmin account
+- `change_password.py` - Change user passwords securely
+- `list_users.py` - List all registered users
+- `secrets_generator.py` - Generate SECRET_KEY
+
+See `scripts/README.md` for detailed usage instructions.
 
 **Current Status:** Core Flask application is running with database models ready for IIVTNU calculations.
 
